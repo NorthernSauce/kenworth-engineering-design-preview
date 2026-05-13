@@ -1,0 +1,280 @@
+/* ═════════════════════════════════════════════════════════════════════
+   FLOURISHES — pro-designer finishing layer
+   Shared across every page. Linked after design.css and page-*.css.
+   Categories:
+     1. Scroll-reveal motion
+     2. Animated stat counters (visual hooks)
+     3. Blueprint flourishes (tick-marks, reticles, dimension lines)
+     4. Typographic polish (drop caps, hairline rules, balance)
+     5. Hero Ken-Burns drift
+     6. Image-card hover lifts
+     7. Button micro-interactions
+     8. Page-load + smooth scroll
+   All motion respects prefers-reduced-motion.
+   ═════════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Scroll-reveal ────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms var(--ns-easing), transform 700ms var(--ns-easing);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+/* Stagger children inside a revealed grid */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms var(--ns-easing), transform 600ms var(--ns-easing);
+}
+.reveal-stagger.is-in > * { opacity: 1; transform: none; }
+.reveal-stagger.is-in > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger.is-in > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger.is-in > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger.is-in > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger.is-in > *:nth-child(6) { transition-delay: 400ms; }
+.reveal-stagger.is-in > *:nth-child(7) { transition-delay: 480ms; }
+.reveal-stagger.is-in > *:nth-child(8) { transition-delay: 560ms; }
+
+/* ─── 2. Animated stat counters — visual indicator only, JS does math ── */
+
+[data-count] { font-variant-numeric: tabular-nums; }
+
+/* ─── 3. Blueprint flourishes ─────────────────────────────────────── */
+
+/* Reticle (+) mark — uses currentColor.  Place anywhere with .reticle.  */
+.reticle {
+  display: inline-block;
+  width: 14px; height: 14px;
+  position: relative;
+  flex-shrink: 0;
+}
+.reticle::before,
+.reticle::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.reticle::before { left: 0; right: 0; top: 50%; height: 1px; transform: translateY(-0.5px); }
+.reticle::after  { top: 0; bottom: 0; left: 50%; width: 1px; transform: translateX(-0.5px); }
+
+/* Section heads — hairline orange rule under H2 in standard heads */
+.section__head:not(.section__head--brace) .section__h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: var(--ns-color-primary);
+  margin: 0.875rem 0 0;
+}
+
+/* Engineering tick-rail — corner brackets on every section heading.
+   Adds a small "[" "]" feel without using corner-mark text.            */
+.section__head--brace::before,
+.section__head--brace::after { /* design.css already supplies these */ }
+
+/* Faint construction grid behind any element flagged .has-blueprint */
+.has-blueprint {
+  position: relative;
+  isolation: isolate;
+}
+.has-blueprint::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(16,14,12,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16,14,12,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 70%);
+}
+.has-blueprint > * { position: relative; z-index: 1; }
+
+/* Dimension-line accent — pair with a number.  Usage: <span class="dim">1200<i></i></span>  */
+.dim {
+  position: relative;
+  display: inline-block;
+}
+.dim > i {
+  position: absolute;
+  bottom: -10px; left: 0; right: 0;
+  height: 6px;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, currentColor 1px, transparent 1px) 0 50% / 1px 6px no-repeat,
+    linear-gradient(to right, currentColor 1px, transparent 1px) 100% 50% / 1px 6px no-repeat,
+    linear-gradient(to right, currentColor 1px, transparent 1px) 50% 50% / calc(100% - 2px) 1px no-repeat;
+  opacity: 0.4;
+}
+
+/* ─── 4. Typographic polish ───────────────────────────────────────── */
+
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+/* Drop cap on article body */
+.art-prose > p:first-of-type::first-letter {
+  font-family: var(--ns-font-display);
+  font-weight: var(--ns-weight-heavy);
+  font-size: 4.5em;
+  line-height: 0.85;
+  float: left;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--ns-color-primary);
+}
+
+/* Hanging punctuation on pull-quotes and blockquotes */
+blockquote, .pullquote {
+  text-indent: -0.4em;
+  padding-left: 0.4em;
+  hanging-punctuation: first;
+}
+
+/* ─── 5. Hero Ken-Burns ───────────────────────────────────────────── */
+
+.svc-hero__img,
+.quote-hero img,
+.hero__poster {
+  animation: ken-burns 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes ken-burns {
+  0%   { transform: scale(1)     translate3d(0, 0, 0); }
+  100% { transform: scale(1.07) translate3d(-1.5%, -1.5%, 0); }
+}
+
+/* ─── 6. Image-card hover lifts ───────────────────────────────────── */
+/* Only safe on cards where text doesn't sit OVER the image.
+   .icard (photographic, text-over-image) is excluded — its hover is locked.
+   .machine, .acard, .feat-card, .related-card, .role-card all lift. */
+
+.machine,
+.acard,
+.feat-card,
+.role-card {
+  transition:
+    transform 280ms var(--ns-easing),
+    box-shadow 280ms var(--ns-easing),
+    border-color 280ms var(--ns-easing);
+  will-change: transform;
+}
+.machine:hover,
+.acard:hover,
+.feat-card:hover,
+.role-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 38px -22px rgba(20, 18, 16, 0.45);
+}
+
+/* ─── 7. Button micro-interactions ────────────────────────────────── */
+
+.btn-primary,
+.btn-secondary,
+.btn-outline {
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 220ms var(--ns-easing),
+    color 220ms var(--ns-easing),
+    transform 220ms var(--ns-easing),
+    box-shadow 220ms var(--ns-easing);
+}
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -14px rgba(238, 108, 25, 0.55);
+}
+.btn-primary:active,
+.btn-secondary:active,
+.btn-outline:active { transform: translateY(0); }
+
+/* Arrow-nudge on any button containing an arrow glyph */
+.btn-primary .arrow,
+.btn-secondary .arrow,
+.btn-outline .arrow,
+.btn-ghost .arrow,
+.acard__cta .arrow,
+.feat-card__cta .arrow,
+.see-all .arrow {
+  display: inline-block;
+  transition: transform 220ms var(--ns-easing);
+  margin-left: 0.25em;
+}
+.btn-primary:hover .arrow,
+.btn-secondary:hover .arrow,
+.btn-outline:hover .arrow,
+.btn-ghost:hover .arrow,
+.acard:hover .acard__cta .arrow,
+.feat-card:hover .feat-card__cta .arrow,
+.see-all:hover .arrow {
+  transform: translate(3px, -2px);
+}
+
+/* Focus-visible refinement — softer than the default UA ring */
+:focus-visible {
+  outline: 2px solid var(--ns-color-primary);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ─── 8. Page-load + smooth scroll ────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px; /* clears the locked nav */
+}
+body {
+  opacity: 0;
+  transition: opacity 380ms ease;
+}
+body.is-loaded { opacity: 1; }
+
+/* ─── Reduced-motion respect ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .svc-hero__img,
+  .quote-hero img,
+  .hero__poster { animation: none !important; }
+  html { scroll-behavior: auto; }
+  body { opacity: 1 !important; transition: none !important; }
+  .machine:hover,
+  .acard:hover,
+  .feat-card:hover,
+  .role-card:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover { transform: none !important; }
+}
+
+/* ─── Footer social icons ─────────────────────────────────────────── */
+.footer-pro__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+.footer-pro__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(245, 240, 232, 0.18);
+  color: rgba(245, 240, 232, 0.7);
+  clip-path: var(--ns-chamfer-sm);
+  transition: color 220ms var(--ns-easing), border-color 220ms var(--ns-easing), background 220ms var(--ns-easing), transform 220ms var(--ns-easing);
+}
+.footer-pro__social a:hover {
+  color: var(--ns-color-primary);
+  border-color: var(--ns-color-primary);
+  background: rgba(238, 108, 25, 0.06);
+  transform: translateY(-1px);
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenworth Engineering — Design preview index</title>
+<link rel="stylesheet" href="../brief/tokens.css">
+<link rel="stylesheet" href="../brief/components.css">
+<link rel="stylesheet" href="design.css">
+<style>
+  body { background: var(--ns-color-paper); padding: 4rem 2rem; }
+  .idx { max-width: 64rem; margin: 0 auto; }
+  .idx h1 { font-family: var(--ns-font-display); font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 0.5rem; }
+  .idx p.lede { color: var(--ns-color-text-muted); margin: 0 0 3rem; max-width: 60ch; }
+  .idx-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--ns-color-rule-strong); border: 1px solid var(--ns-color-rule-strong); }
+  @media (max-width: 720px) { .idx-grid { grid-template-columns: 1fr; } }
+  .idx-card { display: block; padding: 2rem; background: var(--ns-color-paper); text-decoration: none; color: inherit; transition: background var(--ns-duration) var(--ns-easing); position: relative; }
+  .idx-card:hover { background: var(--ns-color-paper-soft); }
+  .idx-card span.n { font-family: var(--ns-font-display); font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-bold); color: var(--ns-color-primary); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; }
+  .idx-card h3 { font-family: var(--ns-font-display); font-size: 1.5rem; margin: 0.5rem 0; }
+  .idx-card p { color: var(--ns-color-text-muted); margin: 0; font-size: var(--ns-text-small); }
+  .idx-card .status { position: absolute; top: 1.25rem; right: 1.25rem; font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-bold); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; color: var(--ns-color-text-muted); }
+  .idx-meta { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--ns-color-rule); font-size: var(--ns-text-small); color: var(--ns-color-text-muted); }
+</style>
+</head>
+<body>
+<div class="idx">
+  <p style="font-family: var(--ns-font-display); font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-bold); color: var(--ns-color-primary); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; margin: 0 0 0.75rem;">+ Kenworth Engineering · Design preview</p>
+  <h1>Design pages.</h1>
+  <p class="lede">Phase 4 high-fidelity HTML/CSS for client sign-off. Home is the locked direction. Service pages and Get a Quote inherit the visual system byte-for-byte across nav and footer.</p>
+
+  <div class="idx-grid">
+    <a class="idx-card" href="home.html">
+      <span class="n">Page 01</span>
+      <span class="status">Signed off</span>
+      <h3>Home</h3>
+      <p>The locked design pattern reference. Scroll-scrubbed hero, three services, machines, quality anchor, industries, three-step quote flow.</p>
+    </a>
+    <a class="idx-card" href="cnc-milling.html">
+      <span class="n">Page 02</span>
+      <span class="status">For review</span>
+      <h3>CNC Milling</h3>
+      <p>Service page · DMU-50 5-axis, NLX mill/turn, spec band, 7-step flow, FAQ accordion, industries pill row.</p>
+    </a>
+    <a class="idx-card" href="cnc-turning.html">
+      <span class="n">Page 03</span>
+      <span class="status">For review</span>
+      <h3>CNC Turning</h3>
+      <p>Service page · Citizen Miyano BNE51 MSY, Hydrafeed Rota-Rack, NLX mill/turn, centre lathe.</p>
+    </a>
+    <a class="idx-card" href="cnc-sliding-head.html">
+      <span class="n">Page 04</span>
+      <span class="status">For review</span>
+      <h3>CNC Sliding Head</h3>
+      <p>Service page · Star SB20R, cost-geometry section, where sliding head wins on unit cost.</p>
+    </a>
+    <a class="idx-card" href="get-a-quote.html">
+      <span class="n">Page 05</span>
+      <span class="status">For review</span>
+      <h3>Get a Quote</h3>
+      <p>Conversion page · focused anchor hero, RFQ form with chamfered fields, objection-killer aside, no final CTA band.</p>
+    </a>
+  </div>
+
+  <p class="idx-meta">Phase 4 of 10 · Designer-Copywriter handoff · Northern Sauce · Pages still to come: Capabilities · Quality · About · Industries · Contact · Careers · Learning Hub.</p>
+</div>
+</body>
+</html>

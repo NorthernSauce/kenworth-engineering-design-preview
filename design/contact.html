@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Kenworth Engineering · Grimsby · UK working hours</title>
+<meta name="description" content="Phone, email, RFQ, or shop visit. UK working hours. The person on the other end knows the machines. Family-run precision CNC, Grimsby, since 1992.">
+
+<link rel="stylesheet" href="../brief/tokens.css">
+<link rel="stylesheet" href="../brief/components.css">
+<link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="page-contact.css">
+<link rel="stylesheet" href="flourishes.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Primary">
+  <a class="nav__logo" href="home.html" aria-label="Kenworth Engineering — homepage">
+    <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+  </a>
+
+  <div class="nav__links">
+    <div class="nav__drop">
+      <a class="nav__link" href="capabilities.html" aria-haspopup="true">Services</a>
+      <div class="nav__panel" role="menu">
+        <a href="cnc-milling.html" role="menuitem">
+          <span class="nav__panel__idx">01</span>
+          <span>
+            <span class="nav__panel__title">CNC Milling</span>
+            <span class="nav__panel__desc">3 and 5-axis up to 1200×600×600mm</span>
+          </span>
+        </a>
+        <a href="cnc-turning.html" role="menuitem">
+          <span class="nav__panel__idx">02</span>
+          <span>
+            <span class="nav__panel__title">CNC Turning</span>
+            <span class="nav__panel__desc">Production turning, unmanned overnight</span>
+          </span>
+        </a>
+        <a href="cnc-sliding-head.html" role="menuitem">
+          <span class="nav__panel__idx">03</span>
+          <span>
+            <span class="nav__panel__title">Sliding Head</span>
+            <span class="nav__panel__desc">1–22mm Ø up to 1000mm long</span>
+          </span>
+        </a>
+        <div class="nav__panel__sep"></div>
+        <a class="nav__panel__all" href="capabilities.html" role="menuitem">All capabilities →</a>
+      </div>
+    </div>
+    <a class="nav__link" href="industries.html">Industries</a>
+    <a class="nav__link" href="about.html">About</a>
+    <a class="nav__link" href="learning-hub.html">Learning Hub</a>
+  </div>
+
+  <div class="nav__cta-wrap" style="display:inline-flex; align-items:center; gap:0.75rem;">
+    <a class="btn btn-primary" href="get-a-quote.html">Get a quote</a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false" data-drawer-trigger>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div class="drawer" id="mobileDrawer" data-open="false" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <div class="drawer__top">
+    <div class="drawer__mark" aria-hidden="true">KE</div>
+    <button class="drawer__close" type="button" aria-label="Close menu" data-drawer-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+        <path d="M6 6l12 12"/><path d="M18 6l-12 12"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="drawer__nav" aria-label="Primary mobile">
+    <a href="cnc-milling.html"><span class="idx">01</span><span>CNC Milling</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-turning.html"><span class="idx">02</span><span>CNC Turning</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-sliding-head.html"><span class="idx">03</span><span>Sliding Head</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="capabilities.html"><span class="idx">04</span><span>Capabilities</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="industries.html"><span class="idx">05</span><span>Industries</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="about.html"><span class="idx">06</span><span>About</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="learning-hub.html"><span class="idx">07</span><span>Learning Hub</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="careers.html"><span class="idx">08</span><span>Careers</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="contact.html" aria-current="page"><span class="idx">09</span><span>Contact</span><span class="arrow" aria-hidden="true">↗</span></a>
+  </nav>
+  <div class="drawer__foot">
+    <span class="drawer__tagline">ISO 9001:2015 · Grimsby · Est. 1992</span>
+    <a class="btn" href="get-a-quote.html">Get a quote</a>
+  </div>
+</div>
+
+<!-- Drawer open/close -->
+<script>
+(function () {
+  const trigger = document.querySelector('[data-drawer-trigger]');
+  const close   = document.querySelector('[data-drawer-close]');
+  const drawer  = document.getElementById('mobileDrawer');
+  if (!trigger || !drawer) return;
+
+  function open() {
+    drawer.dataset.open = 'true';
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.dataset.drawerOpen = 'true';
+  }
+  function shut() {
+    drawer.dataset.open = 'false';
+    trigger.setAttribute('aria-expanded', 'false');
+    delete document.body.dataset.drawerOpen;
+  }
+  trigger.addEventListener('click', open);
+  close && close.addEventListener('click', shut);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+})();
+</script>
+
+<!-- ─── HERO ───────────────────────────────────────────────────────── -->
+<section class="quote-hero contact-hero" aria-label="Contact">
+  <div class="wrap">
+    <div class="quote-hero__inner">
+      <p class="svc-hero__over">+ Contact</p>
+      <h1>Get in touch.</h1>
+      <p class="quote-hero__lede">You've got a question that isn't quite a drawing yet. Pick the route below that suits it. The person on the other end knows the machines.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THREE CONTACT PATHS ────────────────────────────────────────── -->
+<section class="section section--paper" aria-label="Three ways to reach us">
+  <div class="wrap">
+    <div class="section__head section__head--brace" style="max-width:none;">
+      <p class="tagline" style="color: var(--ns-color-primary);">+ Three ways in</p>
+      <h2 class="section__h2">Pick the one that fits.</h2>
+    </div>
+
+    <div class="contact-paths">
+      <article class="contact-path">
+        <span class="contact-path__num">01 · Phone</span>
+        <h3 class="contact-path__title"><a href="tel:01472210678">01472 210 678</a></h3>
+        <p class="contact-path__body">Best for same-day quote-stage chat, a lead-time question, or when you'd rather hear a human voice.</p>
+        <span class="contact-path__meta">Mon–Fri · UK working hours</span>
+      </article>
+
+      <article class="contact-path">
+        <span class="contact-path__num">02 · RFQ email</span>
+        <h3 class="contact-path__title"><a href="mailto:rfq@kenworthengineering.co.uk">rfq@kenworthengineering.co.uk</a></h3>
+        <p class="contact-path__body">Best for buyers with a drawing and questions before they send it. Picked up inside an hour.</p>
+        <span class="contact-path__meta">Working hours · inside 60 min</span>
+      </article>
+
+      <article class="contact-path">
+        <span class="contact-path__num">03 · General</span>
+        <h3 class="contact-path__title"><a href="mailto:info@kenworthengineering.co.uk">info@kenworthengineering.co.uk</a></h3>
+        <p class="contact-path__body">Best for general questions, vendor approval requests, sector questions, anything that isn't a live RFQ.</p>
+        <span class="contact-path__meta">Working hours · same day</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MAP + ADDRESS ──────────────────────────────────────────────── -->
+<section class="section section--paper-soft bleed-tl bleed-from--paper" aria-label="Where we are">
+  <div class="wrap">
+    <div class="section__head section__head--brace" style="max-width:none;">
+      <p class="tagline" style="color: var(--ns-color-primary);">+ Where we are</p>
+      <h2 class="section__h2">Wilton Road, Grimsby.</h2>
+    </div>
+
+    <div class="contact-map-wrap">
+      <div class="contact-map" aria-label="Map of Kenworth Engineering, Grimsby">
+        <div class="contact-map__crosshair" aria-hidden="true"></div>
+        <div class="contact-map__pin" aria-hidden="true"></div>
+        <div class="contact-map__stamp">
+          <strong>Kenworth Engineering Ltd</strong>
+          Wilton Road Industrial Estate<br>
+          Grimsby, North East Lincolnshire<br>
+          DN36 4AS
+        </div>
+      </div>
+
+      <aside class="contact-card" aria-label="Direct contact details">
+        <h3>Direct contact.</h3>
+        <dl>
+          <dt>HQ</dt>
+          <dd>Wilton Road Industrial Estate, Grimsby, DN36 4AS</dd>
+          <dt>Phone</dt>
+          <dd><a href="tel:01472210678">01472 210 678</a></dd>
+          <dt>RFQ</dt>
+          <dd><a href="mailto:rfq@kenworthengineering.co.uk">rfq@kenworthengineering.co.uk</a></dd>
+          <dt>Info</dt>
+          <dd><a href="mailto:info@kenworthengineering.co.uk">info@kenworthengineering.co.uk</a></dd>
+          <dt>Hours</dt>
+          <dd>Mon–Fri · 8am–5pm UK</dd>
+        </dl>
+        <p style="margin:0; font-size: var(--ns-text-small); color: var(--ns-color-text-muted, rgba(20,22,24,0.65)); line-height:1.5;">Visitors welcome by appointment. Let us know what you'd like to see — a particular machine, a process, the inspection room — and we'll line up the right person.</p>
+      </aside>
+    </div>
+
+    <div class="response-strip" aria-label="How quickly we respond">
+      <div class="response-strip__item">
+        <span class="response-strip__num">01</span>
+        <div class="response-strip__body">
+          <strong>Phone</strong>
+          <span>Picked up live in working hours. Voicemail returned same day.</span>
+        </div>
+      </div>
+      <div class="response-strip__item">
+        <span class="response-strip__num">02</span>
+        <div class="response-strip__body">
+          <strong>RFQ email</strong>
+          <span>Acknowledged inside the hour. Full quote inside 48 hours.</span>
+        </div>
+      </div>
+      <div class="response-strip__item">
+        <span class="response-strip__num">03</span>
+        <div class="response-strip__body">
+          <strong>General email</strong>
+          <span>Same day, working hours. Routed to a named human, not a queue.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GENERAL ENQUIRY FORM ───────────────────────────────────────── -->
+<section class="section section--paper bleed-tr bleed-from--paper-soft" aria-label="General enquiry form">
+  <div class="wrap">
+    <div class="section__head section__head--brace" style="max-width:none;">
+      <p class="tagline" style="color: var(--ns-color-primary);">+ Rather type than phone?</p>
+      <h2 class="section__h2">General enquiry.</h2>
+    </div>
+
+    <div class="quote-layout">
+      <form class="quote-form fluentform" action="#" method="post" enctype="multipart/form-data" aria-label="General enquiry">
+        <div class="ff">
+
+          <div class="ff-row">
+            <div class="ff-field">
+              <label for="cf-name">Your name <span class="req">*</span></label>
+              <input id="cf-name" name="name" type="text" placeholder="Sam Carter" required>
+            </div>
+            <div class="ff-field">
+              <label for="cf-company">Company</label>
+              <input id="cf-company" name="company" type="text" placeholder="Carter Aerospace Ltd">
+            </div>
+          </div>
+
+          <div class="ff-row">
+            <div class="ff-field">
+              <label for="cf-email">Email <span class="req">*</span></label>
+              <input id="cf-email" name="email" type="email" placeholder="sam.carter@carteraero.co.uk" required>
+            </div>
+            <div class="ff-field">
+              <label for="cf-phone">Phone</label>
+              <input id="cf-phone" name="phone" type="tel" placeholder="07700 900123">
+            </div>
+          </div>
+
+          <div class="ff-field">
+            <label>What's this about? <span class="req">*</span></label>
+            <div class="ff-pillgroup" role="radiogroup" aria-label="Enquiry purpose">
+              <label class="ff-pill"><input type="radio" name="purpose" value="general" required> General enquiry</label>
+              <label class="ff-pill"><input type="radio" name="purpose" value="vendor"> Vendor approval</label>
+              <label class="ff-pill"><input type="radio" name="purpose" value="sector"> Sector question</label>
+              <label class="ff-pill"><input type="radio" name="purpose" value="visit"> Shop visit</label>
+              <label class="ff-pill"><input type="radio" name="purpose" value="press"> Press / supplier</label>
+              <label class="ff-pill"><input type="radio" name="purpose" value="other"> Other</label>
+            </div>
+          </div>
+
+          <div class="ff-field">
+            <label for="cf-message">Your message <span class="req">*</span></label>
+            <textarea id="cf-message" name="message" placeholder="A line or two on what you're after. The more specific, the faster we'll route it." rows="5" required></textarea>
+          </div>
+
+          <div class="ff-field">
+            <label for="cf-file">Attachment (optional)</label>
+            <div class="ff-file">
+              <input id="cf-file" name="attachment" type="file" accept=".pdf,.dxf,.dwg,.step,.stp,.iges,.igs,.zip,.jpg,.png">
+              <div>
+                <strong>Drop a file or browse.</strong>
+                PDF, DXF, DWG, STEP, IGES, image, or zipped. Up to 25MB.
+              </div>
+            </div>
+          </div>
+
+          <div class="ff-submit">
+            <button type="submit" class="btn btn-primary btn-lg">Send the message</button>
+            <span class="ff-note">Reply from a named human, not a sales bot.</span>
+          </div>
+
+        </div>
+      </form>
+
+      <aside class="quote-aside" aria-label="What you can expect">
+        <div class="quote-aside__block">
+          <h4>+ Got a drawing already?</h4>
+          <p>Skip this form. The RFQ flow gets you a real quote and a delivery date inside 48 hours.</p>
+          <p><a class="btn btn-outline" href="get-a-quote.html" style="margin-top:0.5rem;">Get a quote →</a></p>
+        </div>
+        <div class="quote-aside__block">
+          <h4>+ Response time</h4>
+          <p>Same day in UK working hours. Faster if it's quote-related.</p>
+          <p>From a named human on the team.</p>
+        </div>
+        <div class="quote-aside__block">
+          <h4>+ Visits</h4>
+          <p>Welcome, by appointment. Tell us who you'd like to meet — engineer, inspection, MD — and we'll line them up.</p>
+        </div>
+        <div class="quote-aside__block">
+          <h4>+ Stamped</h4>
+          <div class="quote-aside__stamps">
+            <span>ISO 9001:2015</span>
+            <span>Est. 1992</span>
+            <span>Grimsby UK</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CROSS-LINK to Get a Quote ──────────────────────────────────── -->
+<section class="section section--paper-soft" aria-label="Skip the form">
+  <div class="wrap">
+    <div class="section__head section__head--brace" style="max-width:none;">
+      <p class="tagline" style="color: var(--ns-color-primary);">+ Got a drawing?</p>
+      <h2 class="section__h2">Skip the form.</h2>
+    </div>
+
+    <div class="cross-link">
+      <div>
+        <h3>Send the drawing instead.</h3>
+        <p>Upload it on Get a Quote and you'll get a detailed quote and a real delivery date back inside 48 hours. No phone tag, no holding pattern.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="get-a-quote.html">Get a quote →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQs ───────────────────────────────────────────────────────── -->
+<section class="section section--anchor" aria-label="Common questions">
+  <div class="wrap">
+    <div class="section__head section__head--brace" style="max-width:none;">
+      <p class="tagline" style="color: var(--ns-color-primary);">+ Common questions</p>
+      <h2 class="section__h2">Before you call.</h2>
+    </div>
+
+    <div class="faq">
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>How fast will I get a reply?</span></summary>
+        <div class="faq-item__panel">
+          <p>Phone is live in UK working hours. Email is same day for general queries, inside the hour for anything RFQ-related. Voicemail goes back to you the same day.</p>
+        </div>
+      </details>
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>Can I visit the shop?</span></summary>
+        <div class="faq-item__panel">
+          <p>Yes, by appointment. Tell us who you'd like to meet — engineer, inspection, MD — and what you'd like to see, and we'll line it up. Five minutes from the A180, free parking on site.</p>
+        </div>
+      </details>
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>I'm a supplier. Where do I send a pitch?</span></summary>
+        <div class="faq-item__panel">
+          <p><a href="mailto:info@kenworthengineering.co.uk" class="itext">info@kenworthengineering.co.uk</a>, marked for purchasing. We read everything, we don't reply to everything. If it's relevant, you'll hear back.</p>
+        </div>
+      </details>
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>Who am I going to be talking to?</span></summary>
+        <div class="faq-item__panel">
+          <p>Whoever picks up has worked on the machines or knows who has. No phone tree, no message-taker, no offshored first line. Family-run since 1992 — the people who answer the phone are the people who run the shop.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA BAND ───────────────────────────────────────────────────── -->
+<section class="section section--anchor cta-band-pro bleed-tr bleed-from--anchor" aria-label="Direct line to the floor">
+  <div class="wrap">
+    <div class="cta-band-pro__inner">
+      <div class="cta-band-pro__lead">
+        <p class="tagline" style="color: var(--ns-color-primary);">+ We answer the phone</p>
+        <h2>Direct line to the floor.</h2>
+        <p>Whoever picks up has worked on the machines or knows who has. No phone tree, no message-taker.</p>
+        <div class="cta-band-pro__acts">
+          <a class="btn btn-primary btn-lg" href="tel:01472210678">Call 01472 210 678</a>
+          <a class="btn btn-outline btn-outline--on-dark" href="mailto:rfq@kenworthengineering.co.uk">Email RFQ</a>
+        </div>
+      </div>
+      <div class="cta-band-pro__steps">
+        <div class="cta-step">
+          <span class="cta-step__num">01</span>
+          <div class="cta-step__body"><strong>Phone live</strong>Mon–Fri, UK working hours. Voicemail same-day.</div>
+        </div>
+        <div class="cta-step">
+          <span class="cta-step__num">02</span>
+          <div class="cta-step__body"><strong>RFQ inside the hour</strong>Acknowledged same hour, full quote inside 48.</div>
+        </div>
+        <div class="cta-step">
+          <span class="cta-step__num">03</span>
+          <div class="cta-step__body"><strong>Visit by appointment</strong>Wilton Road, Grimsby. Five minutes off the A180.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pre-footer callout (LOCKED) ─────────────────────────────────── -->
+<section class="pre-footer" aria-label="Direct contact">
+  <div class="wrap">
+    <div class="pre-footer__inner">
+      <div class="pre-footer__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div class="pre-footer__text">
+        <h3>Not ready to send a drawing? Call us instead.</h3>
+        <p>01472 210 678 · 8am–5pm, Mon–Fri · or <a href="mailto:rfq@kenworthengineering.co.uk" class="itext">rfq@kenworthengineering.co.uk</a></p>
+      </div>
+      <a class="btn btn-outline" href="contact.html">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer (LOCKED) ─────────────────────────────────────────────── -->
+<footer class="site-footer-pro" role="contentinfo">
+  <div class="wrap">
+    <div class="footer-pro__top">
+      <div class="footer-pro__brand">
+        <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+        <p>Family-run UK precision CNC machining, on the same shop floor in Grimsby since 1992. Aerospace, F1, defence, oil &amp; gas, medical, sub-sea.</p>
+        <dl class="footer-pro__addr">
+          <dt>HQ</dt><dd>Wilton Road Industrial Estate, Grimsby, DN36 4AS</dd>
+          <dt>Tel</dt><dd>01472 210 678</dd>
+          <dt>RFQ</dt><dd>rfq@kenworthengineering.co.uk</dd>
+        </dl>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Services</h6>
+        <a href="cnc-milling.html">CNC Milling</a>
+        <a href="cnc-turning.html">CNC Turning</a>
+        <a href="cnc-sliding-head.html">Sliding Head</a>
+        <a href="capabilities.html">Capabilities</a>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Company</h6>
+        <a href="about.html">About</a>
+        <a href="industries.html">Industries</a>
+        <a href="careers.html">Careers</a>
+        <a href="learning-hub.html">Learning Hub</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-pro__status">
+        <h6>Shop status</h6>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Quote turnaround</div>
+            <div class="fstat__value"><span class="fstat__pip" aria-hidden="true"></span>48 hrs · on track</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Today's lights-out</div>
+            <div class="fstat__value">Citizen Miyano · 14 hrs</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Latest certification</div>
+            <div class="fstat__value">ISO 9001:2015 · audit 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-pro__bottom">
+      <span>© 2026 Kenworth Engineering Ltd · Co. 02611728</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Modern Slavery</a></span>
+      <div class="footer-pro__social" aria-label="Kenworth on social">
+        <a href="#" aria-label="Kenworth Engineering on LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.5 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.59c0-1.57-.03-3.6-2.19-3.6-2.19 0-2.52 1.71-2.52 3.48V22H7.72V8z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on YouTube" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="20" height="20"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.12C19.55 4 12 4 12 4s-7.55 0-9.4.38A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 .12 12a31.6 31.6 0 0 0 .38 5.5 3 3 0 0 0 2.1 2.12C4.45 20 12 20 12 20s7.55 0 9.4-.38a3 3 0 0 0 2.1-2.12A31.6 31.6 0 0 0 23.88 12a31.6 31.6 0 0 0-.38-5.5zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on Instagram" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" width="18" height="18"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <span>Made by Northern Sauce</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll progress bar — 0 → 1 across the page
+(function () {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  function tick() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? window.scrollY / max : 0;
+    bar.style.transform = 'scaleX(' + pct + ')';
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+
+// Nav scrolled state — snap to solid anchor once past a threshold
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  function tick() {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+<script src="flourishes.js" defer></script>
+</body>
+</html>

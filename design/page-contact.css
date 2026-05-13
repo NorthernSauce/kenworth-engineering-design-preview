@@ -1,0 +1,302 @@
+/* ─── Contact page-specific composition ──────────────────────────────
+   Builds on tokens.css, components.css, design.css.
+   Only patterns unique to /contact go in this file.
+   ──────────────────────────────────────────────────────────────────── */
+
+/* CONTACT PATHS ─ three-card row, anchor-surface, chamfered ─────── */
+.contact-paths {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.25rem;
+}
+@media (max-width: 920px) {
+  .contact-paths { grid-template-columns: 1fr; }
+}
+
+.contact-path {
+  position: relative;
+  background: var(--ns-color-paper);
+  color: var(--ns-color-text);
+  padding: 1.75rem 1.5rem 1.75rem;
+  clip-path: var(--ns-chamfer);
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  transition: transform 220ms ease;
+  border: 1px solid rgba(20, 22, 24, 0.06);
+}
+.contact-path:hover { transform: translateY(-2px); }
+
+.contact-path__num {
+  font-family: var(--ns-font-mono, var(--ns-font-body));
+  font-size: var(--ns-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ns-color-primary);
+  font-weight: var(--ns-weight-medium);
+}
+
+.contact-path__title {
+  font-size: clamp(1.25rem, 0.95rem + 0.95vw, 1.5rem);
+  line-height: 1.15;
+  margin: 0;
+  color: var(--ns-color-text);
+}
+
+.contact-path__title a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+.contact-path:hover .contact-path__title a {
+  color: var(--ns-color-primary);
+  border-bottom-color: var(--ns-color-primary);
+}
+
+.contact-path__body {
+  margin: 0;
+  color: var(--ns-color-text);
+  font-size: var(--ns-text-regular);
+  line-height: 1.55;
+}
+
+.contact-path__meta {
+  margin-top: auto;
+  padding-top: 0.875rem;
+  border-top: 1px dashed rgba(20, 22, 24, 0.18);
+  font-size: var(--ns-text-tiny);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ns-color-text-muted, rgba(20, 22, 24, 0.6));
+}
+
+/* MAP + ADDRESS ─ chamfered block, no live embed ──────────────── */
+.contact-map-wrap {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  align-items: stretch;
+}
+@media (max-width: 920px) {
+  .contact-map-wrap { grid-template-columns: 1fr; }
+}
+
+.contact-map {
+  position: relative;
+  min-height: 320px;
+  clip-path: var(--ns-chamfer);
+  background:
+    linear-gradient(135deg, rgba(20,22,24,0.04), rgba(20,22,24,0.10)),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 38px,
+      rgba(20, 22, 24, 0.06) 38px 39px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 38px,
+      rgba(20, 22, 24, 0.06) 38px 39px
+    ),
+    var(--ns-color-paper-soft);
+  overflow: hidden;
+  border: 1px solid rgba(20, 22, 24, 0.08);
+}
+
+.contact-map__pin {
+  position: absolute;
+  top: 44%; left: 38%;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--ns-color-primary);
+  box-shadow:
+    0 0 0 6px rgba(214, 88, 29, 0.18),
+    0 0 0 14px rgba(214, 88, 29, 0.08);
+  transform: translate(-50%, -50%);
+}
+.contact-map__pin::after {
+  content: "";
+  position: absolute;
+  top: 100%; left: 50%;
+  width: 2px; height: 28px;
+  background: var(--ns-color-primary);
+  transform: translateX(-50%);
+}
+
+.contact-map__crosshair {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.contact-map__crosshair::before,
+.contact-map__crosshair::after {
+  content: "";
+  position: absolute;
+  background: rgba(20, 22, 24, 0.15);
+}
+.contact-map__crosshair::before {
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+}
+.contact-map__crosshair::after {
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+}
+
+.contact-map__stamp {
+  position: absolute;
+  left: 1.25rem; bottom: 1.25rem;
+  background: var(--ns-color-anchor);
+  color: var(--ns-color-text-on-dark);
+  padding: 0.875rem 1rem;
+  clip-path: var(--ns-chamfer-sm);
+  font-size: var(--ns-text-tiny);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  max-width: 280px;
+}
+.contact-map__stamp strong {
+  display: block;
+  color: var(--ns-color-primary);
+  font-weight: var(--ns-weight-medium);
+  margin-bottom: 0.25rem;
+}
+
+.contact-card {
+  background: var(--ns-color-paper);
+  padding: 1.75rem;
+  clip-path: var(--ns-chamfer);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgba(20, 22, 24, 0.08);
+}
+.contact-card h3 {
+  margin: 0;
+  font-size: clamp(1.25rem, 1rem + 0.8vw, 1.5rem);
+  line-height: 1.15;
+}
+.contact-card dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.25rem;
+  font-size: var(--ns-text-small);
+  line-height: 1.5;
+}
+.contact-card dt {
+  color: var(--ns-color-primary);
+  font-family: var(--ns-font-mono, var(--ns-font-body));
+  font-size: var(--ns-text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding-top: 0.15rem;
+}
+.contact-card dd {
+  margin: 0;
+  color: var(--ns-color-text);
+  font-size: var(--ns-text-regular);
+}
+.contact-card dd a {
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+}
+.contact-card dd a:hover { color: var(--ns-color-primary); }
+
+/* RESPONSE-TIME mini strip ─────────────────────────────────────── */
+.response-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--ns-color-paper);
+  clip-path: var(--ns-chamfer);
+  border: 1px solid rgba(20, 22, 24, 0.08);
+}
+@media (max-width: 720px) {
+  .response-strip { grid-template-columns: 1fr; }
+}
+.response-strip__item { display: flex; gap: 1rem; align-items: flex-start; }
+.response-strip__num {
+  font-family: var(--ns-font-mono, var(--ns-font-body));
+  font-size: var(--ns-text-small);
+  color: var(--ns-color-primary);
+  letter-spacing: 0.14em;
+  padding-top: 0.2rem;
+  min-width: 2.25rem;
+}
+.response-strip__body strong {
+  display: block;
+  font-size: var(--ns-text-regular);
+  margin-bottom: 0.2rem;
+  color: var(--ns-color-text);
+}
+.response-strip__body span {
+  font-size: var(--ns-text-small);
+  color: var(--ns-color-text-muted, rgba(20,22,24,0.65));
+}
+
+/* RADIO PILL GROUP for "What's this about?" ─────────────────────── */
+.ff-pillgroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+.ff-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  background: var(--ns-color-paper-soft);
+  border: 1px solid rgba(20, 22, 24, 0.18);
+  clip-path: var(--ns-chamfer-sm);
+  cursor: pointer;
+  font-size: var(--ns-text-small);
+  color: var(--ns-color-text);
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.ff-pill input { position: absolute; opacity: 0; pointer-events: none; }
+.ff-pill:hover { border-color: var(--ns-color-primary); color: var(--ns-color-primary); }
+.ff-pill:has(input:checked) {
+  background: var(--ns-color-primary);
+  color: var(--ns-color-text-on-dark);
+  border-color: var(--ns-color-primary);
+}
+
+/* Smaller hero variant — Contact doesn't need the big numbered "next" grid */
+.contact-hero .quote-hero__lede { max-width: 56ch; }
+/* Kill the inherited "RFQ" giant watermark — wrong word for Contact + decoration */
+.contact-hero::before { content: none !important; }
+
+/* Cross-link callout — paper-soft, single CTA */
+.cross-link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.25rem;
+  background: var(--ns-color-paper);
+  clip-path: var(--ns-chamfer);
+  border: 1px solid rgba(20, 22, 24, 0.08);
+}
+@media (max-width: 720px) {
+  .cross-link { grid-template-columns: 1fr; }
+}
+.cross-link h3 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 1rem + 1.4vw, 2rem);
+  line-height: 1.1;
+}
+.cross-link p {
+  margin: 0;
+  font-size: var(--ns-text-regular);
+  color: var(--ns-color-text);
+  line-height: 1.55;
+  max-width: 60ch;
+}

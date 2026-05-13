@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenworth Engineering — Precision CNC machining, Grimsby</title>
+<meta name="description" content="UK precision CNC subcontract machining. Your parts, right first time, on the date you were given. ISO 9001:2015, sub-10 micron, family-run since 1992.">
+
+<!-- Locked design system from phase 2 (Brief) -->
+<link rel="stylesheet" href="../brief/tokens.css">
+<link rel="stylesheet" href="../brief/components.css">
+
+<!-- Page-specific composition -->
+<link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="flourishes.css">
+</head>
+<body>
+
+<!-- ─── Scroll progress bar ─────────────────────────────────────────── -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+
+<nav class="nav" aria-label="Primary">
+  <a class="nav__logo" href="home.html" aria-label="Kenworth Engineering — homepage">
+    <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+  </a>
+
+  <div class="nav__links">
+    <div class="nav__drop">
+      <a class="nav__link" href="capabilities.html" aria-haspopup="true">Services</a>
+      <div class="nav__panel" role="menu">
+        <a href="cnc-milling.html" role="menuitem">
+          <span class="nav__panel__idx">01</span>
+          <span>
+            <span class="nav__panel__title">CNC Milling</span>
+            <span class="nav__panel__desc">3 and 5-axis up to 1200×600×600mm</span>
+          </span>
+        </a>
+        <a href="cnc-turning.html" role="menuitem">
+          <span class="nav__panel__idx">02</span>
+          <span>
+            <span class="nav__panel__title">CNC Turning</span>
+            <span class="nav__panel__desc">Production turning, unmanned overnight</span>
+          </span>
+        </a>
+        <a href="cnc-sliding-head.html" role="menuitem">
+          <span class="nav__panel__idx">03</span>
+          <span>
+            <span class="nav__panel__title">Sliding Head</span>
+            <span class="nav__panel__desc">1–22mm Ø up to 1000mm long</span>
+          </span>
+        </a>
+        <div class="nav__panel__sep"></div>
+        <a class="nav__panel__all" href="capabilities.html" role="menuitem">All capabilities →</a>
+      </div>
+    </div>
+    <a class="nav__link" href="industries.html">Industries</a>
+    <a class="nav__link" href="about.html">About</a>
+    <a class="nav__link" href="learning-hub.html">Learning Hub</a>
+  </div>
+
+  <div class="nav__cta-wrap" style="display:inline-flex; align-items:center; gap:0.75rem;">
+    <a class="btn btn-primary" href="get-a-quote.html">Get a quote</a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false" data-drawer-trigger>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── Mobile drawer ──────────────────────────────────────────────── -->
+
+<div class="drawer" id="mobileDrawer" data-open="false" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <div class="drawer__top">
+    <div class="drawer__mark" aria-hidden="true">KE</div>
+    <button class="drawer__close" type="button" aria-label="Close menu" data-drawer-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+        <path d="M6 6l12 12"/><path d="M18 6l-12 12"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="drawer__nav" aria-label="Primary mobile">
+    <a href="cnc-milling.html"><span class="idx">01</span><span>CNC Milling</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-turning.html"><span class="idx">02</span><span>CNC Turning</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-sliding-head.html"><span class="idx">03</span><span>Sliding Head</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="capabilities.html"><span class="idx">04</span><span>Capabilities</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="industries.html"><span class="idx">05</span><span>Industries</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="about.html"><span class="idx">06</span><span>About</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="learning-hub.html"><span class="idx">07</span><span>Learning Hub</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="careers.html"><span class="idx">08</span><span>Careers</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="contact.html"><span class="idx">09</span><span>Contact</span><span class="arrow" aria-hidden="true">↗</span></a>
+  </nav>
+  <div class="drawer__foot">
+    <span class="drawer__tagline">ISO 9001:2015 · Grimsby · Est. 1992</span>
+    <a class="btn" href="get-a-quote.html">Get a quote</a>
+  </div>
+</div>
+
+<!-- Drawer open/close -->
+<script>
+(function () {
+  const trigger = document.querySelector('[data-drawer-trigger]');
+  const close   = document.querySelector('[data-drawer-close]');
+  const drawer  = document.getElementById('mobileDrawer');
+  if (!trigger || !drawer) return;
+
+  function open() {
+    drawer.dataset.open = 'true';
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.dataset.drawerOpen = 'true';
+  }
+  function shut() {
+    drawer.dataset.open = 'false';
+    trigger.setAttribute('aria-expanded', 'false');
+    delete document.body.dataset.drawerOpen;
+  }
+  trigger.addEventListener('click', open);
+  close && close.addEventListener('click', shut);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+})();
+</script>
+
+<!-- ─── HERO (sticky-scroll, video scrubs with scroll position) ─────── -->
+
+<section class="hero" aria-label="Hero">
+  <div class="hero__sticky">
+
+    <!-- Background video — scroll-scrubbed via JS.
+         All-intra encoded so every frame is instantly seekable. -->
+    <video
+      class="hero__video"
+      id="heroVideo"
+      muted playsinline
+      preload="auto"
+      disablepictureinpicture
+      poster="../assets/photography/1551.jpg"
+      aria-hidden="true">
+      <source src="../assets/video/hero-scrub.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay system -->
+    <div class="hero__grad" aria-hidden="true"></div>
+    <div class="hero__scan" aria-hidden="true"></div>
+    <!-- Content stack -->
+    <div class="hero__body">
+      <div class="wrap">
+        <div class="hero__inner">
+          <p class="hero__over r d1">+ Precision CNC · Grimsby</p>
+          <h1 class="hero__h1 r d2">Your parts, right first time, on the date you were given.</h1>
+          <p class="hero__sub r d3">Hand your drawing to a UK shop where the engineer specifying the part can talk to the engineer making it. No portal between you. No account manager translating. No offshore factory you'll never see.</p>
+          <div class="hero__acts r d3">
+            <a class="btn btn-primary btn-lg" href="get-a-quote.html">Get a quote</a>
+            <a class="btn-ghost btn-ghost--on-dark" href="capabilities.html">See the machine list</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll cue bottom-right -->
+    <div class="hero__cue" aria-hidden="true">
+      <div class="hero__cue-line"></div>
+      <span>Scroll</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- Scroll-driven video scrubbing.
+     Maps scroll progress through .hero (0 → 1) to video.currentTime.
+     Respects prefers-reduced-motion — falls back to poster only. -->
+<script>
+(function () {
+  const hero = document.querySelector('.hero');
+  const video = document.getElementById('heroVideo');
+  if (!hero || !video) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotion.matches) {
+    video.style.display = 'none';
+    return;
+  }
+
+  let duration = 0;
+  let target = 0;
+  let current = 0;
+  let rafId = 0;
+
+  function onMeta() {
+    duration = video.duration;
+    // Force first frame paint
+    video.currentTime = 0;
+    update();
+  }
+
+  function update() {
+    const rect = hero.getBoundingClientRect();
+    const scrollable = hero.offsetHeight - window.innerHeight;
+    if (scrollable <= 0) return;
+    const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+    target = progress * duration;
+  }
+
+  function tick() {
+    // Smooth toward target so the scrub doesn't jitter on fast wheel events
+    current += (target - current) * 0.18;
+    if (Math.abs(target - current) < 0.005) current = target;
+    if (Number.isFinite(current)) video.currentTime = current;
+    rafId = requestAnimationFrame(tick);
+  }
+
+  if (video.readyState >= 1) {
+    onMeta();
+  } else {
+    video.addEventListener('loadedmetadata', onMeta, { once: true });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  rafId = requestAnimationFrame(tick);
+})();
+
+// Scroll progress bar — 0 → 1 across the page
+(function () {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  function tick() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? window.scrollY / max : 0;
+    bar.style.transform = 'scaleX(' + pct + ')';
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+
+// Nav scrolled state — snap to solid anchor once past the hero
+(function () {
+  const nav = document.querySelector('.nav');
+  const hero = document.querySelector('.hero');
+  if (!nav || !hero) return;
+  function tick() {
+    // Switch when the user has scrolled past ~80% of the hero outer height
+    const threshold = hero.offsetHeight * 0.8;
+    nav.classList.toggle('nav--scrolled', window.scrollY > threshold);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+<!-- ─── Stat strip ──────────────────────────────────────────────────── -->
+
+<section class="stat-strip" aria-label="Headline specs">
+  <div class="wrap">
+    <p class="tagline" style="margin-bottom: 1.5rem; color: var(--ns-color-text-muted);">+ Headline specs</p>
+    <div class="stat-strip__grid">
+      <div class="stat">
+        <span class="stat__label">+ Tolerance</span>
+        <span class="stat__value">&lt;10<span class="stat__unit">µm</span></span>
+        <span class="stat__note">Documented on every batch</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">+ Standard</span>
+        <span class="stat__value">ISO 9001<span class="stat__unit">:2015</span></span>
+        <span class="stat__note">Audited annually</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">+ In business</span>
+        <span class="stat__value"><span data-count="30" data-count-suffix="+">30+</span><span class="stat__unit">yrs</span></span>
+        <span class="stat__note">Same family, same shop</span>
+      </div>
+      <div class="stat">
+        <span class="stat__label">+ Quote</span>
+        <span class="stat__value"><span data-count="48">48</span><span class="stat__unit">hrs</span></span>
+        <span class="stat__note">With a delivery date</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Empathy + problem ──────────────────────────────────────────── -->
+
+<section class="section section--paper-soft" aria-label="The job on your desk" style="position:relative;">
+  <div class="wrap" style="position:relative;">
+    <div class="empathy__layout">
+      <div>
+        <p class="tagline">+ The job on your desk</p>
+        <h2 class="empathy__h2">You shouldn't be chasing your supplier.</h2>
+      </div>
+      <div class="empathy__body">
+        <p>When you spec a subcontractor, you stake your name on it. If the batch lands right, nobody mentions you; if it lands wrong, the post-mortem starts with who specced them.</p>
+        <p>So you've been chasing updates, explaining delays you didn't cause, opening another reject batch — and staying put, because vetting a new supplier felt worse than the cost of staying.</p>
+        <div class="empathy__cta">
+          <a class="btn btn-primary" href="get-a-quote.html">Send a drawing</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Service triptych ───────────────────────────────────────────── -->
+
+<section class="section section--paper bleed-tr bleed-from--paper-soft" aria-label="Services">
+  <div class="wrap">
+    <div class="section__head section__head--brace">
+      <p class="tagline">+ Three services</p>
+      <h2 class="section__h2">What you can send us.</h2>
+    </div>
+
+    <div class="triptych">
+      <a class="service" href="cnc-milling.html">
+        <span class="service__corner" aria-hidden="true"></span>
+        <div class="service__media">
+          <span class="service__idx">01</span>
+          <img src="../assets/photography/1551.jpg" alt="CNC milling — gear in mid-cycle on a 5-axis machine">
+        </div>
+        <div class="service__body">
+          <h3 class="service__title">CNC Milling</h3>
+          <p class="service__lede">3 and 5-axis up to 1200×600×600mm. Single-setup work other shops bill as two ops.</p>
+          <span class="service__cta">See milling</span>
+        </div>
+      </a>
+      <a class="service" href="cnc-turning.html">
+        <span class="service__corner" aria-hidden="true"></span>
+        <div class="service__media">
+          <span class="service__idx">02</span>
+          <img src="../assets/photography/2807.jpg" alt="CNC turning — dual-spindle turret close-up on the Citizen Miyano">
+        </div>
+        <div class="service__body">
+          <h3 class="service__title">CNC Turning</h3>
+          <p class="service__lede">Production turning to 51×100mm on the Citizen Miyano BNE51 MSY. Unmanned overnight.</p>
+          <span class="service__cta">See turning</span>
+        </div>
+      </a>
+      <a class="service" href="cnc-sliding-head.html">
+        <span class="service__corner" aria-hidden="true"></span>
+        <div class="service__media">
+          <span class="service__idx">03</span>
+          <img src="../assets/photography/383.jpg" alt="Tool holders and collets on the workshop bench">
+        </div>
+        <div class="service__body">
+          <h3 class="service__title">CNC Sliding Head</h3>
+          <p class="service__lede">1–22mm diameter up to 1000mm long on the Star SB20R. Sub-10 micron, unattended.</p>
+          <span class="service__cta">See sliding head</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Machine investment ─────────────────────────────────────────── -->
+
+<section class="section section--paper-soft bleed-tl bleed-from--paper" aria-label="The machines">
+  <div class="wrap">
+    <div class="section__head" style="display:flex; justify-content:space-between; align-items:flex-start; gap:2rem; max-width:none;">
+      <div style="max-width:64ch;">
+        <p class="tagline">+ The machines</p>
+        <h2 class="section__h2">The machines you're quoting against.</h2>
+        <p class="section__lede">Four shown here. The full list lives on the capabilities page.</p>
+      </div>
+    </div>
+
+    <div class="machines__grid">
+      <article class="machine">
+        <div class="machine__img"><img src="../assets/photography/2807.jpg" alt="Citizen Miyano BNE51 MSY — dual-spindle turret"></div>
+        <div class="machine__body">
+          <span class="machine__tag">+ Production turning</span>
+          <h3 class="machine__name">Citizen Miyano BNE51 MSY</h3>
+          <p class="machine__note">Dual-spindle, dual-turret, with a custom Hydrafeed Rota-Rack. Both ends in one hit, unmanned overnight.</p>
+          <div class="machine__specs">
+            <div class="machine__spec"><span>Capacity</span>51 × 100 mm</div>
+            <div class="machine__spec"><span>Tolerance</span>&lt;10 µm</div>
+          </div>
+        </div>
+      </article>
+      <article class="machine">
+        <div class="machine__img"><img src="../assets/photography/354.jpg" alt="DMG-Mori HSC 5-axis — cutting tools on the spindle"></div>
+        <div class="machine__body">
+          <span class="machine__tag">+ 5-axis milling</span>
+          <h3 class="machine__name">DMG-Mori DMU-50 5-axis</h3>
+          <p class="machine__note">20,000rpm Speed Master spindle. Complex 3D in a single setup, up to 600mm diameter.</p>
+          <div class="machine__specs">
+            <div class="machine__spec"><span>Envelope</span>600 mm Ø</div>
+            <div class="machine__spec"><span>Spindle</span>20,000 rpm</div>
+          </div>
+        </div>
+      </article>
+      <article class="machine">
+        <div class="machine__img"><img src="../assets/photography/120.jpg" alt="Machined components in a blue tray after running"></div>
+        <div class="machine__body">
+          <span class="machine__tag">+ Mill/turn</span>
+          <h3 class="machine__name">DMG-Mori NLX mill/turn</h3>
+          <p class="machine__note">Turned and milled features in one part, up to 300 × 700 mm. Y-axis with live tooling.</p>
+          <div class="machine__specs">
+            <div class="machine__spec"><span>Capacity</span>300 × 700 mm</div>
+            <div class="machine__spec"><span>Tolerance</span>&lt;15 µm</div>
+          </div>
+        </div>
+      </article>
+      <article class="machine">
+        <div class="machine__img"><img src="../assets/photography/383.jpg" alt="Tool holders for the Star sliding head"></div>
+        <div class="machine__body">
+          <span class="machine__tag">+ Sliding head</span>
+          <h3 class="machine__name">Star SB20R sliding head</h3>
+          <p class="machine__note">1–22mm diameter up to 1000mm length, bar-fed with tool monitoring. Sub-10 micron, unattended.</p>
+          <div class="machine__specs">
+            <div class="machine__spec"><span>Range</span>1–22 mm Ø</div>
+            <div class="machine__spec"><span>Length</span>up to 1000 mm</div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="machines__foot">
+      <a class="btn btn-outline" href="capabilities.html">See every machine</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Industries (rebuilt — engineering-card grid) ───────────────── -->
+
+<section class="industries" aria-label="Sectors we work in">
+  <div class="wrap">
+    <div class="industries__hd">
+      <div>
+        <p class="tagline">+ Sectors we work in</p>
+        <h2>Where late or out-of-spec isn't an option.</h2>
+      </div>
+      <a class="btn btn-primary" href="industries.html">All sectors</a>
+    </div>
+
+    <div class="industries__grid">
+      <a class="icard" href="industries.html#aerospace">
+        <img class="icard__img" src="../assets/photography/1551.jpg" alt="Five-axis machine in mid-cycle on a precision aerospace gear">
+        <span class="icard__n">01</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Aerospace &amp; Space</h3>
+          <p class="icard__desc">Airframe brackets, hydraulic components, structural fasteners. Civil and defence platforms.</p>
+          <div class="icard__tags"><span class="itag">ISO 9001:2015</span><span class="itag">Sub-10 µm</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+      <a class="icard" href="industries.html#f1">
+        <img class="icard__img" src="../assets/photography/354.jpg" alt="Cutting tools mounted on collets for motorsport production">
+        <span class="icard__n">02</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Formula 1</h3>
+          <p class="icard__desc">Suspension hardware, transmission internals, lightweight machined components for race teams.</p>
+          <div class="icard__tags"><span class="itag">NDA-aware</span><span class="itag">Sub-10 µm</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+      <a class="icard" href="industries.html#defence">
+        <img class="icard__img" src="../assets/photography/129.jpg" alt="Multi-axis turret close-up on a heavy production lathe">
+        <span class="icard__n">03</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Defence</h3>
+          <p class="icard__desc">Weapon-system components, vehicle hardware, ground support. Regulated material trace.</p>
+          <div class="icard__tags"><span class="itag">ITAR-aware</span><span class="itag">ISO 9001</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+      <a class="icard" href="industries.html#oil-gas">
+        <img class="icard__img" src="../assets/photography/2807.jpg" alt="Dual-spindle chuck and turret detail for high-volume turning">
+        <span class="icard__n">04</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Oil &amp; Gas · Sub-Sea</h3>
+          <p class="icard__desc">Subsea connectors, valve bodies, pipeline fittings in duplex, Inconel and exotic alloys.</p>
+          <div class="icard__tags"><span class="itag">Exotics</span><span class="itag">High-pressure</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+      <a class="icard" href="industries.html#medical">
+        <img class="icard__img" src="../assets/photography/6563.jpg" alt="Polished tool holders on the workshop bench">
+        <span class="icard__n">05</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Medical</h3>
+          <p class="icard__desc">Surgical instruments, diagnostic housings, implant components. Clean handling on request.</p>
+          <div class="icard__tags"><span class="itag">Biocompat</span><span class="itag">Sub-10 µm</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+      <a class="icard" href="industries.html#renewables">
+        <img class="icard__img" src="../assets/photography/383.jpg" alt="Tool holders and collets staged for the next batch">
+        <span class="icard__n">06</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Renewable Energy</h3>
+          <p class="icard__desc">Wind-turbine gear components, hydro shafts, solar-tracker hardware. Batch volume ready.</p>
+          <div class="icard__tags"><span class="itag">Batch volume</span><span class="itag">ISO 9001</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── How a quote happens (rebuilt — premium steps) ──────────────── -->
+
+<section class="section section--paper-soft section--steps bleed-tr bleed-from--anchor focal-tab" aria-label="How a quote happens">
+  <div class="wrap">
+    <div class="section__head section__head--brace">
+      <p class="tagline">+ How a quote happens</p>
+      <h2 class="section__h2">Three steps. 48 hours.</h2>
+    </div>
+
+    <div class="steps-pro">
+      <article class="step-pro">
+        <span class="step-pro__meta-line">Day 0 · You</span>
+        <div class="step-pro__title-wrap">
+          <span class="step-pro__num-bg" aria-hidden="true">01</span>
+          <h3 class="step-pro__title">Send your drawing.</h3>
+        </div>
+        <p class="step-pro__body">DXF, DWG, STEP or IGES, plus what it's for and the quantity you need.</p>
+        <dl class="step-pro__detail">
+          <dt>Formats</dt><dd>DXF · DWG · STEP · IGES · PDF</dd>
+          <dt>Cutoff</dt><dd>By 5pm for next-day pickup</dd>
+        </dl>
+      </article>
+      <article class="step-pro">
+        <span class="step-pro__meta-line">Day 1–2 · Us</span>
+        <div class="step-pro__title-wrap">
+          <span class="step-pro__num-bg" aria-hidden="true">02</span>
+          <h3 class="step-pro__title">Quote back in 48 hours.</h3>
+        </div>
+        <p class="step-pro__body">Detailed, with a real delivery date. Anything on your drawing that could save you time or money, we'll flag it before you commit.</p>
+        <dl class="step-pro__detail">
+          <dt>Includes</dt><dd>Material · tolerance · delivery date</dd>
+          <dt>From</dt><dd>A named engineer, not a bot</dd>
+        </dl>
+      </article>
+      <article class="step-pro">
+        <span class="step-pro__meta-line">The date · Us → You</span>
+        <div class="step-pro__title-wrap">
+          <span class="step-pro__num-bg" aria-hidden="true">03</span>
+          <h3 class="step-pro__title">Parts on the date you were given.</h3>
+        </div>
+        <p class="step-pro__body">Fully inspected, with ISO 9001:2015 documentation behind every batch. No chase. No surprises.</p>
+        <dl class="step-pro__detail">
+          <dt>Inspection</dt><dd>Every batch · CMM trace on request</dd>
+          <dt>Docs</dt><dd>Material cert · inspection report</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="steps-pro-foot">
+      <p class="steps-pro-foot__note">Faster than that on a one-off prototype where the drawing's clean and the material's in stock.</p>
+      <a class="btn btn-primary btn-lg" href="get-a-quote.html">Send a drawing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Testimonial ────────────────────────────────────────────────── -->
+
+<section class="section section--paper bleed-tl bleed-from--paper-soft" aria-label="What clients say">
+  <div class="wrap">
+    <div class="testimonial">
+      <p class="testimonial__body">"They were the first subcontractor in years who came back with a delivery date instead of a window. We hit our build dates because of them."</p>
+      <p class="testimonial__attr">— Engineering Manager · Tier-1 aerospace · Long-standing Kenworth client</p>
+      <span class="testimonial__placeholder">+ Placeholder · awaiting Natalie's 2–3 named testimonials</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Final CTA band (rebuilt) ──────────────────────────────────── -->
+
+<section class="section section--anchor cta-band-pro bleed-tr bleed-from--paper" aria-label="Send the drawing">
+  <div class="wrap">
+    <div class="cta-band-pro__inner">
+      <div class="cta-band-pro__lead">
+        <p class="tagline" style="color: var(--ns-color-primary);">+ Send the drawing</p>
+        <h2>Send the drawing. Stop thinking about it.</h2>
+        <p>A real delivery date back in 48 hours, and a direct line to the engineers machining your job. Not a portal. Not an account manager.</p>
+        <div class="cta-band-pro__acts">
+          <a class="btn btn-primary btn-lg" href="get-a-quote.html">Get a quote</a>
+          <a class="btn btn-outline btn-outline--on-dark" href="capabilities.html">See the machine list</a>
+        </div>
+      </div>
+      <div class="cta-band-pro__steps">
+        <div class="cta-step">
+          <span class="cta-step__num">01</span>
+          <div class="cta-step__body"><strong>Send your drawing</strong>DXF, DWG, STEP, IGES or PDF. Quantity and what it's for.</div>
+        </div>
+        <div class="cta-step">
+          <span class="cta-step__num">02</span>
+          <div class="cta-step__body"><strong>Quote in 48 hours</strong>Detailed, with a real delivery date. Design-for-manufacture flags before you commit.</div>
+        </div>
+        <div class="cta-step">
+          <span class="cta-step__num">03</span>
+          <div class="cta-step__body"><strong>Parts on the day</strong>Fully inspected. ISO 9001:2015 docs behind every batch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pre-footer callout ─────────────────────────────────────────── -->
+
+<section class="pre-footer" aria-label="Direct contact">
+  <div class="wrap">
+    <div class="pre-footer__inner">
+      <div class="pre-footer__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div class="pre-footer__text">
+        <h3>Not ready to send a drawing? Call us instead.</h3>
+        <p>01472 210 678 · 8am–5pm, Mon–Fri · or <a href="mailto:rfq@kenworthengineering.co.uk" class="itext">rfq@kenworthengineering.co.uk</a></p>
+      </div>
+      <a class="btn btn-outline" href="contact.html">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer (rebuilt — engineering-doc style) ───────────────────── -->
+
+<footer class="site-footer-pro" role="contentinfo">
+  <div class="wrap">
+    <div class="footer-pro__top">
+      <div class="footer-pro__brand">
+        <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+        <p>Family-run UK precision CNC machining, on the same shop floor in Grimsby since 1992. Aerospace, F1, defence, oil &amp; gas, medical, sub-sea.</p>
+        <dl class="footer-pro__addr">
+          <dt>HQ</dt><dd>Wilton Road Industrial Estate, Grimsby, DN36 4AS</dd>
+          <dt>Tel</dt><dd>01472 210 678</dd>
+          <dt>RFQ</dt><dd>rfq@kenworthengineering.co.uk</dd>
+        </dl>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Services</h6>
+        <a href="cnc-milling.html">CNC Milling</a>
+        <a href="cnc-turning.html">CNC Turning</a>
+        <a href="cnc-sliding-head.html">Sliding Head</a>
+        <a href="capabilities.html">Capabilities</a>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Company</h6>
+        <a href="about.html">About</a>
+        <a href="industries.html">Industries</a>
+        <a href="careers.html">Careers</a>
+        <a href="learning-hub.html">Learning Hub</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-pro__status">
+        <h6>Shop status</h6>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Quote turnaround</div>
+            <div class="fstat__value"><span class="fstat__pip" aria-hidden="true"></span>48 hrs · on track</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Today's lights-out</div>
+            <div class="fstat__value">Citizen Miyano · 14 hrs</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Latest certification</div>
+            <div class="fstat__value">ISO 9001:2015 · audit 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-pro__bottom">
+      <span>© 2026 Kenworth Engineering Ltd · Co. 02611728</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Modern Slavery</a></span>
+      <div class="footer-pro__social" aria-label="Kenworth on social">
+        <a href="#" aria-label="Kenworth Engineering on LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.5 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.59c0-1.57-.03-3.6-2.19-3.6-2.19 0-2.52 1.71-2.52 3.48V22H7.72V8z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on YouTube" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="20" height="20"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.12C19.55 4 12 4 12 4s-7.55 0-9.4.38A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 .12 12a31.6 31.6 0 0 0 .38 5.5 3 3 0 0 0 2.1 2.12C4.45 20 12 20 12 20s7.55 0 9.4-.38a3 3 0 0 0 2.1-2.12A31.6 31.6 0 0 0 23.88 12a31.6 31.6 0 0 0-.38-5.5zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on Instagram" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" width="18" height="18"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <span>Made by Northern Sauce</span>
+    </div>
+  </div>
+</footer>
+
+<script src="flourishes.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a Quote — Kenworth Engineering · 48-hour quote, real delivery date</title>
+<meta name="description" content="Send your drawing. Detailed quote and a real delivery date back inside two working days. UK CNC subcontract machining. ISO 9001:2015. ITAR-aware. NDA on request.">
+
+<link rel="stylesheet" href="../brief/tokens.css">
+<link rel="stylesheet" href="../brief/components.css">
+<link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="flourishes.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Primary">
+  <a class="nav__logo" href="home.html" aria-label="Kenworth Engineering — homepage">
+    <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+  </a>
+
+  <div class="nav__links">
+    <div class="nav__drop">
+      <a class="nav__link" href="capabilities.html" aria-haspopup="true">Services</a>
+      <div class="nav__panel" role="menu">
+        <a href="cnc-milling.html" role="menuitem">
+          <span class="nav__panel__idx">01</span>
+          <span>
+            <span class="nav__panel__title">CNC Milling</span>
+            <span class="nav__panel__desc">3 and 5-axis up to 1200×600×600mm</span>
+          </span>
+        </a>
+        <a href="cnc-turning.html" role="menuitem">
+          <span class="nav__panel__idx">02</span>
+          <span>
+            <span class="nav__panel__title">CNC Turning</span>
+            <span class="nav__panel__desc">Production turning, unmanned overnight</span>
+          </span>
+        </a>
+        <a href="cnc-sliding-head.html" role="menuitem">
+          <span class="nav__panel__idx">03</span>
+          <span>
+            <span class="nav__panel__title">Sliding Head</span>
+            <span class="nav__panel__desc">1–22mm Ø up to 1000mm long</span>
+          </span>
+        </a>
+        <div class="nav__panel__sep"></div>
+        <a class="nav__panel__all" href="capabilities.html" role="menuitem">All capabilities →</a>
+      </div>
+    </div>
+    <a class="nav__link" href="industries.html">Industries</a>
+    <a class="nav__link" href="about.html">About</a>
+    <a class="nav__link" href="learning-hub.html">Learning Hub</a>
+  </div>
+
+  <div class="nav__cta-wrap" style="display:inline-flex; align-items:center; gap:0.75rem;">
+    <a class="btn btn-primary" href="get-a-quote.html">Get a quote</a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false" data-drawer-trigger>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div class="drawer" id="mobileDrawer" data-open="false" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <div class="drawer__top">
+    <div class="drawer__mark" aria-hidden="true">KE</div>
+    <button class="drawer__close" type="button" aria-label="Close menu" data-drawer-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+        <path d="M6 6l12 12"/><path d="M18 6l-12 12"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="drawer__nav" aria-label="Primary mobile">
+    <a href="cnc-milling.html"><span class="idx">01</span><span>CNC Milling</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-turning.html"><span class="idx">02</span><span>CNC Turning</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-sliding-head.html"><span class="idx">03</span><span>Sliding Head</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="capabilities.html"><span class="idx">04</span><span>Capabilities</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="industries.html"><span class="idx">05</span><span>Industries</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="about.html"><span class="idx">06</span><span>About</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="learning-hub.html"><span class="idx">07</span><span>Learning Hub</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="careers.html"><span class="idx">08</span><span>Careers</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="contact.html"><span class="idx">09</span><span>Contact</span><span class="arrow" aria-hidden="true">↗</span></a>
+  </nav>
+  <div class="drawer__foot">
+    <span class="drawer__tagline">ISO 9001:2015 · Grimsby · Est. 1992</span>
+    <a class="btn" href="get-a-quote.html">Get a quote</a>
+  </div>
+</div>
+
+<!-- Drawer open/close -->
+<script>
+(function () {
+  const trigger = document.querySelector('[data-drawer-trigger]');
+  const close   = document.querySelector('[data-drawer-close]');
+  const drawer  = document.getElementById('mobileDrawer');
+  if (!trigger || !drawer) return;
+
+  function open() {
+    drawer.dataset.open = 'true';
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.dataset.drawerOpen = 'true';
+  }
+  function shut() {
+    drawer.dataset.open = 'false';
+    trigger.setAttribute('aria-expanded', 'false');
+    delete document.body.dataset.drawerOpen;
+  }
+  trigger.addEventListener('click', open);
+  close && close.addEventListener('click', shut);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+})();
+</script>
+
+<!-- ─── HERO (focused, no video) ───────────────────────────────────── -->
+<section class="quote-hero" aria-label="Get a quote">
+  <div class="wrap">
+    <div class="quote-hero__inner">
+      <p class="svc-hero__over">+ Get a Quote</p>
+      <h1>Send your drawing. 48-hour quote.</h1>
+      <p class="quote-hero__lede">Upload your drawing. Detailed quote and a real delivery date back inside two working days.</p>
+      <div class="quote-hero__next">
+        <div><strong>01 · Acknowledged</strong>Inside the hour, UK working hours.</div>
+        <div><strong>02 · Quoted</strong>Inside 48 hours with a real delivery date and DFM feedback.</div>
+        <div><strong>03 · Honest answer</strong>Not right for us? You'll know straight away.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FORM ───────────────────────────────────────────────────────── -->
+<section class="section section--paper" aria-label="Quote request form" style="padding-top: clamp(3rem, 5vw, 4rem);">
+  <div class="wrap">
+    <div class="quote-layout">
+      <form class="quote-form fluentform" action="#" method="post" enctype="multipart/form-data" aria-label="Quote request">
+        <div class="ff">
+
+          <div class="ff-row">
+            <div class="ff-field">
+              <label for="ff-name">Your name <span class="req">*</span></label>
+              <input id="ff-name" name="name" type="text" placeholder="Sam Carter" required>
+            </div>
+            <div class="ff-field">
+              <label for="ff-company">Company <span class="req">*</span></label>
+              <input id="ff-company" name="company" type="text" placeholder="Carter Aerospace Ltd" required>
+            </div>
+          </div>
+
+          <div class="ff-row">
+            <div class="ff-field">
+              <label for="ff-email">Email <span class="req">*</span></label>
+              <input id="ff-email" name="email" type="email" placeholder="sam.carter@carteraero.co.uk" required>
+            </div>
+            <div class="ff-field">
+              <label for="ff-phone">Phone</label>
+              <input id="ff-phone" name="phone" type="tel" placeholder="07700 900123">
+            </div>
+          </div>
+
+          <div class="ff-field">
+            <label for="ff-purpose">What's the part for? <span class="req">*</span></label>
+            <textarea id="ff-purpose" name="purpose" placeholder="Brief description, sector, end use." rows="4" required></textarea>
+          </div>
+
+          <div class="ff-field">
+            <label for="ff-qty">Quantity <span class="req">*</span></label>
+            <input id="ff-qty" name="quantity" type="text" placeholder="e.g. 50 off, 5,000 off, prototype" required>
+          </div>
+
+          <div class="ff-field">
+            <label for="ff-file">Drawing upload <span class="req">*</span></label>
+            <div class="ff-file">
+              <input id="ff-file" name="drawing" type="file" accept=".dxf,.dwg,.step,.stp,.iges,.igs,.pdf,.zip" required>
+              <div>
+                <strong>Drop your drawing or browse.</strong>
+                DXF, DWG, STEP, IGES, PDF, or zipped. Up to 25MB.
+              </div>
+            </div>
+          </div>
+
+          <div class="ff-field">
+            <label style="display: flex; align-items: center; gap: 0.625rem; text-transform: none; letter-spacing: 0; font-weight: var(--ns-weight-medium);">
+              <input type="checkbox" name="nda" style="width: 1.05rem; height: 1.05rem; margin: 0; accent-color: var(--ns-color-primary);">
+              <span>NDA required before upload? Send me your NDA first.</span>
+            </label>
+          </div>
+
+          <div class="ff-field">
+            <label for="ff-other">Anything else?</label>
+            <textarea id="ff-other" name="other" placeholder="Tolerances of concern, finishing, target delivery." rows="3"></textarea>
+          </div>
+
+          <div class="ff-submit">
+            <button type="submit" class="btn btn-primary btn-lg">Send drawing for quote</button>
+            <span class="ff-note">Reply from a named engineer, not a sales bot.</span>
+          </div>
+
+        </div>
+      </form>
+
+      <aside class="quote-aside" aria-label="What we promise">
+        <div class="quote-aside__block">
+          <h4>+ Drop and go</h4>
+          <p>DXF, DWG, STEP, IGES, PDF, or zipped.</p>
+          <p>Up to 25MB per upload.</p>
+        </div>
+        <div class="quote-aside__block">
+          <h4>+ Response time</h4>
+          <p>Acknowledged inside the hour, UK working hours. Detailed quote inside 48 hours.</p>
+          <p>From a named engineer, not a sales bot.</p>
+        </div>
+        <div class="quote-aside__block">
+          <h4>+ Confidentiality</h4>
+          <p>NDA on request before your drawing leaves your end. ITAR-aware.</p>
+          <p>UK-machined in Grimsby. No overseas routing.</p>
+        </div>
+        <div class="quote-aside__block">
+          <h4>+ Stamped</h4>
+          <div class="quote-aside__stamps">
+            <span>ISO 9001:2015</span>
+            <span>&lt; 10 µm</span>
+            <span>Est. 1992</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQs ───────────────────────────────────────────────────────── -->
+<section class="section section--anchor" aria-label="Common questions">
+  <div class="wrap">
+    <div class="section__head section__head--brace" style="max-width:none;">
+      <p class="tagline" style="color: var(--ns-color-primary);">+ Common questions</p>
+      <h2 class="section__h2">Before you send the drawing.</h2>
+    </div>
+
+    <div class="faq">
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>How fast will I get a price?</span></summary>
+        <div class="faq-item__panel">
+          <p>A real quote inside 48 hours — with a delivery date, not a window. Anything quicker is a guess and we don't do guesses.</p>
+        </div>
+      </details>
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>What do you need from me to quote?</span></summary>
+        <div class="faq-item__panel">
+          <p>A drawing or model (DXF, DWG, STEP, IGES, PDF), the quantity, and a sentence on what the part is for. If something's missing we'll ask — we won't quote blind.</p>
+        </div>
+      </details>
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>Do you sign NDAs?</span></summary>
+        <div class="faq-item__panel">
+          <p>Yes. Routinely. Send yours with the RFQ or ask for ours.</p>
+        </div>
+      </details>
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>What if my drawing isn't finished?</span></summary>
+        <div class="faq-item__panel">
+          <p>Send what you've got. If the geometry isn't manufacturable as drawn, you'll hear about it at quote stage — not three weeks into the job.</p>
+        </div>
+      </details>
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>What sizes and volumes do you handle?</span></summary>
+        <div class="faq-item__panel">
+          <p>Prototype through to production batch. Envelope up to 1200 × 600 × 600 mm on 3-axis, 600 mm Ø on 5-axis. If your job isn't right for us we'll say so at quote stage.</p>
+        </div>
+      </details>
+      <details class="faq-item" name="faq">
+        <summary class="faq-item__btn"><span>Do you ship outside the UK?</span></summary>
+        <div class="faq-item__panel">
+          <p>Yes. ISO 9001:2015 docs, material certs, and inspection paperwork go in the box. Tell us the destination and we'll handle the freight side.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pre-footer callout (LOCKED) ─────────────────────────────────── -->
+<section class="pre-footer" aria-label="Direct contact">
+  <div class="wrap">
+    <div class="pre-footer__inner">
+      <div class="pre-footer__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div class="pre-footer__text">
+        <h3>Not ready to send a drawing? Call us instead.</h3>
+        <p>01472 210 678 · 8am–5pm, Mon–Fri · or <a href="mailto:rfq@kenworthengineering.co.uk" class="itext">rfq@kenworthengineering.co.uk</a></p>
+      </div>
+      <a class="btn btn-outline" href="contact.html">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer (LOCKED) ─────────────────────────────────────────────── -->
+<footer class="site-footer-pro" role="contentinfo">
+  <div class="wrap">
+    <div class="footer-pro__top">
+      <div class="footer-pro__brand">
+        <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+        <p>Family-run UK precision CNC machining, on the same shop floor in Grimsby since 1992. Aerospace, F1, defence, oil &amp; gas, medical, sub-sea.</p>
+        <dl class="footer-pro__addr">
+          <dt>HQ</dt><dd>Wilton Road Industrial Estate, Grimsby, DN36 4AS</dd>
+          <dt>Tel</dt><dd>01472 210 678</dd>
+          <dt>RFQ</dt><dd>rfq@kenworthengineering.co.uk</dd>
+        </dl>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Services</h6>
+        <a href="cnc-milling.html">CNC Milling</a>
+        <a href="cnc-turning.html">CNC Turning</a>
+        <a href="cnc-sliding-head.html">Sliding Head</a>
+        <a href="capabilities.html">Capabilities</a>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Company</h6>
+        <a href="about.html">About</a>
+        <a href="industries.html">Industries</a>
+        <a href="careers.html">Careers</a>
+        <a href="learning-hub.html">Learning Hub</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-pro__status">
+        <h6>Shop status</h6>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Quote turnaround</div>
+            <div class="fstat__value"><span class="fstat__pip" aria-hidden="true"></span>48 hrs · on track</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Today's lights-out</div>
+            <div class="fstat__value">Citizen Miyano · 14 hrs</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Latest certification</div>
+            <div class="fstat__value">ISO 9001:2015 · audit 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-pro__bottom">
+      <span>© 2026 Kenworth Engineering Ltd · Co. 02611728</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Modern Slavery</a></span>
+      <div class="footer-pro__social" aria-label="Kenworth on social">
+        <a href="#" aria-label="Kenworth Engineering on LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.5 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.59c0-1.57-.03-3.6-2.19-3.6-2.19 0-2.52 1.71-2.52 3.48V22H7.72V8z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on YouTube" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="20" height="20"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.12C19.55 4 12 4 12 4s-7.55 0-9.4.38A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 .12 12a31.6 31.6 0 0 0 .38 5.5 3 3 0 0 0 2.1 2.12C4.45 20 12 20 12 20s7.55 0 9.4-.38a3 3 0 0 0 2.1-2.12A31.6 31.6 0 0 0 23.88 12a31.6 31.6 0 0 0-.38-5.5zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on Instagram" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" width="18" height="18"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <span>Made by Northern Sauce</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll progress bar — 0 → 1 across the page
+(function () {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  function tick() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? window.scrollY / max : 0;
+    bar.style.transform = 'scaleX(' + pct + ')';
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+
+// Nav scrolled state — snap to solid anchor once past a threshold
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  function tick() {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+<script src="flourishes.js" defer></script>
+</body>
+</html>

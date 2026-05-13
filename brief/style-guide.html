@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenworth Engineering — Design System</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 3vw, 2.5rem); }
+  .section { padding: clamp(3rem, 6vw, 5rem) 0; }
+  .section--paper-soft { background: var(--ns-color-paper-soft); }
+  .section__header { margin-bottom: 2.25rem; max-width: 70ch; }
+  .section__header .tagline { margin-bottom: 0.75rem; }
+  .grid { display: grid; gap: 1.25rem; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .stack > * + * { margin-top: 1rem; }
+  .stack-tight > * + * { margin-top: 0.5rem; }
+  .row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+  .nav-bar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 1rem clamp(1rem, 3vw, 2.5rem); background: rgba(245, 240, 232, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--ns-color-rule); font-size: var(--ns-text-small); }
+  .nav-bar__mark { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: var(--ns-weight-bold); letter-spacing: var(--ns-tracking-tight); }
+  .nav-bar__mark::before { content: ""; width: 16px; height: 16px; background: var(--ns-color-primary); clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%); }
+  .nav-bar__sections { display: flex; gap: 1.25rem; color: var(--ns-color-text-muted); font-size: var(--ns-text-tiny); flex-wrap: wrap; }
+  .nav-bar__sections a { color: inherit; text-decoration: none; }
+  .nav-bar__sections a:hover { color: var(--ns-color-text); }
+
+  .sec-num { display: inline-flex; align-items: center; gap: 0.5rem; font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-semibold); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; color: var(--ns-color-text-muted); font-variant-numeric: tabular-nums; margin-bottom: 0.5rem; }
+  .sec-num::before { content: ""; width: 6px; height: 6px; background: var(--ns-color-primary); border-radius: 50%; }
+
+  /* Swatches */
+  .swatch { padding: 1.25rem 1.25rem 1rem; clip-path: var(--ns-chamfer); min-height: 130px; display: flex; flex-direction: column; justify-content: space-between; font-family: var(--ns-font-body); }
+  .swatch__name { font-size: var(--ns-text-small); font-weight: var(--ns-weight-bold); letter-spacing: var(--ns-tracking-tight); }
+  .swatch__hex { font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-semibold); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; font-variant-numeric: tabular-nums; }
+  .swatch__token { font-size: var(--ns-text-tiny); opacity: 0.7; margin-top: 0.5rem; font-variant-numeric: tabular-nums; }
+
+  /* Type rows */
+  .type-row { display: grid; grid-template-columns: 80px 1fr; gap: 1.25rem; align-items: baseline; padding: 1rem 0; border-bottom: 1px solid var(--ns-color-rule); }
+  .type-row__meta { font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-semibold); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; color: var(--ns-color-text-muted); font-variant-numeric: tabular-nums; }
+
+  /* Spacing vis */
+  .space-vis { display: flex; flex-direction: column; gap: 0.5rem; }
+  .space-vis__row { display: grid; grid-template-columns: 90px 1fr 100px; align-items: center; gap: 1rem; font-size: var(--ns-text-small); }
+  .space-vis__bar { height: 18px; background: var(--ns-color-primary-wash); clip-path: var(--ns-chamfer-sm); }
+  .space-vis__label { font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-semibold); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; color: var(--ns-color-text-muted); font-variant-numeric: tabular-nums; }
+  .space-vis__token { color: var(--ns-color-text-muted); font-variant-numeric: tabular-nums; font-size: var(--ns-text-tiny); }
+
+  /* Radius vis */
+  .radius-vis { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .radius-vis__box { width: 80px; height: 80px; background: var(--ns-color-graphite); }
+
+  /* Grid vis */
+  .grid-vis { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0.5rem; padding: 1rem; background: var(--ns-color-paper-deep); clip-path: var(--ns-chamfer); }
+  .grid-vis__col { height: 80px; background: var(--ns-color-primary-wash); }
+
+  /* Pattern lists */
+  .pattern-list { list-style: none; padding: 0; margin: 0; }
+  .pattern-list li { padding: 0.75rem 0; border-bottom: 1px solid var(--ns-color-rule); display: flex; gap: 0.875rem; align-items: baseline; }
+  .pattern-list li::before { content: "✕"; color: var(--ns-color-primary); font-weight: var(--ns-weight-bold); flex-shrink: 0; font-size: 0.75em; }
+  .pattern-list.do li::before { content: "→"; color: var(--ns-color-primary); }
+
+  table.spec-table { width: 100%; border-collapse: collapse; font-size: var(--ns-text-small); font-variant-numeric: tabular-nums; }
+  .spec-table th, .spec-table td { text-align: left; padding: 0.875rem 1rem; border-bottom: 1px solid var(--ns-color-rule); }
+  .spec-table th { font-size: var(--ns-text-tiny); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; font-weight: var(--ns-weight-semibold); color: var(--ns-color-text-muted); border-bottom: 1px solid var(--ns-color-rule-strong); }
+  .spec-table td.num { font-weight: var(--ns-weight-semibold); }
+
+  /* Cards */
+  .card-img { background: var(--ns-color-paper-soft); clip-path: var(--ns-chamfer); overflow: hidden; display: flex; flex-direction: column; }
+  .card-img__media { aspect-ratio: 4/3; background: linear-gradient(135deg, rgba(28,26,23,0.05) 0%, rgba(28,26,23,0.18) 100%), var(--ns-color-paper-deep); position: relative; display: flex; align-items: flex-end; padding: 1rem; }
+  .card-img__body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .card-img__eyebrow { font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-semibold); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; color: var(--ns-color-text-muted); }
+  h3.card-img__title { font-size: var(--ns-heading-h5); font-weight: var(--ns-weight-bold); letter-spacing: var(--ns-tracking-tight); margin: 0.25rem 0; }
+  .card-img__lede { font-size: var(--ns-text-small); color: var(--ns-color-text-muted); line-height: var(--ns-leading-relaxed); margin-bottom: 0.75rem; }
+
+  /* Quote — oversized opening "+" mark in primary, no side-stripe (avoids AI side-tab tell). */
+  .quote { padding: 2.5rem 2rem 2rem; background: var(--ns-color-paper-soft); clip-path: var(--ns-chamfer-card); max-width: 64ch; position: relative; }
+  .quote::before { content: "+"; position: absolute; top: 0.875rem; left: 1.5rem; font-family: var(--ns-font-display); font-size: 2.5rem; line-height: 1; color: var(--ns-color-primary); font-weight: var(--ns-weight-bold); }
+  .quote__body { font-size: var(--ns-heading-h5); font-family: var(--ns-font-display); line-height: var(--ns-leading-snug); letter-spacing: var(--ns-tracking-tight); margin-bottom: 1rem; }
+  .quote__attr { font-size: var(--ns-text-small); color: var(--ns-color-text-muted); font-weight: var(--ns-weight-bold); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; }
+
+  /* Breadcrumb */
+  .bcrumb { display: flex; gap: 0.5rem; font-size: var(--ns-text-tiny); color: var(--ns-color-text-muted); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; }
+  .bcrumb a { color: inherit; text-decoration: none; }
+  .bcrumb a:hover { color: var(--ns-color-primary); }
+  .bcrumb__sep { color: var(--ns-color-rule-strong); }
+
+  /* Pagination */
+  .pag { display: inline-flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; }
+  .pag__item, .pag__btn { min-width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; font-size: var(--ns-text-small); font-weight: var(--ns-weight-semibold); color: var(--ns-color-text); background: transparent; cursor: pointer; clip-path: var(--ns-chamfer-sm); text-decoration: none; padding: 0 0.5rem; }
+  .pag__item--current { background: var(--ns-color-graphite); color: var(--ns-color-text-on-dark); }
+  .pag__item:hover { background: var(--ns-color-paper-soft); }
+
+  /* Alerts — full state-tinted background, no side-stripe (avoids AI side-tab tell). State colour lives in the bold title text. */
+  .alert { padding: 1rem 1.25rem; clip-path: var(--ns-chamfer); font-size: var(--ns-text-small); display: flex; gap: 0.75rem; align-items: flex-start; }
+  .alert--info    { background: var(--ns-color-paper-soft); color: var(--ns-color-text); }
+  .alert--info .alert__title { color: var(--ns-color-text); }
+  .alert--success { background: #DCE9DC; color: #234A26; }
+  .alert--success .alert__title { color: #234A26; }
+  .alert--warn    { background: var(--ns-color-primary-wash); color: var(--ns-color-text); }
+  .alert--warn .alert__title { color: var(--ns-color-text); }
+  .alert--warn .alert__title::before { content: "+ "; color: var(--ns-color-primary); font-weight: var(--ns-weight-bold); }
+  .alert--error   { background: #F3D8D6; color: #7A1E18; }
+  .alert--error .alert__title { color: #7A1E18; }
+  .alert__title { font-weight: var(--ns-weight-bold); margin-bottom: 0.125rem; }
+
+  /* Iconography */
+  .icon-box { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.25rem; background: var(--ns-color-paper-soft); clip-path: var(--ns-chamfer); }
+  .icon-box svg { width: 24px; height: 24px; }
+  .icon-box__label { font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-semibold); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; color: var(--ns-color-text-muted); }
+
+  /* Logo demos */
+  .logo-demo { padding: 2rem; display: flex; align-items: center; justify-content: center; clip-path: var(--ns-chamfer); min-height: 120px; }
+  .logo-demo--paper { background: var(--ns-color-paper); }
+  .logo-demo--dark { background: var(--ns-color-anchor); }
+  .logo-demo img { max-width: 200px; }
+
+  /* In-text link */
+  a.itext { color: var(--ns-color-text); text-decoration: underline; text-decoration-color: var(--ns-color-primary); text-underline-offset: 3px; text-decoration-thickness: 2px; transition: color var(--ns-duration-fast) var(--ns-easing); }
+  a.itext:hover { color: var(--ns-color-primary); }
+
+  /* Lists */
+  ul.ns-list, ol.ns-list { padding: 0; margin: 0; list-style: none; }
+  ul.ns-list li, ol.ns-list li { padding: 0.5rem 0 0.5rem 1.5rem; position: relative; font-size: var(--ns-text-regular); line-height: var(--ns-leading-relaxed); }
+  ul.ns-list--bullet li::before { content: ""; position: absolute; left: 0; top: 0.95em; width: 6px; height: 6px; background: var(--ns-color-graphite); }
+  ul.ns-list--plus li::before { content: "+"; position: absolute; left: 0; top: 0.4em; color: var(--ns-color-primary); font-weight: var(--ns-weight-bold); }
+  ol.ns-list { counter-reset: nslist; }
+  ol.ns-list li { counter-increment: nslist; }
+  ol.ns-list li::before { content: counter(nslist, decimal-leading-zero); position: absolute; left: 0; top: 0.6em; font-size: var(--ns-text-tiny); font-weight: var(--ns-weight-semibold); letter-spacing: var(--ns-tracking-eyebrow); color: var(--ns-color-primary); font-variant-numeric: tabular-nums; }
+
+  /* Open-item callout — full primary-wash bg, no side-stripe. */
+  .open-item { padding: 1.25rem 1.5rem; background: var(--ns-color-primary-wash); clip-path: var(--ns-chamfer); font-size: var(--ns-text-small); color: var(--ns-color-text); max-width: 64ch; }
+  .open-item strong { color: var(--ns-color-text); }
+
+  /* Footer */
+  .sg-footer { padding: 2rem 0; border-top: 1px solid var(--ns-color-rule); font-size: var(--ns-text-tiny); color: var(--ns-color-text-muted); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <div class="nav-bar__mark">Kenworth Engineering · Design System</div>
+  <div class="nav-bar__sections">
+    <a href="#palette">01 Palette</a>
+    <a href="#type">02 Type</a>
+    <a href="#space">03 Space</a>
+    <a href="#grid">04 Grid</a>
+    <a href="#motion">07 Motion</a>
+    <a href="#buttons">11 Buttons</a>
+    <a href="#cards">12 Cards</a>
+    <a href="#specs">13 Specs</a>
+    <a href="#forms">15 Forms</a>
+    <a href="#voice">28 Voice</a>
+    <a href="#brand">29 Brand</a>
+    <a href="#rules">33 Rules</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+
+<section class="section">
+  <div class="container">
+    <p class="tagline">+ Design System v0.3</p>
+    <h1>Machined Paper.</h1>
+    <p class="text-large" style="color: var(--ns-color-text-muted); max-width: 68ch;">
+      The visual system for the Kenworth Engineering website. Tokens, components, brand application, and rules — the vocabulary the designer uses to compose every page on the site. Page-level assembly happens in phase 4.
+    </p>
+    <div class="row" style="margin-top: 1.5rem;">
+      <span class="corner-mark"><span class="corner-mark__dot"></span> Kenworth Engineering</span>
+      <span class="corner-mark"><span class="corner-mark__dot"></span> System, not pages</span>
+      <span class="corner-mark"><span class="corner-mark__dot"></span> 2026.05.13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════ A. FOUNDATIONS ════ -->
+
+<section class="section section--paper-soft" id="palette">
+  <div class="container">
+    <p class="sec-num">01 · Palette</p>
+    <div class="section__header">
+      <h2>One warm. Two darks. Three papers.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Narrow by design. Orange is the only warm and the only CTA colour — never decorative. Two darks anchor heavy sections. Three paper tones do almost all the work.
+      </p>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Paper</p>
+    <div class="grid grid-3" style="margin-bottom: 2rem;">
+      <div class="swatch" style="background: var(--ns-color-paper); color: var(--ns-color-text);"><span class="swatch__name">Paper</span><div><div class="swatch__hex">#F5F0E8</div><div class="swatch__token">--ns-color-paper · default page bg</div></div></div>
+      <div class="swatch" style="background: var(--ns-color-paper-soft); color: var(--ns-color-text);"><span class="swatch__name">Paper Soft</span><div><div class="swatch__hex">#EDE6D8</div><div class="swatch__token">--ns-color-paper-soft · alternating sections</div></div></div>
+      <div class="swatch" style="background: var(--ns-color-paper-deep); color: var(--ns-color-text);"><span class="swatch__name">Paper Deep</span><div><div class="swatch__hex">#E4DBC8</div><div class="swatch__token">--ns-color-paper-deep · card surfaces</div></div></div>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Dark</p>
+    <div class="grid grid-2" style="margin-bottom: 2rem;">
+      <div class="swatch" style="background: var(--ns-color-graphite); color: var(--ns-color-text-on-dark);"><span class="swatch__name">Graphite</span><div><div class="swatch__hex">#1C1A17</div><div class="swatch__token">--ns-color-graphite · default text · dark sections</div></div></div>
+      <div class="swatch" style="background: var(--ns-color-anchor); color: var(--ns-color-text-on-dark);"><span class="swatch__name">Anchor</span><div><div class="swatch__hex">#100E0C</div><div class="swatch__token">--ns-color-anchor · hero · heaviest sections</div></div></div>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Primary</p>
+    <div class="grid grid-3">
+      <div class="swatch" style="background: var(--ns-color-primary); color: #fff;"><span class="swatch__name">Primary</span><div><div class="swatch__hex">#EE6C19</div><div class="swatch__token">--ns-color-primary · CTA-only</div></div></div>
+      <div class="swatch" style="background: var(--ns-color-primary-dark); color: #fff;"><span class="swatch__name">Primary Dark</span><div><div class="swatch__hex">#C4520A</div><div class="swatch__token">--ns-color-primary-dark · hover</div></div></div>
+      <div class="swatch" style="background: var(--ns-color-primary-wash); color: var(--ns-color-text);"><span class="swatch__name">Primary Wash</span><div><div class="swatch__hex">#FDE8D5</div><div class="swatch__token">--ns-color-primary-wash · rare highlight only</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="type">
+  <div class="container">
+    <p class="sec-num">02 · Typography</p>
+    <div class="section__header">
+      <h2>One typeface, two voices.</h2>
+    </div>
+
+    <!-- Fonts on this project — explicit, named, prominent. Mandated by brief-checklist. -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2.5rem; max-width: 900px;">
+      <div style="padding: 1.75rem; background: var(--ns-color-paper-soft); clip-path: var(--ns-chamfer);">
+        <p class="tagline" style="margin-bottom: 0.75rem;">+ Fonts on this project</p>
+        <div style="font-family: var(--ns-font-display); font-size: var(--ns-heading-h3); font-weight: var(--ns-weight-bold); letter-spacing: var(--ns-tracking-display); line-height: 1.05; margin-bottom: 0.5rem;">General Sans</div>
+        <p class="text-small" style="color: var(--ns-color-text-muted); margin: 0;">Pangram Pangram · free for commercial use · Fontshare CDN</p>
+      </div>
+      <div style="padding: 1.75rem; background: var(--ns-color-paper-soft); clip-path: var(--ns-chamfer);">
+        <p class="tagline" style="margin-bottom: 0.75rem;">+ Two cuts, two voices</p>
+        <ul class="ns-list ns-list--plus" style="margin: 0;">
+          <li><strong>General Sans Display</strong> — headings H1–H6, weight 700</li>
+          <li><strong>General Sans Variable</strong> — body, taglines, UI, weights 400–600</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text-medium" style="color: var(--ns-color-text-muted); max-width: 70ch; margin-bottom: 2rem;">
+      One family. Two cuts. No second typeface. Tabular numerics via <code>font-variant-numeric: tabular-nums</code> on every spec readout. Monospace is forbidden — no typewriter / programming fonts anywhere.
+    </p>
+    <div style="border-top: 1px solid var(--ns-color-rule-strong);">
+      <div class="type-row"><div class="type-row__meta">H1 · 40→72</div><h1 style="margin: 0;">Precision parts, made right first time.</h1></div>
+      <div class="type-row"><div class="type-row__meta">H2 · 32→56</div><h2 style="margin: 0;">5-axis milling. Sub-10 micron tolerances.</h2></div>
+      <div class="type-row"><div class="type-row__meta">H3 · 24→40</div><h3 style="margin: 0;">A subcontractor you can stop worrying about.</h3></div>
+      <div class="type-row"><div class="type-row__meta">H4 · 20→28</div><h4 style="margin: 0;">Citizen Miyano BNE51 MSY · dual spindles, dual turrets.</h4></div>
+      <div class="type-row"><div class="type-row__meta">H5 · 18→22</div><h5 style="margin: 0;">DMG-Mori 5-axis · single-setup machining</h5></div>
+      <div class="type-row"><div class="type-row__meta">H6 · 16→18</div><h6 style="margin: 0;">Capability sheet · downloadable PDF</h6></div>
+      <div class="type-row"><div class="type-row__meta">Large · 18→20</div><p class="text-large" style="margin: 0;">You've got a drawing on your desk and a deadline that doesn't move. Send the drawing — we'll come back inside 48 hours with a quote and a real delivery date.</p></div>
+      <div class="type-row"><div class="type-row__meta">Regular · 15→16</div><p class="text-regular" style="margin: 0;">Thirty years machining precision components for the kind of work where late or out-of-spec is not an option. Formula 1, aerospace, sub-sea, oil and gas, defence, renewable energy, medical. ISO 9001:2015 certified.</p></div>
+      <div class="type-row"><div class="type-row__meta">Small · 13→14</div><p class="text-small" style="margin: 0;">Inspection report attached on every batch. Material traceability available on request. Vendor approval pack delivered within 24 hours of enquiry.</p></div>
+      <div class="type-row"><div class="type-row__meta">Tiny · 11→12</div><p class="text-tiny" style="margin: 0;">Kenworth Engineering Ltd · Wilton Road Industrial Estate · Grimsby DN37 9TF · 01472 000000</p></div>
+      <div class="type-row"><div class="type-row__meta">Tagline</div><div><span class="tagline">+ Capabilities</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft" id="space">
+  <div class="container">
+    <p class="sec-num">03 · Spacing scale</p>
+    <div class="section__header">
+      <h2>Rhythm.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        4px base unit. Section padding clamps with viewport; component spacing is fixed. No off-scale gaps — keep to these.
+      </p>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Token scale (component-level)</p>
+    <div class="space-vis" style="margin-bottom: 2rem;">
+      <div class="space-vis__row"><span class="space-vis__label">--space-1</span><span class="space-vis__bar" style="width: 4px;"></span><span class="space-vis__token">4px · 0.25rem</span></div>
+      <div class="space-vis__row"><span class="space-vis__label">--space-2</span><span class="space-vis__bar" style="width: 8px;"></span><span class="space-vis__token">8px · 0.5rem</span></div>
+      <div class="space-vis__row"><span class="space-vis__label">--space-3</span><span class="space-vis__bar" style="width: 12px;"></span><span class="space-vis__token">12px · 0.75rem</span></div>
+      <div class="space-vis__row"><span class="space-vis__label">--space-4</span><span class="space-vis__bar" style="width: 16px;"></span><span class="space-vis__token">16px · 1rem</span></div>
+      <div class="space-vis__row"><span class="space-vis__label">--space-5</span><span class="space-vis__bar" style="width: 24px;"></span><span class="space-vis__token">24px · 1.5rem</span></div>
+      <div class="space-vis__row"><span class="space-vis__label">--space-6</span><span class="space-vis__bar" style="width: 32px;"></span><span class="space-vis__token">32px · 2rem</span></div>
+      <div class="space-vis__row"><span class="space-vis__label">--space-7</span><span class="space-vis__bar" style="width: 48px;"></span><span class="space-vis__token">48px · 3rem</span></div>
+      <div class="space-vis__row"><span class="space-vis__label">--space-8</span><span class="space-vis__bar" style="width: 64px;"></span><span class="space-vis__token">64px · 4rem</span></div>
+      <div class="space-vis__row"><span class="space-vis__label">--space-9</span><span class="space-vis__bar" style="width: 96px;"></span><span class="space-vis__token">96px · 6rem</span></div>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Section padding (clamps)</p>
+    <table class="spec-table" style="max-width: 600px;">
+      <thead><tr><th>Use</th><th>Mobile</th><th>Desktop</th><th>CSS</th></tr></thead>
+      <tbody>
+        <tr><td>Section vertical</td><td class="num">48px</td><td class="num">80px</td><td class="num">clamp(3rem, 6vw, 5rem)</td></tr>
+        <tr><td>Section horizontal</td><td class="num">16px</td><td class="num">40px</td><td class="num">clamp(1rem, 3vw, 2.5rem)</td></tr>
+        <tr><td>Hero vertical</td><td class="num">48px</td><td class="num">112px</td><td class="num">clamp(3rem, 7vw, 7rem)</td></tr>
+        <tr><td>Card padding</td><td class="num">24px</td><td class="num">28px</td><td class="num">clamp(1.5rem, 2vw, 1.75rem)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="grid">
+  <div class="container">
+    <p class="sec-num">04 · Grid + breakpoints</p>
+    <div class="section__header">
+      <h2>12-column desktop, 4-column mobile.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Container max 1200px. Gutters scale with viewport. Hero and anchor sections can break full-bleed.
+      </p>
+    </div>
+
+    <div class="grid-vis" style="margin-bottom: 1.5rem;">
+      <div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div><div class="grid-vis__col"></div>
+    </div>
+
+    <table class="spec-table" style="max-width: 600px;">
+      <thead><tr><th>Breakpoint</th><th>Min width</th><th>Columns</th><th>Container max</th></tr></thead>
+      <tbody>
+        <tr><td>Mobile</td><td class="num">375px</td><td class="num">4</td><td class="num">100% − 32px</td></tr>
+        <tr><td>Tablet</td><td class="num">720px</td><td class="num">8</td><td class="num">100% − 48px</td></tr>
+        <tr><td>Desktop</td><td class="num">1024px</td><td class="num">12</td><td class="num">1200px</td></tr>
+        <tr><td>Wide</td><td class="num">1440px</td><td class="num">12</td><td class="num">1200px</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">05 · Radius scale</p>
+    <div class="section__header">
+      <h2>Tight. The angle does the work.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Curves are restrained. The chamfered corner is the system's hero geometry — not radius. Radius only on form inputs and the smallest auxiliary elements.
+      </p>
+    </div>
+
+    <div class="grid grid-4">
+      <div class="radius-vis"><div class="radius-vis__box" style="border-radius: var(--ns-radius-none);"></div><span class="space-vis__label">--ns-radius-none</span><span class="space-vis__token">0 · buttons (chamfer)</span></div>
+      <div class="radius-vis"><div class="radius-vis__box" style="border-radius: var(--ns-radius-sm);"></div><span class="space-vis__label">--ns-radius-sm</span><span class="space-vis__token">2px · small inline</span></div>
+      <div class="radius-vis"><div class="radius-vis__box" style="border-radius: var(--ns-radius-md);"></div><span class="space-vis__label">--ns-radius-md</span><span class="space-vis__token">4px · form inputs only</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">06 · Shadow / depth</p>
+    <div class="section__header">
+      <h2>No shadows.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted); max-width: 60ch;">
+        Depth comes from surface contrast (paper → paper-soft → anchor) and the chamfer cut, not from drop-shadows. The only exception is the focus ring (a 2px inset box-shadow on form fields).
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft" id="motion">
+  <div class="container">
+    <p class="sec-num">07 · Motion language</p>
+    <div class="section__header">
+      <h2>Almost none.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Restrained editorial. Hover transitions only. No scroll-driven animation, no fade-in-on-scroll, no parallax. The site reads like a document.
+      </p>
+    </div>
+
+    <table class="spec-table" style="max-width: 720px;">
+      <thead><tr><th>What</th><th>Duration</th><th>Easing</th><th>Rule</th></tr></thead>
+      <tbody>
+        <tr><td>Button hover (bg + arrow shift)</td><td class="num">150ms</td><td>ease-out</td><td>Always</td></tr>
+        <tr><td>Link colour transition</td><td class="num">150ms</td><td>ease-out</td><td>Always</td></tr>
+        <tr><td>Form field focus ring</td><td class="num">150ms</td><td>ease-out</td><td>Always</td></tr>
+        <tr><td>Accordion open/close</td><td class="num">220ms</td><td>cubic-bezier(0.16, 1, 0.3, 1)</td><td>Allowed</td></tr>
+        <tr><td>Mobile drawer slide</td><td class="num">280ms</td><td>cubic-bezier(0.16, 1, 0.3, 1)</td><td>Allowed</td></tr>
+        <tr><td>Scroll-driven animation</td><td class="num">—</td><td>—</td><td>Never</td></tr>
+        <tr><td>Parallax</td><td class="num">—</td><td>—</td><td>Never</td></tr>
+        <tr><td>Hero video autoplay</td><td class="num">—</td><td>—</td><td>Never</td></tr>
+      </tbody>
+    </table>
+
+    <p class="text-small" style="color: var(--ns-color-text-muted); margin-top: 1rem;">Respect <code>prefers-reduced-motion</code> — disable all transitions when set.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">08 · Iconography</p>
+    <div class="section__header">
+      <h2>Lucide, 1.75px stroke.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Single icon source: <a class="itext" href="https://lucide.dev">Lucide</a>. Stroke icons only — no fills. Stroke weight 1.75px at 24px. Use icons sparingly — labels do most of the work.
+      </p>
+    </div>
+
+    <div class="grid grid-4" style="max-width: 720px;">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+        <span class="icon-box__label">48-hour quote</span>
+      </div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        <span class="icon-box__label">Capabilities</span>
+      </div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span class="icon-box__label">ISO 9001</span>
+      </div>
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 19 12"/><polyline points="13 6 19 12 13 18"/></svg>
+        <span class="icon-box__label">Arrow</span>
+      </div>
+    </div>
+    <p class="text-small" style="color: var(--ns-color-text-muted); margin-top: 1rem;">Icon sizes: <span class="numeric">16px</span> (inline), <span class="numeric">20px</span> (button), <span class="numeric">24px</span> (default), <span class="numeric">32px</span> (feature). Never above 32px.</p>
+  </div>
+</section>
+
+<!-- ════ B. SURFACE RHYTHM ════ -->
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">09–10 · Container + surface rhythm</p>
+    <div class="section__header">
+      <h2>Paper → soft → anchor → paper.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        The system supports surface alternation. Default ground is paper. Section 2 typically lifts to paper-soft. One dark anchor breaks the rhythm — usually full-bleed. Container stays within 1200px except when an anchor or hero goes full-bleed. <em>Which sections sit on which surface is the designer's call in phase 4 — the system just defines the alternation rule.</em>
+      </p>
+    </div>
+
+    <div class="stack" style="font-family: var(--ns-font-display);">
+      <div style="height: 60px; background: var(--ns-color-paper); padding: 1rem; display: flex; align-items: center; font-size: var(--ns-text-small); font-weight: var(--ns-weight-semibold); border: 1px solid var(--ns-color-rule);">paper</div>
+      <div style="height: 60px; background: var(--ns-color-paper-soft); padding: 1rem; display: flex; align-items: center; font-size: var(--ns-text-small); font-weight: var(--ns-weight-semibold); border: 1px solid var(--ns-color-rule);">paper-soft</div>
+      <div style="height: 60px; background: var(--ns-color-anchor); padding: 1rem; display: flex; align-items: center; color: var(--ns-color-text-on-dark); font-size: var(--ns-text-small); font-weight: var(--ns-weight-semibold);">anchor · full-bleed</div>
+      <div style="height: 60px; background: var(--ns-color-paper-soft); padding: 1rem; display: flex; align-items: center; font-size: var(--ns-text-small); font-weight: var(--ns-weight-semibold); border: 1px solid var(--ns-color-rule);">paper-soft</div>
+      <div style="height: 60px; background: var(--ns-color-paper); padding: 1rem; display: flex; align-items: center; font-size: var(--ns-text-small); font-weight: var(--ns-weight-semibold); border: 1px solid var(--ns-color-rule);">paper</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ C. COMPONENT VOCABULARY ════ -->
+
+<section class="section" id="buttons">
+  <div class="container">
+    <p class="sec-num">11 · Buttons</p>
+    <div class="section__header">
+      <h2>The cut.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Chamfered top-right corner on every button. Orange reserved for conversion CTAs only.
+      </p>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ On paper</p>
+    <div class="row" style="margin-bottom: 2rem;">
+      <a class="btn btn-primary" href="#">Get a quote</a>
+      <a class="btn btn-secondary" href="#">View capabilities</a>
+      <a class="btn btn-outline" href="#">Download spec sheet</a>
+      <a class="btn-ghost" href="#">See machine list</a>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Sizes</p>
+    <div class="row" style="margin-bottom: 2rem;">
+      <a class="btn btn-primary btn-sm" href="#">Send drawing</a>
+      <a class="btn btn-primary" href="#">Get a quote</a>
+      <a class="btn btn-primary btn-lg" href="#">Start a quote</a>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ States</p>
+    <div class="row" style="margin-bottom: 2rem;">
+      <a class="btn btn-primary" href="#">Default</a>
+      <a class="btn btn-primary" href="#" style="background: var(--ns-color-primary-dark);">Hover</a>
+      <button class="btn btn-primary" disabled style="opacity: 0.45; cursor: not-allowed;">Disabled</button>
+      <button class="btn btn-primary" style="opacity: 0.7;"><span style="display: inline-block; width: 12px; height: 12px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%;"></span> Loading…</button>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ On dark</p>
+    <div class="row" style="background: var(--ns-color-anchor); padding: 2rem; clip-path: var(--ns-chamfer-lg);">
+      <a class="btn btn-primary" href="#">Get a quote</a>
+      <a class="btn btn-outline btn-outline--on-dark" href="#">View capabilities</a>
+      <a class="btn-ghost btn-ghost--on-dark" href="#">See machine list</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft" id="cards">
+  <div class="container">
+    <p class="sec-num">12 · Cards</p>
+    <div class="section__header">
+      <h2>Card surface vocabulary.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Four card primitives. The designer composes which appears where in phase 4.
+      </p>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Image card</p>
+    <div class="grid grid-3" style="margin-bottom: 2.5rem;">
+      <div class="card-img">
+        <div class="card-img__media"></div>
+        <div class="card-img__body">
+          <span class="card-img__eyebrow">Eyebrow · 01</span>
+          <h3 class="card-img__title">Card title here.</h3>
+          <p class="card-img__lede">Short supporting lede that runs at text-small with muted colour. Comfortable line-height.</p>
+          <a class="btn-ghost" href="#">Read more</a>
+        </div>
+      </div>
+      <div class="card-img">
+        <div class="card-img__media"></div>
+        <div class="card-img__body">
+          <span class="card-img__eyebrow">Eyebrow · 02</span>
+          <h3 class="card-img__title">Card title here.</h3>
+          <p class="card-img__lede">Short supporting lede that runs at text-small with muted colour. Comfortable line-height.</p>
+          <a class="btn-ghost" href="#">Read more</a>
+        </div>
+      </div>
+      <div class="card-img">
+        <div class="card-img__media"></div>
+        <div class="card-img__body">
+          <span class="card-img__eyebrow">Eyebrow · 03</span>
+          <h3 class="card-img__title">Card title here.</h3>
+          <p class="card-img__lede">Short supporting lede that runs at text-small with muted colour. Comfortable line-height.</p>
+          <a class="btn-ghost" href="#">Read more</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Text · bordered · anchor</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <p class="tagline">+ Text card</p>
+        <h3>Plain text on paper-soft.</h3>
+        <p class="text-small" style="color: var(--ns-color-text-muted); margin: 0;">Default card surface — paper-soft with chamfer. Anywhere copy needs a contained slab.</p>
+      </div>
+      <div class="card card--bordered">
+        <p class="tagline tagline--neutral">+ Bordered</p>
+        <h3>Outline only, no fill.</h3>
+        <p class="text-small" style="color: var(--ns-color-text-muted); margin: 0;">For lighter density. Sits inside a section without lifting the surface.</p>
+      </div>
+      <div class="card card--anchor">
+        <p class="tagline" style="color: var(--ns-color-primary);">+ Anchor</p>
+        <h3 style="color: var(--ns-color-text-on-dark);">Dark inverted card.</h3>
+        <p class="text-small" style="color: var(--ns-color-muted-on-dark); margin: 0;">Used inline on paper sections to break rhythm without taking the whole section dark.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="specs">
+  <div class="container">
+    <p class="sec-num">13 · Spec blocks</p>
+    <div class="section__header">
+      <h2>Numbers as engineering output.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        The numeric vocabulary — used wherever a tolerance, capacity, RPM, lead time or other engineering value needs prominence. Tabular numerics throughout.
+      </p>
+    </div>
+
+    <div class="grid grid-3" style="margin-bottom: 2.5rem;">
+      <div class="spec-block"><span class="spec-block__label">Tolerance</span><span class="spec-block__value">≤ 10<span class="spec-block__unit">µm</span></span><span class="spec-block__note">Documented on every batch</span></div>
+      <div class="spec-block"><span class="spec-block__label">5-axis envelope</span><span class="spec-block__value">600<span class="spec-block__unit">mm Ø</span></span><span class="spec-block__note">Single-setup machining</span></div>
+      <div class="spec-block"><span class="spec-block__label">Quote turnaround</span><span class="spec-block__value">48<span class="spec-block__unit">hrs</span></span><span class="spec-block__note">From drawing in</span></div>
+    </div>
+
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ On dark</p>
+    <div class="grid grid-3" style="background: var(--ns-color-anchor); padding: 2rem; clip-path: var(--ns-chamfer-lg);">
+      <div class="spec-block spec-block--on-dark"><span class="spec-block__label">Mill/turn capacity</span><span class="spec-block__value">300 × 700<span class="spec-block__unit">mm</span></span><span class="spec-block__note">DMG-Mori NLX</span></div>
+      <div class="spec-block spec-block--on-dark"><span class="spec-block__label">Sliding head Ø</span><span class="spec-block__value">1–22<span class="spec-block__unit">mm</span></span><span class="spec-block__note">Up to 1000mm length</span></div>
+      <div class="spec-block spec-block--on-dark"><span class="spec-block__label">Lights-out hours</span><span class="spec-block__value">14<span class="spec-block__unit">hrs / day</span></span><span class="spec-block__note">Unattended overnight</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">14 · Tables</p>
+    <div class="section__header"><h2>Engineering tables.</h2></div>
+    <table class="spec-table" style="max-width: 800px;">
+      <thead>
+        <tr><th>Machine</th><th>Axes</th><th>X × Y × Z (mm)</th><th>Tolerance</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>DMG-Mori HSC</td><td class="num">5</td><td class="num">600 Ø</td><td class="num">≤ 10 µm</td><td>20,000rpm spindle</td></tr>
+        <tr><td>DMG-Mori NLX</td><td class="num">3</td><td class="num">1200 × 600 × 600</td><td class="num">≤ 15 µm</td><td>Mill/turn capable</td></tr>
+        <tr><td>Citizen Miyano BNE51 MSY</td><td class="num">5</td><td class="num">300 × 700</td><td class="num">≤ 10 µm</td><td>Hydrafeed Rota-Rack</td></tr>
+        <tr><td>Star SB20R</td><td class="num">—</td><td class="num">22 Ø × 1000</td><td class="num">≤ 10 µm</td><td>Sliding head, bar-fed</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section" id="forms">
+  <div class="container">
+    <p class="sec-num">15 · Form fields</p>
+    <div class="section__header">
+      <h2>Field styling only.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Field vocabulary — input, textarea, validation states. The designer composes the actual forms (quote form, contact form, vendor-approval pack request) in phase 4. Fluent Forms ships the markup; this is the styling.
+      </p>
+    </div>
+
+    <div class="grid grid-2" style="gap: 3rem; max-width: 900px;">
+      <div>
+        <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Default</p>
+        <div class="stack">
+          <div class="field"><label class="field__label" for="d1">Label</label><input class="field__input" id="d1" type="text" placeholder="natalie@company.co.uk"></div>
+          <div class="field"><label class="field__label" for="d2">Textarea</label><textarea class="field__textarea" id="d2" placeholder="Material, quantity, tolerance, anything we should know."></textarea></div>
+        </div>
+      </div>
+      <div>
+        <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Validation states</p>
+        <div class="stack">
+          <div class="field"><label class="field__label" for="v1">Focus</label><input class="field__input" id="v1" type="text" value="Natalie Merton" style="box-shadow: inset 0 0 0 2px var(--ns-color-primary);"></div>
+          <div class="field"><label class="field__label" for="v2">Error</label><input class="field__input" id="v2" type="email" value="not-an-email" style="box-shadow: inset 0 0 0 2px #B43228;"><span class="text-small" style="color: #B43228; margin-top: 0.375rem;">Looks like that's not a valid email — mind double-checking?</span></div>
+          <div class="field"><label class="field__label" for="v3">Success</label><input class="field__input" id="v3" type="email" value="natalie@kenworthengineering.co.uk" style="box-shadow: inset 0 0 0 2px #386E3C;"></div>
+          <div class="field"><label class="field__label" for="v4">Disabled</label><input class="field__input" id="v4" type="text" value="Locked while submitting" disabled style="opacity: 0.55; cursor: not-allowed;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">16 · Pills / tags</p>
+    <div class="section__header"><h2>Sector tags.</h2></div>
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ On paper</p>
+    <div class="row" style="margin-bottom: 1.5rem;">
+      <span class="pill">+ Aerospace</span><span class="pill">+ Formula 1</span><span class="pill">+ Oil & Gas</span><span class="pill">+ Defence</span><span class="pill">+ Sub-sea</span><span class="pill">+ Medical</span><span class="pill">+ Renewables</span>
+    </div>
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ On dark</p>
+    <div class="row" style="background: var(--ns-color-anchor); padding: 1.5rem; clip-path: var(--ns-chamfer-lg); margin-bottom: 1.5rem;">
+      <span class="pill pill--on-dark">+ Aerospace</span><span class="pill pill--on-dark">+ Formula 1</span><span class="pill pill--on-dark">+ Oil & Gas</span><span class="pill pill--on-dark">+ Defence</span>
+    </div>
+    <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Primary (rare)</p>
+    <div class="row"><span class="pill pill--primary">+ Cost</span><span class="pill pill--primary">+ Problems</span><span class="pill pill--primary">+ Compare</span><span class="pill pill--primary">+ Review</span><span class="pill pill--primary">+ Shortlist</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">17 · Link styles</p>
+    <div class="section__header"><h2>Three link patterns.</h2></div>
+    <div class="grid grid-2" style="gap: 3rem;">
+      <div>
+        <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ In-text</p>
+        <p class="text-regular">Send us the <a class="itext" href="#">drawing</a> and tell us roughly what it's for. Inside 48 hours we'll come back with a quote, a real delivery date, and any <a class="itext" href="#">design-for-manufacture flags</a> we've spotted on the part.</p>
+      </div>
+      <div>
+        <p class="tagline tagline--neutral" style="margin-bottom: 0.75rem;">+ Standalone (ghost)</p>
+        <div class="stack-tight">
+          <a class="btn-ghost" href="#">See capability sheet</a>
+          <a class="btn-ghost" href="#">Read the full breakdown</a>
+          <a class="btn-ghost" href="#">Vendor approval pack</a>
+        </div>
+        <p class="tagline tagline--neutral" style="margin: 1.25rem 0 0.75rem;">+ On dark</p>
+        <div style="background: var(--ns-color-anchor); padding: 1.5rem; clip-path: var(--ns-chamfer); display: inline-block;">
+          <a class="btn-ghost btn-ghost--on-dark" href="#">See capability sheet</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">18 · Lists</p>
+    <div class="section__header"><h2>Three list patterns.</h2></div>
+    <div class="grid grid-3">
+      <div>
+        <p class="tagline">+ Bulleted</p>
+        <ul class="ns-list ns-list--bullet">
+          <li>3-axis milling up to 1200 × 600 × 600mm</li>
+          <li>5-axis milling up to 600mm Ø</li>
+          <li>Mill/turn up to 300mm Ø × 700mm</li>
+          <li>Sub-10 micron tolerances on demand</li>
+        </ul>
+      </div>
+      <div>
+        <p class="tagline">+ Plus-marker</p>
+        <ul class="ns-list ns-list--plus">
+          <li>Drawing in by 5pm Friday</li>
+          <li>Quote and delivery date back inside 48 hours</li>
+          <li>Order confirmed, parts machined</li>
+          <li>Dimensional inspection on every batch</li>
+        </ul>
+      </div>
+      <div>
+        <p class="tagline">+ Numbered (process)</p>
+        <ol class="ns-list">
+          <li>Send drawings and 3D models</li>
+          <li>We quote inside 48 hours</li>
+          <li>Confirm order and delivery date</li>
+          <li>Machined, inspected, despatched</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">19 · Quote / testimonial</p>
+    <div class="section__header"><h2>Pull-quote.</h2></div>
+    <div class="quote">
+      <p class="quote__body">"They were the first subcontractor in years who came back with a delivery date instead of a window. We hit our build dates because of them."</p>
+      <span class="quote__attr">— Procurement Manager · Tier-1 aerospace</span>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">20 · Breadcrumb</p>
+    <div class="section__header"><h2>Deep-page navigation.</h2></div>
+    <div class="bcrumb">
+      <a href="#">Learning Hub</a><span class="bcrumb__sep">/</span>
+      <a href="#">Cost</a><span class="bcrumb__sep">/</span>
+      <span>Why a cheap CNC quote often costs you more</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">21 · Pagination</p>
+    <div class="section__header"><h2>List-page navigation.</h2></div>
+    <div class="pag">
+      <a class="pag__btn" href="#">← Prev</a>
+      <a class="pag__item" href="#">1</a>
+      <a class="pag__item pag__item--current" href="#">2</a>
+      <a class="pag__item" href="#">3</a>
+      <a class="pag__item" href="#">4</a>
+      <span class="pag__item">…</span>
+      <a class="pag__item" href="#">12</a>
+      <a class="pag__btn" href="#">Next →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">22 · Alerts</p>
+    <div class="section__header"><h2>Four notice variants.</h2></div>
+    <div class="stack" style="max-width: 720px;">
+      <div class="alert alert--info"><div><div class="alert__title">Quote in progress</div><div>We've received your drawing and we'll come back inside 48 hours.</div></div></div>
+      <div class="alert alert--success"><div><div class="alert__title">Drawing received</div><div>Thanks — Natalie's been emailed a confirmation.</div></div></div>
+      <div class="alert alert--warn"><div><div class="alert__title">Tight tolerance flag</div><div>The 5µm callout on feature B will need 5-axis. We'll confirm cost at quote.</div></div></div>
+      <div class="alert alert--error"><div><div class="alert__title">Couldn't read the drawing</div><div>Try DXF, DWG, STEP, IGES or PDF — let us know if you'd rather email it.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ D. IMAGERY ════ -->
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">23 · Image treatment</p>
+    <div class="section__header">
+      <h2>Real shop floor, real machines, real people.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        No generic stock photography. No model-engineer staged shots. Real Kenworth machines, real Kenworth people, real machined parts (where NDA permits). Warm, natural light. No heavy grading, no teal-and-orange filter.
+      </p>
+    </div>
+
+    <div class="open-item" style="margin-bottom: 2rem;">
+      <strong>Open item — stock photography in use for now.</strong> The example crops below use stock CNC engineering imagery from <code>assets/photography/</code>. These will be replaced with real Kenworth shop-floor + machine + named-person photography before launch. Aspect-ratio rules and treatment guidance are locked; the photos themselves are placeholders. Flagged in client-strategy.md section 7.
+    </div>
+
+    <p class="tagline" style="margin-bottom: 0.75rem;">+ Aspect ratios</p>
+    <div class="grid" style="grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+
+      <!-- 16:9 full-bleed -->
+      <figure style="margin: 0;">
+        <div style="aspect-ratio: 16/9; background: url('../assets/photography/1551.jpg') center/cover var(--ns-color-paper-deep); clip-path: var(--ns-chamfer); position: relative;">
+          <span style="position: absolute; top: 1rem; right: 1rem; font-size: var(--ns-text-tiny); color: var(--ns-color-text-on-dark); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; background: rgba(16,14,12,0.55); padding: 0.375rem 0.75rem; clip-path: var(--ns-chamfer-sm); font-weight: var(--ns-weight-bold);">16:9 · full-bleed hero</span>
+        </div>
+        <figcaption class="text-small" style="color: var(--ns-color-text-muted); margin-top: 0.625rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <span><strong>Use:</strong> homepage hero, capability page header, full-bleed bands.</span>
+          <span><strong>Crop:</strong> wide shop-floor shots, machine in mid-cycle.</span>
+        </figcaption>
+      </figure>
+
+      <div class="grid grid-2" style="gap: 1.5rem;">
+        <!-- 4:3 card -->
+        <figure style="margin: 0;">
+          <div style="aspect-ratio: 4/3; background: url('../assets/photography/120.jpg') center/cover var(--ns-color-paper-deep); clip-path: var(--ns-chamfer); position: relative;">
+            <span style="position: absolute; top: 1rem; right: 1rem; font-size: var(--ns-text-tiny); color: var(--ns-color-text-on-dark); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; background: rgba(16,14,12,0.55); padding: 0.375rem 0.75rem; clip-path: var(--ns-chamfer-sm); font-weight: var(--ns-weight-bold);">4:3 · card</span>
+          </div>
+          <figcaption class="text-small" style="color: var(--ns-color-text-muted); margin-top: 0.625rem;">
+            <strong>Use:</strong> image card media. <strong>Crop:</strong> single machine or component, balanced negative space.
+          </figcaption>
+        </figure>
+
+        <!-- 1:1 portrait/detail -->
+        <figure style="margin: 0;">
+          <div style="aspect-ratio: 1/1; background: url('../assets/photography/354.jpg') center/cover var(--ns-color-paper-deep); clip-path: var(--ns-chamfer); position: relative;">
+            <span style="position: absolute; top: 1rem; right: 1rem; font-size: var(--ns-text-tiny); color: var(--ns-color-text-on-dark); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; background: rgba(16,14,12,0.55); padding: 0.375rem 0.75rem; clip-path: var(--ns-chamfer-sm); font-weight: var(--ns-weight-bold);">1:1 · portrait / detail</span>
+          </div>
+          <figcaption class="text-small" style="color: var(--ns-color-text-muted); margin-top: 0.625rem;">
+            <strong>Use:</strong> named-person portrait, machined-part detail. <strong>Crop:</strong> eye-level for people, tight macro for parts.
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- 21:9 cinematic -->
+      <figure style="margin: 0;">
+        <div style="aspect-ratio: 21/9; background: url('../assets/photography/2807.jpg') center/cover var(--ns-color-paper-deep); clip-path: var(--ns-chamfer); position: relative;">
+          <span style="position: absolute; top: 1rem; right: 1rem; font-size: var(--ns-text-tiny); color: var(--ns-color-text-on-dark); letter-spacing: var(--ns-tracking-eyebrow); text-transform: uppercase; background: rgba(16,14,12,0.55); padding: 0.375rem 0.75rem; clip-path: var(--ns-chamfer-sm); font-weight: var(--ns-weight-bold);">21:9 · cinematic band</span>
+        </div>
+        <figcaption class="text-small" style="color: var(--ns-color-text-muted); margin-top: 0.625rem;">
+          <strong>Use:</strong> Capability sheet header, between-section bands. <strong>Crop:</strong> long dolly-style shop-floor shots.
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <div class="grid grid-2" style="gap: 2rem;">
+      <div>
+        <p class="tagline">+ Do</p>
+        <ul class="pattern-list do">
+          <li>Real Kenworth machines, real parts, real people.</li>
+          <li>Warm, natural light. Slight contrast lift. Honest colour.</li>
+          <li>Captions on every image: machine name + what it does.</li>
+          <li>Use the chamfered corner on photo containers (matches button + card language).</li>
+        </ul>
+      </div>
+      <div>
+        <p class="tagline tagline--neutral">+ Don't</p>
+        <ul class="pattern-list">
+          <li>No stock-photo "engineer holding tablet" shots.</li>
+          <li>No heavy duotone, no teal-and-orange grade, no faux-cinematic filter.</li>
+          <li>No staged smiling-team-around-a-machine photos.</li>
+          <li>Never crop a photograph in a way that loses the chamfer corner.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ E. STATES + RESPONSIVE ════ -->
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">25 · Component states</p>
+    <div class="section__header"><h2>Empty / loading / error.</h2></div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <p class="tagline">+ Empty</p>
+        <h3>No articles yet</h3>
+        <p class="text-small" style="color: var(--ns-color-text-muted); margin: 0;">The Learning Hub goes live with the first article in summer 2026. Want to be told when it lands?</p>
+        <a class="btn-ghost" href="#" style="margin-top: 0.75rem; align-self: flex-start;">Email me</a>
+      </div>
+      <div class="card">
+        <p class="tagline">+ Loading</p>
+        <h3>Sending your drawing…</h3>
+        <p class="text-small" style="color: var(--ns-color-text-muted); margin: 0;">Hang on — we're uploading and confirming receipt. This usually takes a few seconds.</p>
+      </div>
+      <div class="card">
+        <p class="tagline">+ Error</p>
+        <h3>Something broke our side</h3>
+        <p class="text-small" style="color: var(--ns-color-text-muted); margin: 0;">Email your drawing to <a class="itext" href="#">hello@kenworth.co.uk</a> and we'll come back inside 48 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">26 · Responsive behaviour</p>
+    <div class="section__header"><h2>Component lift points.</h2></div>
+    <table class="spec-table" style="max-width: 900px;">
+      <thead><tr><th>Component</th><th>Mobile (375)</th><th>Tablet (720)</th><th>Desktop (1024+)</th></tr></thead>
+      <tbody>
+        <tr><td>Cards (grid)</td><td>1 column</td><td>2 column</td><td>3 column</td></tr>
+        <tr><td>Spec block (grid)</td><td>1 column</td><td>2 column</td><td>3 column</td></tr>
+        <tr><td>Pills</td><td>Wrap freely</td><td>Wrap freely</td><td>Wrap freely</td></tr>
+        <tr><td>Buttons</td><td>Stack, full-width on form rows</td><td>Inline</td><td>Inline</td></tr>
+        <tr><td>Tables</td><td>Horizontal scroll</td><td>Full width</td><td>Full width</td></tr>
+        <tr><td>Form fields</td><td>Full-width</td><td>Up to 32rem max</td><td>Up to 32rem max</td></tr>
+        <tr><td>Type ramp</td><td colspan="3" class="num">clamp() — scales smoothly across all viewports</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">27 · Print stylesheet</p>
+    <div class="section__header">
+      <h2>Engineers print.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        Capabilities, machine list, About, and Learning Hub articles all print cleanly. Strip navigation, footer, CTA bands, and the orange. Body text in graphite on white. Image captions stay.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ F. VOICE ════ -->
+
+<section class="section" id="voice">
+  <div class="container">
+    <p class="sec-num">28 · Microcopy rules</p>
+    <div class="section__header"><h2>Voice in the UI.</h2></div>
+
+    <div class="grid grid-2" style="gap: 3rem;">
+      <div>
+        <p class="tagline">+ Button labels</p>
+        <ul class="ns-list ns-list--plus">
+          <li>Verb-led. "Send a drawing", "Get a quote", "Download capability sheet".</li>
+          <li>Sentence case. Never SHOUTY.</li>
+          <li>Never "Submit". Never "Click here". Never "Learn more".</li>
+        </ul>
+      </div>
+      <div>
+        <p class="tagline">+ Form placeholders</p>
+        <ul class="ns-list ns-list--plus">
+          <li>Real example. "natalie@company.co.uk", not "Email address".</li>
+          <li>Lowercase unless a proper noun.</li>
+          <li>Never repeat the label as the placeholder.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="tagline">+ Error messages</p>
+        <ul class="ns-list ns-list--plus">
+          <li>What went wrong + what to do, in one sentence.</li>
+          <li>Specific. "That email's missing the @" beats "Invalid format".</li>
+          <li>Never blame the user.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="tagline">+ Capitalisation + numbers</p>
+        <ul class="ns-list ns-list--plus">
+          <li>Sentence case for everything except headings (which can do title-tight where it reads better).</li>
+          <li>Numbers in tabular form on spec readouts. Units after a hair-space.</li>
+          <li>Tolerances: <span class="numeric">≤ 10 µm</span> (not <span class="numeric">10µm</span> or <span class="numeric">10 micron</span>).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ G. BRAND ════ -->
+
+<section class="section section--paper-soft" id="brand">
+  <div class="container">
+    <p class="sec-num">29 · Logo usage</p>
+    <div class="section__header"><h2>One mark. Two contexts.</h2></div>
+
+    <div class="grid grid-2">
+      <div class="logo-demo logo-demo--paper">
+        <img src="references/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering logo on paper">
+      </div>
+      <div class="logo-demo logo-demo--dark">
+        <img src="references/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering logo on dark">
+      </div>
+    </div>
+    <p class="text-small" style="color: var(--ns-color-text-muted); margin-top: 1rem;">Clearspace: minimum height of the "K" mark on all sides. Minimum render width: 80px desktop, 60px mobile. Never recolour. Never apply effects.</p>
+    <div class="open-item" style="margin-top: 1.5rem;">
+      <strong>Open item — needs vector logo.</strong> Current logo is .webp. Vector SVG required for crisp rendering at all sizes, especially print and high-DPR displays. Flagged in client-strategy.md section 7.
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">30 · Visual signature — the chamfer</p>
+    <div class="section__header">
+      <h2>Where the angle lives.</h2>
+      <p class="text-medium" style="color: var(--ns-color-text-muted);">
+        The chamfered top-right corner is the project's distinctive design move. It appears on every button, every spec callout, every card and surface large enough to read it. It does not appear on body text containers, plain dividers, table cells, or anywhere it would shrink below 8px of cut.
+      </p>
+    </div>
+
+    <table class="spec-table" style="max-width: 720px;">
+      <thead><tr><th>Element</th><th>Chamfer</th><th>Token</th></tr></thead>
+      <tbody>
+        <tr><td>Small button · pill · form field</td><td class="num">10px</td><td>--ns-chamfer-sm</td></tr>
+        <tr><td>Default button · card · spec block</td><td class="num">14px</td><td>--ns-chamfer</td></tr>
+        <tr><td>Large button · hero · CTA band · footer</td><td class="num">20px</td><td>--ns-chamfer-lg</td></tr>
+        <tr><td>Quote card (two-corner cut)</td><td class="num">18px</td><td>--ns-chamfer-card</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ════ H. A11Y + PERF ════ -->
+
+<section class="section section--paper-soft">
+  <div class="container">
+    <p class="sec-num">31 · Accessibility</p>
+    <div class="section__header"><h2>What's enforced.</h2></div>
+    <ul class="ns-list ns-list--plus" style="max-width: 70ch;">
+      <li>Every palette pairing is contrast-tested. Body text on paper ≥ AAA. Body text on anchor ≥ AA.</li>
+      <li>Focus state is mandatory and visible on every interactive element: 2px primary-orange inset ring, never removed.</li>
+      <li>All images have alt text. Decorative SVGs use <code>aria-hidden="true"</code>.</li>
+      <li>Keyboard navigation works through every component. Tab order follows visual order.</li>
+      <li>Respect <code>prefers-reduced-motion</code> — disable all transitions when set.</li>
+      <li>Form labels are always visible (not placeholder-only). Errors are announced via <code>aria-live</code>.</li>
+      <li>Buttons are <code>button</code> elements. Links are <code>a</code>. No "div pretending to be button".</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="sec-num">32 · Performance</p>
+    <div class="section__header"><h2>What's forbidden.</h2></div>
+    <ul class="ns-list ns-list--plus" style="max-width: 70ch;">
+      <li>No autoplay hero video.</li>
+      <li>No carousel sliders.</li>
+      <li>No external JS animation libraries (GSAP, Lottie). CSS transitions only.</li>
+      <li>Hero image weight: ≤ 200KB. Card image weight: ≤ 80KB. WebP with JPEG fallback.</li>
+      <li>General Sans loaded with <code>font-display: swap</code> from Fontshare CDN.</li>
+      <li>LCP target: ≤ 1.8s. CLS target: ≤ 0.05. INP target: ≤ 200ms.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════ I. CLOSED SYSTEM ════ -->
+
+<section class="section section--paper-soft" id="rules">
+  <div class="container">
+    <p class="sec-num">33 · The closed system</p>
+    <div class="section__header"><h2>Do / Don't.</h2></div>
+
+    <div class="grid grid-2" style="gap: 3rem;">
+      <div>
+        <p class="tagline">+ Do</p>
+        <ul class="pattern-list do">
+          <li>Use orange only on conversion CTAs. CTA-only, never decorative.</li>
+          <li>Lead-left layouts. Hero copy ranged left, never centred.</li>
+          <li>Chamfered top-right corner on every button, spec callout, and primary card.</li>
+          <li>Tabular numerics on every spec readout.</li>
+          <li>Alternate paper / paper-soft / anchor — at least one anchor per page.</li>
+          <li>General Sans Display for headings, General Sans Variable for body.</li>
+          <li>Lucide stroke icons only, 1.75px weight, 24px default.</li>
+          <li>Real Kenworth machines and people in every photograph.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="tagline tagline--neutral">+ Don't</p>
+        <ul class="pattern-list">
+          <li>Don't use orange for body accents, borders, or icon fills.</li>
+          <li>Don't centre hero copy. Don't centre full sections.</li>
+          <li>Don't add a third typeface or a typewriter mono.</li>
+          <li>Don't add gradient text, gradient backgrounds, or neon palettes.</li>
+          <li>Don't use rounded buttons. Chamfer always.</li>
+          <li>Don't repeat 3-card icon grids section after section. Vary the rhythm.</li>
+          <li>Don't use stock photography. Don't use staged team photos.</li>
+          <li>Don't introduce shadows. Depth comes from surfaces.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 1rem; padding-bottom: 2.5rem;">
+  <div class="container">
+    <div class="sg-footer">
+      <span>Kenworth Engineering · Design System</span>
+      <span>v0.3 · 2026.05.13</span>
+      <span>Northern Sauce</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

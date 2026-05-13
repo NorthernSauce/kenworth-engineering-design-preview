@@ -1,0 +1,216 @@
+/* ─── Careers page composition ────────────────────────────────────────
+   Page-specific layout only. No design.css overrides.
+   ──────────────────────────────────────────────────────────────────── */
+
+/* Hero — paper, with corner mark + photographic plate */
+.careers-hero {
+  position: relative;
+  padding: clamp(7rem, 12vw, 11rem) 0 clamp(3rem, 6vw, 5rem);
+  background: var(--ns-color-paper);
+  overflow: hidden;
+}
+.careers-hero__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: end;
+}
+.careers-hero__corner {
+  position: absolute;
+  top: clamp(5rem, 8vw, 7rem);
+  right: clamp(1.25rem, 4vw, 3rem);
+  font-family: var(--ns-font-mono, "JetBrains Mono", monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ns-color-text-muted);
+}
+.careers-hero__h1 {
+  margin: 0.5rem 0 1.25rem;
+  max-width: 18ch;
+}
+.careers-hero__lede {
+  max-width: 56ch;
+  color: var(--ns-color-text-muted);
+  margin: 0 0 1.75rem;
+}
+.careers-hero__acts {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.careers-hero__plate {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--ns-color-anchor);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%);
+}
+.careers-hero__plate img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.careers-hero__plate::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(20,22,24,0.45) 100%);
+  pointer-events: none;
+}
+.careers-hero__caption {
+  position: absolute;
+  left: 1rem; bottom: 1rem;
+  font-family: var(--ns-font-mono, "JetBrains Mono", monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ns-color-text-on-dark);
+  opacity: 0.85;
+}
+@media (max-width: 900px) {
+  .careers-hero__layout { grid-template-columns: 1fr; }
+  .careers-hero__plate { aspect-ratio: 16 / 11; }
+  .careers-hero__corner { position: static; display: block; margin-bottom: 1rem; }
+}
+
+/* Inside-the-shop — two columns with photo plate strip */
+.inside-shop {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+.inside-shop__body p {
+  max-width: 60ch;
+  margin: 0 0 1rem;
+}
+.inside-shop__strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.inside-shop__strip img {
+  width: 100%; aspect-ratio: 4 / 5;
+  object-fit: cover; display: block;
+  border-radius: 2px;
+}
+.inside-shop__strip img:nth-child(2) { transform: translateY(2.5rem); }
+@media (max-width: 900px) {
+  .inside-shop { grid-template-columns: 1fr; }
+  .inside-shop__strip img:nth-child(2) { transform: none; }
+}
+
+/* Role cards — chamfered, like the empathy/included aside vocabulary */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+@media (max-width: 900px) {
+  .roles-grid { grid-template-columns: 1fr; }
+}
+.role-card {
+  position: relative;
+  background: var(--ns-color-paper);
+  border: 1px solid var(--ns-color-rule, rgba(20,22,24,0.12));
+  padding: clamp(1.5rem, 2.5vw, 2rem);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto auto auto;
+  gap: 0.4rem 1rem;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+  transition: border-color .25s ease;
+}
+.role-card:hover { border-color: var(--ns-color-primary); }
+.role-card__idx {
+  font-family: var(--ns-font-mono, "JetBrains Mono", monospace);
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  color: var(--ns-color-text-muted);
+  grid-row: 1; grid-column: 1;
+  padding-top: 0.35rem;
+}
+.role-card__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.05rem + 0.6vw, 1.5rem);
+  grid-row: 1; grid-column: 2;
+}
+.role-card__meta {
+  grid-row: 2; grid-column: 2;
+  font-family: var(--ns-font-mono, "JetBrains Mono", monospace);
+  font-size: 0.75rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ns-color-text-muted);
+  margin: 0;
+}
+.role-card__meta span + span::before {
+  content: "·"; margin: 0 0.5rem; opacity: 0.6;
+}
+.role-card__body {
+  grid-row: 3; grid-column: 1 / -1;
+  margin: 0.75rem 0 0;
+  color: var(--ns-color-text-muted);
+  max-width: 58ch;
+}
+.role-card__cta {
+  grid-row: 1; grid-column: 3;
+  align-self: center;
+}
+@media (max-width: 600px) {
+  .role-card { grid-template-columns: auto 1fr; }
+  .role-card__cta { grid-row: 4; grid-column: 1 / -1; justify-self: start; margin-top: 0.5rem; }
+}
+
+/* Apply card — anchor surface, application steps + form prompt */
+.apply-card {
+  background: var(--ns-color-anchor);
+  color: var(--ns-color-text-on-dark);
+  padding: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3rem);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
+}
+.apply-card h2 { color: var(--ns-color-text-on-dark); margin: 0 0 1rem; }
+.apply-card p { color: rgba(245, 240, 232, 0.72); margin: 0 0 0.75rem; max-width: 50ch; }
+.apply-card ol {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 1rem;
+  counter-reset: applystep;
+}
+.apply-card ol li {
+  position: relative;
+  padding: 0.6rem 0 0.6rem 3rem;
+  counter-increment: applystep;
+  border-top: 1px solid rgba(245, 240, 232, 0.15);
+  color: var(--ns-color-text-on-dark);
+}
+.apply-card ol li::before {
+  content: counter(applystep, decimal-leading-zero);
+  position: absolute; left: 0; top: 0.55rem;
+  font-family: var(--ns-font-mono, "JetBrains Mono", monospace);
+  font-size: 0.85rem; color: var(--ns-color-primary);
+  letter-spacing: 0.08em;
+}
+.apply-card ol li strong {
+  display: block; margin-bottom: 0.15rem; color: var(--ns-color-text-on-dark);
+}
+.apply-card ol li span { color: rgba(245, 240, 232, 0.72); font-size: 0.95rem; }
+@media (max-width: 900px) {
+  .apply-card { grid-template-columns: 1fr; }
+}
+
+/* Roles intro line */
+.roles-intro {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;
+}
+.roles-intro p {
+  font-family: var(--ns-font-mono, "JetBrains Mono", monospace);
+  font-size: 0.8rem; letter-spacing: 0.08em;
+  color: var(--ns-color-text-muted);
+  margin: 0;
+}

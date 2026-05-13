@@ -1,0 +1,159 @@
+/* ─────────────────────────────────────────────────────────────────────
+   Kenworth Engineering — Design Tokens
+   Direction: Machined Paper
+   Two-voice system: General Sans (Display + Variable cuts)
+   Locked palette from logo + index-v2 reference + Mercury rhythm.
+   ───────────────────────────────────────────────────────────────────── */
+
+/* General Sans — Pangram Pangram. Free for commercial use. Two voices via Display + Variable cuts. */
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap");
+
+:root {
+  /* ── Colour ─────────────────────────────────────────────────────── */
+  --ns-color-paper:           #F5F0E8;
+  --ns-color-paper-soft:      #EDE6D8;
+  --ns-color-paper-deep:      #E4DBC8;
+
+  --ns-color-graphite:        #1C1A17;
+  --ns-color-graphite-soft:   #2A2722;
+  --ns-color-anchor:          #100E0C;
+
+  --ns-color-primary:         #EE6C19;
+  --ns-color-primary-dark:    #C4520A;
+  --ns-color-primary-wash:    #FDE8D5;
+
+  --ns-color-text:            #1C1A17;
+  --ns-color-text-muted:      #5C564E;
+  --ns-color-text-on-dark:    #F5F0E8;
+  --ns-color-muted-on-dark:   rgba(245, 240, 232, 0.62);
+
+  --ns-color-rule:            rgba(28, 26, 23, 0.12);
+  --ns-color-rule-strong:     rgba(28, 26, 23, 0.24);
+  --ns-color-rule-on-dark:    rgba(245, 240, 232, 0.16);
+
+  /* ── Opacity ────────────────────────────────────────────────────── */
+  --ns-opacity-quiet:         0.62;
+  --ns-opacity-faint:         0.40;
+  --ns-opacity-trace:         0.16;
+
+  /* ── Radius ─────────────────────────────────────────────────────── */
+  --ns-radius-none:           0;
+  --ns-radius-sm:             2px;
+  --ns-radius-md:             4px;
+
+  /* ── Chamfer (the CNC angle motif) ──────────────────────────────── */
+  --ns-chamfer-sm:            polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  --ns-chamfer:               polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  --ns-chamfer-lg:            polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+  --ns-chamfer-card:          polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+
+  /* ── Type families ──────────────────────────────────────────────── */
+  --ns-font-display:          "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ns-font-body:             "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* ── Headings (clamp 375→1440) ──────────────────────────────────── */
+  --ns-heading-h1:            clamp(2.5rem, 1.796rem + 3.005vw, 4.5rem);
+  --ns-heading-h2:            clamp(2rem, 1.472rem + 2.254vw, 3.5rem);
+  --ns-heading-h3:            clamp(1.5rem, 1.148rem + 1.502vw, 2.5rem);
+  --ns-heading-h4:            clamp(1.25rem, 1.074rem + 0.751vw, 1.75rem);
+  --ns-heading-h5:            clamp(1.125rem, 1.037rem + 0.376vw, 1.375rem);
+  --ns-heading-h6:            clamp(1rem, 0.956rem + 0.188vw, 1.125rem);
+
+  /* ── Body text tiers (clamp 375→1440) ───────────────────────────── */
+  --ns-text-large:            clamp(1.125rem, 1.081rem + 0.188vw, 1.25rem);
+  --ns-text-medium:           clamp(1rem, 0.956rem + 0.188vw, 1.125rem);
+  --ns-text-regular:          clamp(0.9375rem, 0.916rem + 0.094vw, 1rem);
+  --ns-text-small:            clamp(0.8125rem, 0.791rem + 0.094vw, 0.875rem);
+  --ns-text-tiny:             clamp(0.6875rem, 0.666rem + 0.094vw, 0.75rem);
+
+  /* ── Weights ────────────────────────────────────────────────────── */
+  --ns-weight-regular:        400;
+  --ns-weight-medium:         500;
+  --ns-weight-semibold:       600;
+  --ns-weight-bold:           700;
+  --ns-weight-heavy:          800;
+
+  /* ── Line height ────────────────────────────────────────────────── */
+  --ns-leading-tight:         1.08;
+  --ns-leading-snug:          1.22;
+  --ns-leading-normal:        1.5;
+  --ns-leading-relaxed:       1.65;
+
+  /* ── Tracking ───────────────────────────────────────────────────── */
+  --ns-tracking-display:      -0.02em;
+  --ns-tracking-tight:        -0.01em;
+  --ns-tracking-normal:       0;
+  --ns-tracking-eyebrow:      0.06em;
+
+  /* ── Motion ─────────────────────────────────────────────────────── */
+  --ns-easing:                cubic-bezier(0.16, 1, 0.3, 1);
+  --ns-duration-fast:         150ms;
+  --ns-duration:              220ms;
+  --ns-duration-slow:         420ms;
+}
+
+@theme {
+  --color-paper:              var(--ns-color-paper);
+  --color-paper-soft:         var(--ns-color-paper-soft);
+  --color-paper-deep:         var(--ns-color-paper-deep);
+  --color-graphite:           var(--ns-color-graphite);
+  --color-graphite-soft:      var(--ns-color-graphite-soft);
+  --color-anchor:             var(--ns-color-anchor);
+  --color-primary:            var(--ns-color-primary);
+  --color-primary-dark:       var(--ns-color-primary-dark);
+  --color-primary-wash:       var(--ns-color-primary-wash);
+  --color-text:               var(--ns-color-text);
+  --color-text-muted:         var(--ns-color-text-muted);
+  --font-display:             var(--ns-font-display);
+  --font-body:                var(--ns-font-body);
+  --radius-none:              var(--ns-radius-none);
+  --radius-sm:                var(--ns-radius-sm);
+  --radius-md:                var(--ns-radius-md);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────────────────────────────── */
+
+html {
+  font-family: var(--ns-font-body);
+  font-size: 16px;
+  color: var(--ns-color-text);
+  background: var(--ns-color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--ns-font-body);
+  font-size: var(--ns-text-regular);
+  line-height: var(--ns-leading-normal);
+  color: var(--ns-color-text);
+  background: var(--ns-color-paper);
+  font-optical-sizing: auto;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ns-font-display);
+  font-weight: var(--ns-weight-bold);
+  line-height: var(--ns-leading-tight);
+  letter-spacing: var(--ns-tracking-display);
+  color: var(--ns-color-text);
+  font-optical-sizing: auto;
+  margin: 0 0 0.5em 0;
+}
+
+h1 { font-size: var(--ns-heading-h1); }
+h2 { font-size: var(--ns-heading-h2); }
+h3 { font-size: var(--ns-heading-h3); letter-spacing: var(--ns-tracking-tight); }
+h4 { font-size: var(--ns-heading-h4); letter-spacing: var(--ns-tracking-tight); }
+h5 { font-size: var(--ns-heading-h5); letter-spacing: var(--ns-tracking-tight); }
+h6 { font-size: var(--ns-heading-h6); letter-spacing: var(--ns-tracking-normal); font-weight: var(--ns-weight-semibold); }
+
+p { margin: 0 0 1em 0; }
+
+.numeric, .spec-block, .spec-value, [data-numeric] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" on, "ss01" on;
+}

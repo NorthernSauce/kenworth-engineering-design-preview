@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industries — Kenworth Engineering · Precision CNC, Grimsby</title>
+<meta name="description" content="Sectors we machine for — aerospace, F1, defence, oil & gas, medical, renewables, automotive, sub-sea. Tight tolerance, full traceability, on the date you were given.">
+
+<!-- Locked design system from phase 2 (Brief) -->
+<link rel="stylesheet" href="../brief/tokens.css">
+<link rel="stylesheet" href="../brief/components.css">
+
+<!-- Page-specific composition -->
+<link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="flourishes.css">
+</head>
+<body>
+
+<!-- ─── Scroll progress bar ─────────────────────────────────────────── -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ─── NAV (LOCKED — identical to home.html) ──────────────────────── -->
+
+<nav class="nav" aria-label="Primary">
+  <a class="nav__logo" href="home.html" aria-label="Kenworth Engineering — homepage">
+    <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+  </a>
+
+  <div class="nav__links">
+    <div class="nav__drop">
+      <a class="nav__link" href="capabilities.html" aria-haspopup="true">Services</a>
+      <div class="nav__panel" role="menu">
+        <a href="cnc-milling.html" role="menuitem">
+          <span class="nav__panel__idx">01</span>
+          <span>
+            <span class="nav__panel__title">CNC Milling</span>
+            <span class="nav__panel__desc">3 and 5-axis up to 1200×600×600mm</span>
+          </span>
+        </a>
+        <a href="cnc-turning.html" role="menuitem">
+          <span class="nav__panel__idx">02</span>
+          <span>
+            <span class="nav__panel__title">CNC Turning</span>
+            <span class="nav__panel__desc">Production turning, unmanned overnight</span>
+          </span>
+        </a>
+        <a href="cnc-sliding-head.html" role="menuitem">
+          <span class="nav__panel__idx">03</span>
+          <span>
+            <span class="nav__panel__title">Sliding Head</span>
+            <span class="nav__panel__desc">1–22mm Ø up to 1000mm long</span>
+          </span>
+        </a>
+        <div class="nav__panel__sep"></div>
+        <a class="nav__panel__all" href="capabilities.html" role="menuitem">All capabilities →</a>
+      </div>
+    </div>
+    <a class="nav__link" href="industries.html" aria-current="page">Industries</a>
+    <a class="nav__link" href="about.html">About</a>
+    <a class="nav__link" href="learning-hub.html">Learning Hub</a>
+  </div>
+
+  <div class="nav__cta-wrap" style="display:inline-flex; align-items:center; gap:0.75rem;">
+    <a class="btn btn-primary" href="get-a-quote.html">Get a quote</a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false" data-drawer-trigger>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── Mobile drawer (LOCKED — identical to home.html) ────────────── -->
+
+<div class="drawer" id="mobileDrawer" data-open="false" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <div class="drawer__top">
+    <div class="drawer__mark" aria-hidden="true">KE</div>
+    <button class="drawer__close" type="button" aria-label="Close menu" data-drawer-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+        <path d="M6 6l12 12"/><path d="M18 6l-12 12"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="drawer__nav" aria-label="Primary mobile">
+    <a href="cnc-milling.html"><span class="idx">01</span><span>CNC Milling</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-turning.html"><span class="idx">02</span><span>CNC Turning</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-sliding-head.html"><span class="idx">03</span><span>Sliding Head</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="capabilities.html"><span class="idx">04</span><span>Capabilities</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="industries.html" aria-current="page"><span class="idx">05</span><span>Industries</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="about.html"><span class="idx">06</span><span>About</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="learning-hub.html"><span class="idx">07</span><span>Learning Hub</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="careers.html"><span class="idx">08</span><span>Careers</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="contact.html"><span class="idx">09</span><span>Contact</span><span class="arrow" aria-hidden="true">↗</span></a>
+  </nav>
+  <div class="drawer__foot">
+    <span class="drawer__tagline">ISO 9001:2015 · Grimsby · Est. 1992</span>
+    <a class="btn" href="get-a-quote.html">Get a quote</a>
+  </div>
+</div>
+
+<!-- Drawer open/close -->
+<script>
+(function () {
+  const trigger = document.querySelector('[data-drawer-trigger]');
+  const close   = document.querySelector('[data-drawer-close]');
+  const drawer  = document.getElementById('mobileDrawer');
+  if (!trigger || !drawer) return;
+
+  function open() {
+    drawer.dataset.open = 'true';
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.dataset.drawerOpen = 'true';
+  }
+  function shut() {
+    drawer.dataset.open = 'false';
+    trigger.setAttribute('aria-expanded', 'false');
+    delete document.body.dataset.drawerOpen;
+  }
+  trigger.addEventListener('click', open);
+  close && close.addEventListener('click', shut);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+})();
+</script>
+
+<!-- ─── HERO (service-style, dark anchor with photo) ───────────────── -->
+
+<section class="svc-hero" aria-label="Industries hero">
+  <img class="svc-hero__img" src="../assets/photography/1551.jpg" alt="Five-axis CNC machine mid-cycle on a precision aerospace gear" aria-hidden="true">
+  <div class="wrap">
+    <div class="svc-hero__inner">
+      <p class="svc-hero__over">+ Industries</p>
+      <h1 class="svc-hero__h1">Where late or out-of-spec isn't an option.</h1>
+      <p class="svc-hero__sub">You work in a sector where a missed delivery date is a meeting on Monday. Below: what we machine for each one, and the service that does the work.</p>
+      <div class="svc-hero__acts">
+        <a class="btn btn-primary btn-lg" href="get-a-quote.html">Get a quote</a>
+        <a class="btn-ghost btn-ghost--on-dark" href="capabilities.html">See the machine list</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Intro / empathy on paper-soft ──────────────────────────────── -->
+
+<section class="section section--paper-soft" aria-label="What you'll find on this page">
+  <div class="wrap">
+    <div class="empathy__layout">
+      <div>
+        <p class="tagline">+ Sectors we machine for</p>
+        <h2 class="empathy__h2">Twelve sectors. One shop. Same date discipline.</h2>
+      </div>
+      <div class="empathy__body">
+        <p>Aerospace brackets, F1 suspension parts, sub-sea fittings and surgical instrument bodies come off the same shop floor in Grimsby — programmed, machined and inspected by engineers you can ring directly.</p>
+        <p>Find your sector below. Each card tells you what we machine for it and the service that does the work. If you don't see a fit, send the drawing anyway — we'll tell you inside 48 hours.</p>
+        <div class="empathy__cta">
+          <a class="btn btn-primary" href="get-a-quote.html">Send a drawing</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Sector grid (12 cards — photographic .icard pattern) ───────── -->
+
+<section class="industries" id="sectors" aria-label="Sectors we work in">
+  <div class="wrap">
+    <div class="industries__hd">
+      <div>
+        <p class="tagline">+ Twelve sectors</p>
+        <h2>What we machine, by sector.</h2>
+      </div>
+      <a class="btn btn-primary" href="get-a-quote.html">Get a quote</a>
+    </div>
+
+    <div class="industries__grid">
+
+      <a class="icard" id="aerospace" href="cnc-milling.html">
+        <img class="icard__img" src="../assets/photography/1551.jpg" alt="Five-axis machining centre cutting a precision aerospace gear">
+        <span class="icard__n">01</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Aerospace</h3>
+          <p class="icard__desc">Brackets, fittings, mounts, fixtures. Tight tolerance, full material traceability, civil and defence platforms.</p>
+          <div class="icard__tags"><span class="itag">ISO 9001:2015</span><span class="itag">Sub-10 µm</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="space" href="cnc-milling.html">
+        <img class="icard__img" src="../assets/photography/354.jpg" alt="Cutting tools on a high-speed CNC spindle ready for a titanium cut">
+        <span class="icard__n">02</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Space</h3>
+          <p class="icard__desc">Lightweight aluminium and titanium for satellite hardware and launch components. 5-axis on the DMU-50.</p>
+          <div class="icard__tags"><span class="itag">Ti &amp; Al</span><span class="itag">5-axis</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="f1" href="cnc-milling.html">
+        <img class="icard__img" src="../assets/photography/383.jpg" alt="Tool holders and collets staged for a motorsport production run">
+        <span class="icard__n">03</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Formula 1</h3>
+          <p class="icard__desc">Bespoke parts to F1 tolerances and weight. Direct supply to race teams, NDAs respected, programme on file for repeat orders.</p>
+          <div class="icard__tags"><span class="itag">NDA-aware</span><span class="itag">Sub-10 µm</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="defence" href="cnc-milling.html">
+        <img class="icard__img" src="../assets/photography/129.jpg" alt="Multi-axis turret close-up on a heavy production lathe">
+        <span class="icard__n">04</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Defence</h3>
+          <p class="icard__desc">UK-machined, controlled-process. Vehicle hardware, ground support, weapon-system components. Vendor approval supported.</p>
+          <div class="icard__tags"><span class="itag">UK-machined</span><span class="itag">ISO 9001</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="oil-gas" href="cnc-turning.html">
+        <img class="icard__img" src="../assets/photography/2807.jpg" alt="Dual-spindle turret detail on the Citizen Miyano turning a stainless fitting">
+        <span class="icard__n">05</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Oil &amp; Gas</h3>
+          <p class="icard__desc">Stainless and exotic alloy fittings, valve bodies, sub-sea-rated parts. Duplex, Inconel and super-duplex routinely.</p>
+          <div class="icard__tags"><span class="itag">Exotics</span><span class="itag">High-pressure</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="renewables" href="cnc-turning.html">
+        <img class="icard__img" src="../assets/photography/120.jpg" alt="Finished machined components in a blue tray after a production run">
+        <span class="icard__n">06</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Renewable Energy</h3>
+          <p class="icard__desc">Volume components for wind, hydro and solar hardware. Batch production on the Citizen Miyano, unmanned overnight.</p>
+          <div class="icard__tags"><span class="itag">Batch volume</span><span class="itag">ISO 9001</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="sub-sea" href="cnc-turning.html">
+        <img class="icard__img" src="../assets/photography/2807.jpg" alt="High-volume turning operation producing pressure-rated bodies">
+        <span class="icard__n">07</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Sub-Sea</h3>
+          <p class="icard__desc">Pressure-rated bodies, fittings, housings. Connectors and manifolds in duplex and Inconel for deepwater service.</p>
+          <div class="icard__tags"><span class="itag">Pressure-rated</span><span class="itag">Exotics</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="medical" href="cnc-sliding-head.html">
+        <img class="icard__img" src="../assets/photography/6563.jpg" alt="Polished tool holders and small precision components on the workshop bench">
+        <span class="icard__n">08</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Medical</h3>
+          <p class="icard__desc">Sub-10 micron parts for surgical instruments, diagnostic housings and implantable assemblies. Clean handling on request.</p>
+          <div class="icard__tags"><span class="itag">Biocompat</span><span class="itag">Sub-10 µm</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="automotive" href="cnc-turning.html">
+        <img class="icard__img" src="../assets/photography/120.jpg" alt="Production-volume turned parts laid out in a tray">
+        <span class="icard__n">09</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Automotive</h3>
+          <p class="icard__desc">Production-volume turned parts and mill/turn hybrids. Repeatable batches on programme, drawing on file for re-orders.</p>
+          <div class="icard__tags"><span class="itag">Batch volume</span><span class="itag">Mill/turn</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="architectural" href="cnc-milling.html">
+        <img class="icard__img" src="../assets/photography/354.jpg" alt="Spindle and cutter detail on the 5-axis machining centre">
+        <span class="icard__n">10</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Architectural</h3>
+          <p class="icard__desc">Bespoke metalwork components and structural fittings. One-off and short-run, milled and turned to drawing.</p>
+          <div class="icard__tags"><span class="itag">Bespoke</span><span class="itag">Short-run</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="food-beverage" href="cnc-turning.html">
+        <img class="icard__img" src="../assets/photography/2807.jpg" alt="Stainless components in mid-cycle on the production lathe">
+        <span class="icard__n">11</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Food &amp; Beverage</h3>
+          <p class="icard__desc">Stainless production components for processing equipment. Clean machining, full material certs in the box.</p>
+          <div class="icard__tags"><span class="itag">Stainless</span><span class="itag">Cert in box</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+      <a class="icard" id="electronics" href="cnc-sliding-head.html">
+        <img class="icard__img" src="../assets/photography/383.jpg" alt="Small precision turned parts staged for an electronics production run">
+        <span class="icard__n">12</span>
+        <div class="icard__body">
+          <h3 class="icard__name">Electronics</h3>
+          <p class="icard__desc">Small precision turned parts at volume. 1–22mm diameter on the Star SB20R, sub-10 micron, unattended overnight.</p>
+          <div class="icard__tags"><span class="itag">High volume</span><span class="itag">Sub-10 µm</span></div>
+        </div>
+        <span class="icard__line"></span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Anonymised proof block ─────────────────────────────────────── -->
+
+<section class="section section--paper-soft bleed-tr bleed-from--paper" aria-label="Where the work goes">
+  <div class="wrap">
+    <div class="testimonial">
+      <p class="testimonial__body">"Precision parts for Formula 1 teams. Major clients in renewable energy, oil and gas, automotive. Aerospace prototype and production. Sub-sea and defence components in the same shop."</p>
+      <p class="testimonial__attr">— Where the work goes · Anonymised pending named client permissions</p>
+      <span class="testimonial__placeholder">+ Placeholder · awaiting Natalie's NDA-cleared wording and named clients</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ISO + quality (spec strip on paper) ────────────────────────── -->
+
+<section class="section section--paper bleed-tl bleed-from--paper-soft" aria-label="Quality on every batch">
+  <div class="wrap">
+    <div class="section__head section__head--brace">
+      <p class="tagline">+ Quality on every batch</p>
+      <h2 class="section__h2">ISO 9001:2015. Documented per batch.</h2>
+      <p class="section__lede">Full dimensional inspection per batch. Material traceability. Vendor approval pack on request.</p>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec">
+        <span class="spec__idx">01</span>
+        <span class="spec__label">+ Standard</span>
+        <span class="spec__value">ISO 9001:2015</span>
+        <span class="spec__note">Audited annually, current to 2026</span>
+      </div>
+      <div class="spec">
+        <span class="spec__idx">02</span>
+        <span class="spec__label">+ Inspection</span>
+        <span class="spec__value">Every batch</span>
+        <span class="spec__note">First-article on every new part</span>
+      </div>
+      <div class="spec">
+        <span class="spec__idx">03</span>
+        <span class="spec__label">+ Tolerance</span>
+        <span class="spec__value">&lt; 10 µm</span>
+        <span class="spec__note">Documented on every order</span>
+      </div>
+      <div class="spec">
+        <span class="spec__idx">04</span>
+        <span class="spec__label">+ Material trace</span>
+        <span class="spec__value">Cert in box</span>
+        <span class="spec__note">Heat-number-level, every batch</span>
+      </div>
+      <div class="spec">
+        <span class="spec__idx">05</span>
+        <span class="spec__label">+ Vendor approval</span>
+        <span class="spec__value">Pack on request</span>
+        <span class="spec__note">Quality docs assembled for audit</span>
+      </div>
+      <div class="spec">
+        <span class="spec__idx">06</span>
+        <span class="spec__label">+ Controlled process</span>
+        <span class="spec__value">UK-machined</span>
+        <span class="spec__note">Same shop floor since 1992</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Final CTA band ─────────────────────────────────────────────── -->
+
+<section class="section section--anchor cta-band-pro bleed-tr bleed-from--paper" aria-label="Send the drawing">
+  <div class="wrap">
+    <div class="cta-band-pro__inner">
+      <div class="cta-band-pro__lead">
+        <p class="tagline" style="color: var(--ns-color-primary);">+ Send the drawing</p>
+        <h2>Don't see your sector? Send a drawing anyway.</h2>
+        <p>If we can hold the spec, we'll quote it. If we can't, you'll know inside 48 hours — with a sensible suggestion of where to take it instead.</p>
+        <div class="cta-band-pro__acts">
+          <a class="btn btn-primary btn-lg" href="get-a-quote.html">Get a quote</a>
+          <a class="btn btn-outline btn-outline--on-dark" href="capabilities.html">See the machine list</a>
+        </div>
+      </div>
+      <div class="cta-band-pro__steps">
+        <div class="cta-step">
+          <span class="cta-step__num">01</span>
+          <div class="cta-step__body"><strong>Send your drawing</strong>DXF, DWG, STEP, IGES or PDF. Quantity and what it's for.</div>
+        </div>
+        <div class="cta-step">
+          <span class="cta-step__num">02</span>
+          <div class="cta-step__body"><strong>Quote in 48 hours</strong>Detailed, with a real delivery date. DFM flags before you commit.</div>
+        </div>
+        <div class="cta-step">
+          <span class="cta-step__num">03</span>
+          <div class="cta-step__body"><strong>Parts on the day</strong>Fully inspected. ISO 9001:2015 docs behind every batch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pre-footer callout (LOCKED — identical to home.html) ───────── -->
+<section class="pre-footer" aria-label="Direct contact">
+  <div class="wrap">
+    <div class="pre-footer__inner">
+      <div class="pre-footer__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div class="pre-footer__text">
+        <h3>Not ready to send a drawing? Call us instead.</h3>
+        <p>01472 210 678 · 8am–5pm, Mon–Fri · or <a href="mailto:rfq@kenworthengineering.co.uk" class="itext">rfq@kenworthengineering.co.uk</a></p>
+      </div>
+      <a class="btn btn-outline" href="contact.html">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer (LOCKED — identical to home.html) ───────────────────── -->
+<footer class="site-footer-pro" role="contentinfo">
+  <div class="wrap">
+    <div class="footer-pro__top">
+      <div class="footer-pro__brand">
+        <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+        <p>Family-run UK precision CNC machining, on the same shop floor in Grimsby since 1992. Aerospace, F1, defence, oil &amp; gas, medical, sub-sea.</p>
+        <dl class="footer-pro__addr">
+          <dt>HQ</dt><dd>Wilton Road Industrial Estate, Grimsby, DN36 4AS</dd>
+          <dt>Tel</dt><dd>01472 210 678</dd>
+          <dt>RFQ</dt><dd>rfq@kenworthengineering.co.uk</dd>
+        </dl>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Services</h6>
+        <a href="cnc-milling.html">CNC Milling</a>
+        <a href="cnc-turning.html">CNC Turning</a>
+        <a href="cnc-sliding-head.html">Sliding Head</a>
+        <a href="capabilities.html">Capabilities</a>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Company</h6>
+        <a href="about.html">About</a>
+        <a href="industries.html">Industries</a>
+        <a href="careers.html">Careers</a>
+        <a href="learning-hub.html">Learning Hub</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-pro__status">
+        <h6>Shop status</h6>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Quote turnaround</div>
+            <div class="fstat__value"><span class="fstat__pip" aria-hidden="true"></span>48 hrs · on track</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Today's lights-out</div>
+            <div class="fstat__value">Citizen Miyano · 14 hrs</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Latest certification</div>
+            <div class="fstat__value">ISO 9001:2015 · audit 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-pro__bottom">
+      <span>© 2026 Kenworth Engineering Ltd · Co. 02611728</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Modern Slavery</a></span>
+      <div class="footer-pro__social" aria-label="Kenworth on social">
+        <a href="#" aria-label="Kenworth Engineering on LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.5 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.59c0-1.57-.03-3.6-2.19-3.6-2.19 0-2.52 1.71-2.52 3.48V22H7.72V8z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on YouTube" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="20" height="20"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.12C19.55 4 12 4 12 4s-7.55 0-9.4.38A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 .12 12a31.6 31.6 0 0 0 .38 5.5 3 3 0 0 0 2.1 2.12C4.45 20 12 20 12 20s7.55 0 9.4-.38a3 3 0 0 0 2.1-2.12A31.6 31.6 0 0 0 23.88 12a31.6 31.6 0 0 0-.38-5.5zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on Instagram" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" width="18" height="18"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <span>Made by Northern Sauce</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Site scripts: scroll progress bar + nav scrolled state -->
+<script>
+// Scroll progress bar — 0 → 1 across the page
+(function () {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  function tick() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? window.scrollY / max : 0;
+    bar.style.transform = 'scaleX(' + pct + ')';
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+
+// Nav scrolled state — snap to solid anchor once past a threshold
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  function tick() {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+<script src="flourishes.js" defer></script>
+</body>
+</html>

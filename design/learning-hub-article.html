@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How much does CNC machining cost in the UK in 2026? — Kenworth Engineering</title>
+<meta name="description" content="Real per-hour and per-part ranges for UK CNC machining in 2026. What drives the price up, what makes a cheap quote a red flag, and what to ask before you sign.">
+
+<!-- Locked design system from phase 2 (Brief) -->
+<link rel="stylesheet" href="../brief/tokens.css">
+<link rel="stylesheet" href="../brief/components.css">
+
+<!-- Page-specific composition -->
+<link rel="stylesheet" href="design.css">
+<link rel="stylesheet" href="page-learning-hub.css">
+<link rel="stylesheet" href="page-learning-hub-article.css">
+<link rel="stylesheet" href="flourishes.css">
+</head>
+<body>
+
+<!-- ─── Scroll progress bar ─────────────────────────────────────────── -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ─── NAV (LOCKED — identical to home.html) ───────────────────────── -->
+<nav class="nav" aria-label="Primary">
+  <a class="nav__logo" href="home.html" aria-label="Kenworth Engineering — homepage">
+    <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+  </a>
+
+  <div class="nav__links">
+    <div class="nav__drop">
+      <a class="nav__link" href="capabilities.html" aria-haspopup="true">Services</a>
+      <div class="nav__panel" role="menu">
+        <a href="cnc-milling.html" role="menuitem">
+          <span class="nav__panel__idx">01</span>
+          <span>
+            <span class="nav__panel__title">CNC Milling</span>
+            <span class="nav__panel__desc">3 and 5-axis up to 1200×600×600mm</span>
+          </span>
+        </a>
+        <a href="cnc-turning.html" role="menuitem">
+          <span class="nav__panel__idx">02</span>
+          <span>
+            <span class="nav__panel__title">CNC Turning</span>
+            <span class="nav__panel__desc">Production turning, unmanned overnight</span>
+          </span>
+        </a>
+        <a href="cnc-sliding-head.html" role="menuitem">
+          <span class="nav__panel__idx">03</span>
+          <span>
+            <span class="nav__panel__title">Sliding Head</span>
+            <span class="nav__panel__desc">1–22mm Ø up to 1000mm long</span>
+          </span>
+        </a>
+        <div class="nav__panel__sep"></div>
+        <a class="nav__panel__all" href="capabilities.html" role="menuitem">All capabilities →</a>
+      </div>
+    </div>
+    <a class="nav__link" href="industries.html">Industries</a>
+    <a class="nav__link" href="about.html">About</a>
+    <a class="nav__link" href="learning-hub.html" aria-current="page">Learning Hub</a>
+  </div>
+
+  <div class="nav__cta-wrap" style="display:inline-flex; align-items:center; gap:0.75rem;">
+    <a class="btn btn-primary" href="get-a-quote.html">Get a quote</a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false" data-drawer-trigger>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── Mobile drawer (LOCKED — identical to home.html) ─────────────── -->
+<div class="drawer" id="mobileDrawer" data-open="false" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <div class="drawer__top">
+    <div class="drawer__mark" aria-hidden="true">KE</div>
+    <button class="drawer__close" type="button" aria-label="Close menu" data-drawer-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+        <path d="M6 6l12 12"/><path d="M18 6l-12 12"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="drawer__nav" aria-label="Primary mobile">
+    <a href="cnc-milling.html"><span class="idx">01</span><span>CNC Milling</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-turning.html"><span class="idx">02</span><span>CNC Turning</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="cnc-sliding-head.html"><span class="idx">03</span><span>Sliding Head</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="capabilities.html"><span class="idx">04</span><span>Capabilities</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="industries.html"><span class="idx">05</span><span>Industries</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="about.html"><span class="idx">06</span><span>About</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="learning-hub.html" aria-current="page"><span class="idx">07</span><span>Learning Hub</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="careers.html"><span class="idx">08</span><span>Careers</span><span class="arrow" aria-hidden="true">↗</span></a>
+    <a href="contact.html"><span class="idx">09</span><span>Contact</span><span class="arrow" aria-hidden="true">↗</span></a>
+  </nav>
+  <div class="drawer__foot">
+    <span class="drawer__tagline">ISO 9001:2015 · Grimsby · Est. 1992</span>
+    <a class="btn" href="get-a-quote.html">Get a quote</a>
+  </div>
+</div>
+
+<!-- Drawer open/close -->
+<script>
+(function () {
+  const trigger = document.querySelector('[data-drawer-trigger]');
+  const close   = document.querySelector('[data-drawer-close]');
+  const drawer  = document.getElementById('mobileDrawer');
+  if (!trigger || !drawer) return;
+
+  function open() {
+    drawer.dataset.open = 'true';
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.dataset.drawerOpen = 'true';
+  }
+  function shut() {
+    drawer.dataset.open = 'false';
+    trigger.setAttribute('aria-expanded', 'false');
+    delete document.body.dataset.drawerOpen;
+  }
+  trigger.addEventListener('click', open);
+  close && close.addEventListener('click', shut);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+})();
+</script>
+
+<!-- ─── ARTICLE HERO (anchor surface — works with locked nav) ───────── -->
+
+<section class="svc-hero art-hero" aria-label="Article header">
+  <img class="svc-hero__img" src="../assets/photography/1551.jpg" alt="A 5-axis machining centre in mid-cycle on a precision component" aria-hidden="true">
+  <div class="wrap">
+    <div class="svc-hero__inner">
+      <p class="svc-hero__over">+ Cost &amp; pricing</p>
+      <h1 class="svc-hero__h1">How much does CNC machining cost in the UK in 2026?</h1>
+      <p class="svc-hero__sub">Real per-hour and per-part ranges. What pushes a quote up. What makes a cheap quote a red flag. Written for the engineer about to sign a PO, not the procurement manager scrolling for the lowest line.</p>
+      <dl class="art-hero__meta">
+        <div>
+          <dt>Published</dt>
+          <dd>May 2026</dd>
+        </div>
+        <div>
+          <dt>Read time</dt>
+          <dd>12 min</dd>
+        </div>
+        <div>
+          <dt>Author</dt>
+          <dd>The shop floor</dd>
+        </div>
+        <div>
+          <dt>Category</dt>
+          <dd>Cost &amp; pricing</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BODY — sticky TOC + prose ───────────────────────────────────── -->
+
+<section class="art-body" aria-label="Article body">
+  <div class="wrap">
+    <div class="art-body__grid">
+
+      <!-- Sticky TOC -->
+      <aside class="art-toc" aria-label="On this page">
+        <p class="art-toc__label">On this page</p>
+        <ol class="art-toc__list">
+          <li><a href="#per-hour">The per-hour number</a></li>
+          <li><a href="#what-drives-up">What drives a quote up</a></li>
+          <li><a href="#what-keeps-down">What keeps a quote down</a></li>
+          <li><a href="#cheap-quote-red-flag">When a cheap quote is a red flag</a></li>
+          <li><a href="#per-part">From per-hour to per-part</a></li>
+          <li><a href="#what-to-ask">What to ask before you sign</a></li>
+        </ol>
+      </aside>
+
+      <!-- Prose -->
+      <article class="art-prose">
+
+        <p class="art-prose__lede">If you ring three UK CNC subcontractors with the same drawing, you'll get three numbers that can sit two times apart. That's not always one of them taking the piss. Most of it is real, and it's worth understanding which bits of the quote you can negotiate and which bits you shouldn't.</p>
+
+        <h2 id="per-hour">The per-hour number</h2>
+        <p>In 2026, a UK subcontract machining hour sits roughly between <strong>£40 and £90</strong>, depending on the machine, the operator, and the inspection burden the shop has to carry. That's the spread you should expect when you ask.</p>
+
+        <table class="art-spec-table">
+          <thead>
+            <tr><th>Process</th><th>Typical UK rate</th><th>What that buys you</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>3-axis milling</td><td>£42–£60 / hr</td><td>Single-setup work on commodity alloys, ±0.05mm general</td></tr>
+            <tr><td>5-axis milling</td><td>£60–£90 / hr</td><td>Complex 3D in one fixture, sub-10 µm achievable</td></tr>
+            <tr><td>Production turning</td><td>£40–£65 / hr</td><td>Bar-fed, often unmanned overnight, batch-friendly</td></tr>
+            <tr><td>Sliding head</td><td>£55–£85 / hr</td><td>Small-diameter, long parts, sub-10 µm, lights-out</td></tr>
+          </tbody>
+        </table>
+
+        <p>Anything below £40/hr in 2026 for a UK shop running its own machines is either a teaser rate to win the first PO, a hidden re-routing offshore, or a shop that's about to go under. Anything above £90/hr usually means the part needs something the rate hides — clean handling, full CMM inspection on every piece, or capacity on a machine other shops don't have.</p>
+
+        <h2 id="what-drives-up">What drives a quote up</h2>
+        <p>Five things, in roughly the order they bite.</p>
+
+        <h3>Tight tolerance</h3>
+        <p>The jump from ±0.05mm general tolerance to sub-10 µm is not a 10% premium. It's a different way of running the part. Climate-stabilised inspection, in-process probing, a tool change schedule based on wear data instead of guesswork, and someone trained to read CMM reports rather than tick them off. If your drawing has a sub-10 µm callout on one feature, that feature drags the whole part into a tighter regime — the rest of the geometry gets cut to the same standard whether it needs it or not.</p>
+
+        <h3>Small batch, exotic alloy</h3>
+        <p>A run of five parts in Inconel 718 will price out higher per piece than a run of fifty in 6082 aluminium, even when the geometry is identical. Setup time amortises over quantity, exotics chew tooling, and material lead times push delivery dates. If you're prototyping in the final material, expect the prototype to cost more per part than production. That's not the shop punishing you. It's physics.</p>
+
+        <h3>Surface finish and post-processing</h3>
+        <p>An Ra 0.4 µm finish on a machined face is not a different cut, it's a different operation. Bead-blast, anodise, passivate, black-oxide, electroless nickel — each of those is a separate vendor relationship the shop is managing on your behalf, and each adds days and lines on the invoice. Specify them on the drawing, not in a verbal aside, or you'll get them wrong.</p>
+
+        <h3>Inspection burden</h3>
+        <p>A full first-article inspection report with a CMM trace on every critical feature can take longer than the machining did. If your sector needs it — aerospace, medical, defence — pay for it knowingly. If it doesn't, don't ask for it as a comfort blanket; you're paying for a document that nobody is going to read.</p>
+
+        <h3>Material itself</h3>
+        <p>Stainless costs more than aluminium. Titanium costs more than stainless. The cost of the billet shows up at line-item one before any machining starts. On a small part it's irrelevant; on a 30kg block with most of it ending up as swarf, it can dominate the quote.</p>
+
+        <h2 id="what-keeps-down">What keeps a quote down</h2>
+        <p>The cheapest version of your part is almost never the version on the drawing. A shop that quotes silently is the shop you don't want — they'll just machine what's there and bill you. A shop that comes back with three DFM flags before they quote is going to save you money on the run, every time.</p>
+
+        <p>Things that legitimately lower a quote:</p>
+        <ul>
+          <li><strong>Sensible tolerances.</strong> If only two features are critical, tag them ±0.01 and let the rest sit at ±0.1. The savings on inspection alone are real.</li>
+          <li><strong>Standard stock.</strong> 25mm round bar is cheaper than 24mm; 12mm plate is cheaper than 11mm. Designing within the material that's already on the rack saves the shop a procurement day and saves you a margin point.</li>
+          <li><strong>Batch sizes the machine actually wants.</strong> A Citizen Miyano running unattended overnight wants 100s, not 5s. A 5-axis DMG-Mori is happy with 10s. Asking the shop what their sweet spot is can shave 15–25% off.</li>
+          <li><strong>Clean drawings.</strong> A 3D model with no datums, no GD&amp;T, and "see model" written on every dimension forces the shop to interpret. Interpretation costs an hour of engineering time before they can quote.</li>
+        </ul>
+
+        <h2 id="cheap-quote-red-flag">When a cheap quote is a red flag</h2>
+
+        <div class="art-callout">
+          <p class="art-callout__label">Walk away when</p>
+          <ul>
+            <li>The quote came back the same day with no DFM comments. They didn't read the drawing.</li>
+            <li>The delivery date is a window ("4–6 weeks") not a date. They don't have the schedule in hand.</li>
+            <li>There's no inspection plan attached. You'll get the parts and a packing slip.</li>
+            <li>The rate is below £40/hr on a UK address. Either it's not UK, or it won't be UK for long.</li>
+            <li>The quote doesn't say what's included. "Plus material" is the line that costs you most.</li>
+          </ul>
+        </div>
+
+        <p>A cheap quote isn't a saving if the parts come back wrong, late, or with documentation that won't pass a customer audit. Rework, rejection, missed build dates, and the time you'll personally spend chasing — none of that is on the invoice, and all of it lands on your name.</p>
+
+        <blockquote>
+          <p>The cheapest quote on the table is rarely the cheapest part on the shelf. By the second batch, it's usually the most expensive.</p>
+          <cite>— A long-standing aerospace buyer, on the phone last week</cite>
+        </blockquote>
+
+        <h2 id="per-part">From per-hour to per-part</h2>
+        <p>The per-hour rate is one input. The per-part price depends on:</p>
+        <ul>
+          <li><strong>Cycle time</strong> — how long the spindle is actually cutting, not how long the part is in the building.</li>
+          <li><strong>Setup time</strong> — fixtures, first-off proving, probing routines. Amortised across the batch.</li>
+          <li><strong>Material</strong> — billet cost plus waste. Swarf is yours to pay for.</li>
+          <li><strong>Inspection</strong> — first article, in-process, final. Per piece or per batch.</li>
+          <li><strong>Finishing</strong> — bead-blast, anodise, plate, paint. Often subcontracted, always invoiced.</li>
+        </ul>
+        <p>For a typical 5-axis aerospace bracket in 6082-T6, 80×60×40mm, ±0.02 tolerance, batch of 50, you're looking at <strong>£35–£55 per part</strong> from a UK shop running its own machines. Half that suggests offshore or a shop cutting corners. Double that suggests gold-plating the inspection or a shop that doesn't really want the work.</p>
+
+        <h2 id="what-to-ask">What to ask before you sign</h2>
+        <p>The five questions that separate a quote you can trust from a quote that's a guess:</p>
+        <ol>
+          <li>"What's the delivery <em>date</em>, not the window?" If they can't give you a date, they don't have the schedule in front of them.</li>
+          <li>"What inspection is included, and what costs extra?" The answer should be specific. Vague answers get expensive.</li>
+          <li>"Is anything in this quote outsourced — and to whom?" Subbing out finishing is normal. Subbing out the machining itself is the thing you need to know about.</li>
+          <li>"What did you spot on the drawing that could save me time or money?" Silence here is the answer. A good shop will have two or three flags before they quote.</li>
+          <li>"Who do I call when something goes wrong?" If the answer is an account manager, ask for the engineer's name and direct line. If they won't give it, that's the answer too.</li>
+        </ol>
+
+        <hr>
+
+        <p>If you've got a drawing sitting in your inbox and you want the version of this conversation that ends in a quote, send it across. A real delivery date back in 48 hours, design-for-manufacture flags before you commit, and a direct line to the engineer machining your job.</p>
+
+        <!-- Article footer — byline, useful?, share -->
+        <div class="art-foot">
+          <div class="art-foot__byline">
+            <span class="art-foot__avatar" aria-hidden="true">SF</span>
+            <div>
+              <span class="art-foot__by-name">The shop floor</span>
+              <span class="art-foot__by-role">Written by the engineers running the machines · Kenworth, Grimsby</span>
+            </div>
+          </div>
+          <div class="art-foot__row">
+            <div class="art-foot__useful">
+              <strong>Was this useful?</strong>
+              <button type="button">Yes</button>
+              <button type="button">Not really</button>
+            </div>
+            <div class="art-foot__share">
+              <strong>Share</strong>
+              <a href="#" aria-label="Copy article link">Copy link</a>
+              <a href="#" aria-label="Share on LinkedIn">LinkedIn</a>
+              <a href="#" aria-label="Share on X">X</a>
+            </div>
+          </div>
+        </div>
+
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Related articles ───────────────────────────────────────────── -->
+
+<section class="hub-grid-section section--paper-soft bleed-tl bleed-from--paper" aria-label="Read next">
+  <div class="wrap">
+    <div class="hub-grid__head">
+      <div>
+        <p class="tagline">+ Read next</p>
+        <h2 class="section__h2">Three more from the shop floor.</h2>
+      </div>
+      <a class="acard__cta" href="learning-hub.html" style="position:relative;">All articles <span class="arrow" aria-hidden="true">↗</span></a>
+    </div>
+
+    <div class="hub-grid">
+
+      <a class="acard" href="#">
+        <span class="acard__eyebrow">Cost &amp; pricing</span>
+        <h3 class="acard__title">Why a cheap CNC quote often costs you more in the end.</h3>
+        <p class="acard__dek">Rework, rejection, missed dates, chase-time. The cost that doesn't show on the invoice.</p>
+        <div class="acard__foot">
+          <span class="acard__meta">9 min · Apr 2026</span>
+          <span class="acard__cta">Read <span class="arrow" aria-hidden="true">↗</span></span>
+        </div>
+      </a>
+
+      <a class="acard" href="#">
+        <span class="acard__eyebrow">Cost &amp; pricing</span>
+        <h3 class="acard__title">What you're really paying for on a sub-10 micron tolerance quote.</h3>
+        <p class="acard__dek">What hitting sub-10 micron requires. Why one number for 10 µm and 100 µm is a red flag.</p>
+        <div class="acard__foot">
+          <span class="acard__meta">11 min · Apr 2026</span>
+          <span class="acard__cta">Read <span class="arrow" aria-hidden="true">↗</span></span>
+        </div>
+      </a>
+
+      <a class="acard" href="#">
+        <span class="acard__eyebrow">Best-of</span>
+        <h3 class="acard__title">Five things to ask any CNC subcontractor before you send a drawing.</h3>
+        <p class="acard__dek">Five questions you should be asking. Published openly. Use them on us.</p>
+        <div class="acard__foot">
+          <span class="acard__meta">8 min · Jan 2026</span>
+          <span class="acard__cta">Read <span class="arrow" aria-hidden="true">↗</span></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Final CTA band (rebuilt — anchor, conversion-end of read) ──── -->
+
+<section class="section section--anchor cta-band-pro bleed-tr bleed-from--paper-soft" aria-label="Send the drawing">
+  <div class="wrap">
+    <div class="cta-band-pro__inner">
+      <div class="cta-band-pro__lead">
+        <p class="tagline" style="color: var(--ns-color-primary);">+ Send the drawing instead</p>
+        <h2>Done reading? Send the drawing.</h2>
+        <p>The quickest way to know what your part costs is to put it in front of an engineer. A detailed quote back in 48 hours, with a real delivery date and design-for-manufacture flags before you commit.</p>
+        <div class="cta-band-pro__acts">
+          <a class="btn btn-primary btn-lg" href="get-a-quote.html">Get a quote</a>
+          <a class="btn btn-outline btn-outline--on-dark" href="capabilities.html">See the machine list</a>
+        </div>
+      </div>
+      <div class="cta-band-pro__steps">
+        <div class="cta-step">
+          <span class="cta-step__num">01</span>
+          <div class="cta-step__body"><strong>Send your drawing</strong>DXF, DWG, STEP, IGES or PDF. Quantity and what it's for.</div>
+        </div>
+        <div class="cta-step">
+          <span class="cta-step__num">02</span>
+          <div class="cta-step__body"><strong>Quote in 48 hours</strong>Detailed, with a real delivery date. DFM flags before you commit.</div>
+        </div>
+        <div class="cta-step">
+          <span class="cta-step__num">03</span>
+          <div class="cta-step__body"><strong>Parts on the day</strong>Fully inspected. ISO 9001:2015 docs behind every batch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pre-footer callout (LOCKED — identical to home.html) ───────── -->
+<section class="pre-footer" aria-label="Direct contact">
+  <div class="wrap">
+    <div class="pre-footer__inner">
+      <div class="pre-footer__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+      <div class="pre-footer__text">
+        <h3>Not ready to send a drawing? Call us instead.</h3>
+        <p>01472 210 678 · 8am–5pm, Mon–Fri · or <a href="mailto:rfq@kenworthengineering.co.uk" class="itext">rfq@kenworthengineering.co.uk</a></p>
+      </div>
+      <a class="btn btn-outline" href="contact.html">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer (LOCKED — identical to home.html) ───────────────────── -->
+<footer class="site-footer-pro" role="contentinfo">
+  <div class="wrap">
+    <div class="footer-pro__top">
+      <div class="footer-pro__brand">
+        <img src="../assets/logos/kenworth-engineering-logo-e1670834256736.webp" alt="Kenworth Engineering">
+        <p>Family-run UK precision CNC machining, on the same shop floor in Grimsby since 1992. Aerospace, F1, defence, oil &amp; gas, medical, sub-sea.</p>
+        <dl class="footer-pro__addr">
+          <dt>HQ</dt><dd>Wilton Road Industrial Estate, Grimsby, DN36 4AS</dd>
+          <dt>Tel</dt><dd>01472 210 678</dd>
+          <dt>RFQ</dt><dd>rfq@kenworthengineering.co.uk</dd>
+        </dl>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Services</h6>
+        <a href="cnc-milling.html">CNC Milling</a>
+        <a href="cnc-turning.html">CNC Turning</a>
+        <a href="cnc-sliding-head.html">Sliding Head</a>
+        <a href="capabilities.html">Capabilities</a>
+      </div>
+      <div class="footer-pro__col">
+        <h6>Company</h6>
+        <a href="about.html">About</a>
+        <a href="industries.html">Industries</a>
+        <a href="careers.html">Careers</a>
+        <a href="learning-hub.html">Learning Hub</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-pro__status">
+        <h6>Shop status</h6>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Quote turnaround</div>
+            <div class="fstat__value"><span class="fstat__pip" aria-hidden="true"></span>48 hrs · on track</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Today's lights-out</div>
+            <div class="fstat__value">Citizen Miyano · 14 hrs</div>
+          </div>
+        </div>
+        <div class="fstat">
+          <div>
+            <div class="fstat__label">Latest certification</div>
+            <div class="fstat__value">ISO 9001:2015 · audit 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-pro__bottom">
+      <span>© 2026 Kenworth Engineering Ltd · Co. 02611728</span>
+      <span><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Modern Slavery</a></span>
+      <div class="footer-pro__social" aria-label="Kenworth on social">
+        <a href="#" aria-label="Kenworth Engineering on LinkedIn" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.5 0h4.37v1.92h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 7v7.44h-4.56v-6.59c0-1.57-.03-3.6-2.19-3.6-2.19 0-2.52 1.71-2.52 3.48V22H7.72V8z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on YouTube" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="20" height="20"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.12C19.55 4 12 4 12 4s-7.55 0-9.4.38A3 3 0 0 0 .5 6.5 31.6 31.6 0 0 0 .12 12a31.6 31.6 0 0 0 .38 5.5 3 3 0 0 0 2.1 2.12C4.45 20 12 20 12 20s7.55 0 9.4-.38a3 3 0 0 0 2.1-2.12A31.6 31.6 0 0 0 23.88 12a31.6 31.6 0 0 0-.38-5.5zM9.75 15.5v-7l6.25 3.5-6.25 3.5z"/></svg>
+        </a>
+        <a href="#" aria-label="Kenworth Engineering on Instagram" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" width="18" height="18"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <span>Made by Northern Sauce</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Site scripts: scroll progress bar + nav scrolled state -->
+<script>
+// Scroll progress bar — 0 → 1 across the page
+(function () {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  function tick() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? window.scrollY / max : 0;
+    bar.style.transform = 'scaleX(' + pct + ')';
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+
+// Nav scrolled state — snap to solid anchor once past a threshold
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  function tick() {
+    nav.classList.toggle('nav--scrolled', window.scrollY > 60);
+  }
+  window.addEventListener('scroll', tick, { passive: true });
+  window.addEventListener('resize', tick);
+  tick();
+})();
+</script>
+
+<script src="flourishes.js" defer></script>
+</body>
+</html>

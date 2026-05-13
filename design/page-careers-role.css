@@ -1,0 +1,141 @@
+/* ============================================================
+   page-careers-role.css — single role page composition
+   Loaded after design.css and page-careers.css.
+   Inherits svc-hero, section, spec-grid, steps-pro, faq, quote-form, ff.
+   ============================================================ */
+
+/* ── Hero meta strip ─────────────────────────────────────── */
+.role-hero-meta {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--ns-color-text-on-dark) 22%, transparent);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  max-width: 64rem;
+}
+@media (max-width: 720px) {
+  .role-hero-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.role-hero-meta__cell { display: flex; flex-direction: column; gap: 0.35rem; }
+.role-hero-meta__label {
+  font-size: var(--ns-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--ns-color-text-on-dark) 70%, transparent);
+  font-weight: var(--ns-weight-medium);
+}
+.role-hero-meta__value {
+  font-size: var(--ns-text-medium);
+  color: var(--ns-color-text-on-dark);
+  font-weight: var(--ns-weight-semibold);
+}
+
+/* ── The role — long-form prose ──────────────────────────── */
+.role-prose {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+@media (max-width: 880px) { .role-prose { grid-template-columns: 1fr; } }
+.role-prose__aside {
+  position: sticky;
+  top: 6rem;
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--ns-color-border);
+}
+@media (max-width: 880px) {
+  .role-prose__aside { position: static; padding-right: 0; border-right: 0; border-bottom: 1px solid var(--ns-color-border); padding-bottom: 1rem; }
+}
+.role-prose__aside dl { margin: 1rem 0 0; display: grid; gap: 0.65rem; }
+.role-prose__aside dt {
+  font-size: var(--ns-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ns-color-text-muted);
+  font-weight: var(--ns-weight-medium);
+}
+.role-prose__aside dd {
+  margin: 0;
+  font-size: var(--ns-text-regular);
+  color: var(--ns-color-text);
+  font-weight: var(--ns-weight-semibold);
+}
+.role-prose__body p { margin: 0 0 1.1rem; font-size: var(--ns-text-medium); line-height: 1.6; color: var(--ns-color-text); }
+.role-prose__body p:last-child { margin-bottom: 0; }
+
+/* ── Rule-divided responsibilities list ──────────────────── */
+.duties {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--ns-color-border);
+}
+@media (max-width: 720px) { .duties { grid-template-columns: 1fr; } }
+.duty {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 1rem;
+  padding: 1.5rem 1.25rem 1.5rem 0;
+  border-bottom: 1px solid var(--ns-color-border);
+  align-items: start;
+}
+.duty:nth-child(odd) { padding-right: 2rem; border-right: 1px solid var(--ns-color-border); }
+@media (max-width: 720px) {
+  .duty:nth-child(odd) { padding-right: 0; border-right: 0; }
+}
+.duty__idx {
+  font-size: var(--ns-text-tiny);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ns-color-primary);
+  font-weight: var(--ns-weight-semibold);
+  padding-top: 0.2rem;
+}
+.duty__body { font-size: var(--ns-text-regular); line-height: 1.55; color: var(--ns-color-text); }
+.duty__body strong { display: block; font-weight: var(--ns-weight-semibold); margin-bottom: 0.2rem; color: var(--ns-color-text); }
+
+/* ── Benefits — rule-divided list, single column rhythm ──── */
+.gives {
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--ns-color-border);
+}
+.give {
+  display: grid;
+  grid-template-columns: clamp(8rem, 22%, 14rem) 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--ns-color-border);
+  align-items: baseline;
+}
+@media (max-width: 640px) { .give { grid-template-columns: 1fr; gap: 0.35rem; } }
+.give__label {
+  font-size: var(--ns-text-small);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ns-color-text-muted);
+  font-weight: var(--ns-weight-medium);
+}
+.give__value {
+  font-size: var(--ns-text-medium);
+  line-height: 1.55;
+  color: var(--ns-color-text);
+}
+.give__value strong { font-weight: var(--ns-weight-semibold); }
+
+/* ── Cross-link strip back to all roles ──────────────────── */
+.see-all {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.75rem clamp(1.25rem, 3vw, 2rem);
+  background: var(--ns-color-paper-soft);
+  border: 1px solid var(--ns-color-border);
+  border-radius: var(--ns-radius-md);
+  flex-wrap: wrap;
+}
+.see-all__text { display: flex; flex-direction: column; gap: 0.25rem; }
+.see-all__lede { font-size: var(--ns-text-regular); color: var(--ns-color-text-muted); }
+.see-all__title { font-size: var(--ns-text-large); color: var(--ns-color-text); font-weight: var(--ns-weight-semibold); }
