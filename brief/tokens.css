@@ -5,8 +5,8 @@
    Locked palette from logo + index-v2 reference + Mercury rhythm.
    ───────────────────────────────────────────────────────────────────── */
 
-/* General Sans — Pangram Pangram. Free for commercial use. Two voices via Display + Variable cuts. */
-@import url("https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap");
+/* Switzer — Pangram Pangram. Industrial grotesk, free for commercial use. Closest free analogue to Neue Haas Grotesk. */
+@import url("https://api.fontshare.com/v2/css?f[]=switzer@100,200,300,400,500,600,700,800,900&display=swap");
 
 :root {
   /* ── Colour ─────────────────────────────────────────────────────── */
@@ -48,8 +48,8 @@
   --ns-chamfer-card:          polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
 
   /* ── Type families ──────────────────────────────────────────────── */
-  --ns-font-display:          "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --ns-font-body:             "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ns-font-display:          "Switzer", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ns-font-body:             "Switzer", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   /* ── Headings (clamp 375→1440) ──────────────────────────────────── */
   --ns-heading-h1:            clamp(2.5rem, 1.796rem + 3.005vw, 4.5rem);

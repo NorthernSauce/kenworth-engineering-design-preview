@@ -41,7 +41,7 @@
   padding-left: 1.5rem;
 }
 .hub-hero__meta dt {
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -50,7 +50,7 @@
 }
 .hub-hero__meta dd {
   margin: 0 0 1rem;
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-weight: 600;
   font-size: 1rem;
   color: var(--ns-color-text);
@@ -76,7 +76,7 @@
   gap: 0.65rem;
 }
 .hub-filter__label {
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -88,7 +88,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 0.9rem;
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-weight: 500;
   font-size: 0.875rem;
   color: var(--ns-color-text);
@@ -146,7 +146,7 @@
 .feat-card__stamp {
   position: absolute;
   top: 1rem; left: 1rem;
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -163,7 +163,7 @@
   gap: 1rem;
 }
 .feat-card__eyebrow {
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -194,7 +194,7 @@
   gap: 1.25rem;
   align-items: center;
   margin-top: 0.5rem;
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.85rem;
   color: var(--ns-color-text-muted);
 }
@@ -206,7 +206,7 @@
 }
 .feat-card__cta {
   margin-top: 0.75rem;
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-weight: 600;
   color: var(--ns-color-text);
   display: inline-flex;
@@ -248,7 +248,7 @@
   flex-wrap: wrap;
 }
 .hub-grid__count {
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.85rem;
   color: var(--ns-color-text-muted);
   letter-spacing: 0.04em;
@@ -277,7 +277,7 @@
 }
 .acard:hover { border-color: var(--ns-color-text); }
 .acard__eyebrow {
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -317,13 +317,13 @@
   border-top: 1px solid rgba(28, 26, 23, 0.1);
 }
 .acard__meta {
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.78rem;
   color: var(--ns-color-text-muted);
   letter-spacing: 0.02em;
 }
 .acard__cta {
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-weight: 600;
   font-size: 0.85rem;
   color: var(--ns-color-text);
@@ -353,7 +353,7 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: clamp(2.5rem, 4vw, 3.5rem);
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
 }
 .hub-paginate__btn,
 .hub-paginate__page {
@@ -419,14 +419,14 @@
 }
 .hub-rule__n {
   display: block;
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   color: var(--ns-color-primary);
   margin-bottom: 0.5rem;
 }
 .hub-rule__t {
-  font-family: 'General Sans', sans-serif;
+  font-family: 'Switzer', sans-serif;
   font-weight: 600;
   color: var(--ns-color-text-on-dark);
   font-size: 0.95rem;

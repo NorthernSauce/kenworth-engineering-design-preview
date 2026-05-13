@@ -278,3 +278,17 @@ body.is-loaded { opacity: 1; }
   background: rgba(238, 108, 25, 0.06);
   transform: translateY(-1px);
 }
+
+/* ─── Footer social column (replaces old shop-status block) ───────── */
+.footer-pro__col--social h6 {
+  margin-bottom: 1.25rem;
+}
+.footer-pro__col--social .footer-pro__social {
+  margin-bottom: 1rem;
+}
+.footer-pro__col-note {
+  font-size: var(--ns-text-small);
+  color: rgba(245, 240, 232, 0.5);
+  margin: 0;
+  max-width: 24ch;
+}
